@@ -30,7 +30,8 @@ function WallhavenGallery() {
 
 const resolutionOptions = ["3840x2160"];
 const wallhavenAPI = {
-  search: "https://wallhaven.cc/api/v1/search",
+  search: "https://taor-api.vercel.com/api/wallhaven/search",
+  searchLocal: "http://localhost:3000/api/wallhaven/search",
 };
 
 function useWallhavenSearching() {

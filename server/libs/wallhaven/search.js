@@ -1,8 +1,9 @@
 import * as http from "../../http";
 import { wallhavenAPI } from "./const";
 
-export default async function search(req, res) {
-    const { query } = req;
+export default async function search(ctx, next) {
+    const { query } = ctx;
     const data = await http.get(wallhavenAPI.search, { params: query });
-    res.status(200).json(data);
+    ctx.body = data;
+    ctx.status = 200;
 }
