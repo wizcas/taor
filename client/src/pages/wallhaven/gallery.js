@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { Gallery } from "../../components/wallpaper/Gallery";
 
 const client = new QueryClient();
 
@@ -21,9 +22,13 @@ function WallhavenGallery() {
     <div>Loading...</div>
   ) : (
     <div>
-      {wallpapers.map((wallpaper) => (
-        <img src={wallpaper.thumbs.original} alt={wallpaper.short_url} />
-      ))}
+      <Gallery
+        wallpapers={wallpapers.map((w) => ({
+          id: w.id,
+          thumbnail: w.thumbs.original,
+          raw: w.path,
+        }))}
+      />
     </div>
   );
 }
@@ -37,13 +42,14 @@ const wallhavenAPI = {
 function useWallhavenSearching() {
   const query = {
     q: "cat",
-    categories: "110", // general/anime/people
+    categories: "111", // general/anime/people
     purity: "110", // sfw/sketchy/nsfw
-    sorting: "toplist",
+    sorting: "relevance",
     atleast: resolutionOptions[0],
+    ratios: "16x9,16x10",
   };
 
-  const url = new URL(wallhavenAPI.search);
+  const url = new URL(wallhavenAPI.searchLocal);
   url.search = new URLSearchParams(query);
 
   return useQuery(["wallhaven", "search", query], () => {
