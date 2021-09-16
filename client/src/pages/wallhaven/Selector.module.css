@@ -1,0 +1,14 @@
+.toolbar {
+  @apply flex flex-row w-full gap-2;
+
+  .toggleGroup {
+    @apply flex flex-row items-stretch;
+    label {
+      background: #fafafa;
+      border: 1px solid #666;
+      &.checked {
+        background: #ccc;
+      }
+    }
+  }
+}
