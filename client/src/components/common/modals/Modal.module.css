@@ -1,0 +1,10 @@
+.modal {
+  @apply absolute inset-4;
+  @apply flex flex-col items-stretch overflow-hidden;
+  @apply p-4;
+  background: white;
+}
+
+.content {
+  @apply overflow-y-auto;
+}

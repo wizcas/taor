@@ -1,3 +1,12 @@
+.wrapper {
+  @apply flex flex-col items-stretch;
+}
+
 .toolbar {
   @apply flex flex-row w-full gap-2;
+  flex: 0 0 auto;
+}
+
+.content {
+  @apply overflow-y-auto;
 }

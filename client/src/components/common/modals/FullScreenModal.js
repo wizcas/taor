@@ -1,6 +1,7 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
-import Modal from "react-modal";
-import { ModalHeader } from "./ModalHeader";
+import { forwardRef, useImperativeHandle, useState } from 'react';
+import Modal from 'react-modal';
+import { ModalHeader } from './ModalHeader';
+import styles from './Modal.module.css';
 
 function Component(props, ref) {
   const { title, children } = props;
@@ -20,9 +21,9 @@ function Component(props, ref) {
   }
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={close}>
+    <Modal isOpen={isOpen} onRequestClose={close} className={styles.modal}>
       <ModalHeader title={title} onClose={close} />
-      <main>{children}</main>
+      <div className={styles.content}>{children}</div>
     </Modal>
   );
 }

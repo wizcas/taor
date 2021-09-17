@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MaskToggleGroup } from '../../components/common/form';
+import { WallhavenGallery } from './gallery';
 import styles from './Selector.module.css';
 
 const categoryOptions = [
@@ -34,7 +35,7 @@ export function WallhavenSelector() {
   console.log({ categories, purity });
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <section className={styles.toolbar}>
         <input type="text" placeholder="Search by keywords" />
         <MaskToggleGroup
@@ -56,7 +57,9 @@ export function WallhavenSelector() {
         </select>
         <button>Search</button>
       </section>
-      <section></section>
+      <div className={styles.content}>
+        <WallhavenGallery />
+      </div>
     </div>
   );
 }
