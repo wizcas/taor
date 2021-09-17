@@ -1,33 +1,52 @@
-import classNames from "classnames";
-import { useState } from "react";
-import styles from "./Selector.module.css";
+import { useState } from 'react';
+import { MaskToggleGroup } from '../../components/common/form';
+import styles from './Selector.module.css';
 
-const categories = [
-  { label: "General", value: "general" },
-  { label: "Anime", value: "anime" },
-  { label: "People", value: "people" },
+const categoryOptions = [
+  { label: 'General', value: 'general' },
+  { label: 'Anime', value: 'anime' },
+  { label: 'People', value: 'people' },
 ];
 
-const purities = [
-  { label: "SFW", value: "sfw" },
-  { label: "Sketchy", value: "sketchy" },
-  { label: "NSFW", value: "nsfw" },
+const purityOptions = [
+  { label: 'SFW', value: 'sfw' },
+  { label: 'Sketchy', value: 'sketchy' },
+  { label: 'NSFW', value: 'nsfw' },
 ];
 
 const resolutions = [
-  { label: "Any", value: undefined },
-  { label: "1440x900", value: "1440x900" },
-  { label: "1920x1080 (1080p)", value: "1920x1080" },
-  { label: "2560x1004 (2K)", value: "2560x1440" },
-  { label: "3840x2160 (4K)", value: "3840x2160" },
+  { label: 'Any', value: undefined },
+  { label: '1440x900', value: '1440x900' },
+  { label: '1920x1080 (1080p)', value: '1920x1080' },
+  { label: '2560x1004 (2K)', value: '2560x1440' },
+  { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
 export function WallhavenSelector() {
+  const [categories, setCategories] = useState('');
+  const [purity, setPurity] = useState('');
+
+  function onMaskGroupChange(setter) {
+    return function fn(value) {
+      setter(value);
+    };
+  }
+
+  console.log({ categories, purity });
+
   return (
     <div>
       <section className={styles.toolbar}>
         <input type="text" placeholder="Search by keywords" />
-        <ToggleGroup options={categories} />
-        <ToggleGroup options={purities} />
+        <MaskToggleGroup
+          options={categoryOptions}
+          value={categories}
+          onChange={onMaskGroupChange(setCategories)}
+        />
+        <MaskToggleGroup
+          options={purityOptions}
+          value={purity}
+          onChange={onMaskGroupChange(setPurity)}
+        />
         <select value="3840x2160">
           {resolutions.map(({ label, value }) => (
             <option key={value} value={value}>
@@ -39,63 +58,5 @@ export function WallhavenSelector() {
       </section>
       <section></section>
     </div>
-  );
-}
-
-function ToggleGroup(props) {
-  const { options } = props;
-
-  const [checkState, setCheckState] = useState([]);
-
-  function onToggleButtonChange(index) {
-    console.log("make toggle change", index);
-    function fn(checked) {
-      checkState[index] = checked;
-      setCheckState((prev) => {
-        const next = [...prev];
-        next[index] = checked;
-        return next;
-      });
-    }
-    return fn;
-  }
-
-  return (
-    <div className={styles.toggleGroup}>
-      {options.map(({ label, value }, i) => {
-        return (
-          <ToggleButton
-            label={label}
-            value={value}
-            checked={checkState[i]}
-            onToggle={onToggleButtonChange(i)}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-function ToggleButton(props) {
-  const { label, value, checked, onToggle } = props;
-
-  function onStateChange(e) {
-    onToggle?.(e.target.checked);
-  }
-
-  return (
-    <label
-      className={classNames({
-        [styles.checked]: checked,
-      })}
-    >
-      <input
-        type="checkbox"
-        key={value}
-        checked={checked}
-        onChange={onStateChange}
-      />
-      {label}
-    </label>
   );
 }
