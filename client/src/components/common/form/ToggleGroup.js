@@ -27,6 +27,7 @@ export function ToggleGroup(props) {
       {options.map(({ label, value }, i) => {
         return (
           <ToggleButton
+            key={value}
             label={label}
             value={value}
             checked={initialValues[i]}

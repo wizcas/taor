@@ -10,7 +10,7 @@ export function Gallery(props) {
       {wallpapers.filter(Boolean).map((wallpaper) => {
         const { id, thumbnail } = wallpaper;
         return (
-          <div onClick={() => onItemSelect(wallpaper)}>
+          <div key={id} onClick={() => onItemSelect(wallpaper)}>
             <img key={id} src={thumbnail} alt={id} />
           </div>
         );

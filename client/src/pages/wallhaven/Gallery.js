@@ -1,18 +1,33 @@
+import { useMemo } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Gallery } from '../../components/wallpaper/Gallery';
+import _defaults from 'lodash/defaults';
+
+const resolutionOptions = ['3840x2160'];
+const defaultQuery = {
+  // q: 'cat',
+  // categories: '111', // general/anime/people
+  // purity: '110', // sfw/sketchy/nsfw
+  sorting: 'relevance',
+  // atleast: resolutionOptions[0],
+  ratios: '16x9,16x10',
+};
 
 const client = new QueryClient();
 
 export function WallhavenGallery(props) {
   return (
     <QueryClientProvider client={client}>
-      <WallhavenGalleryContent />
+      <WallhavenGalleryContent {...props} />
     </QueryClientProvider>
   );
 }
 
-function WallhavenGalleryContent() {
-  const { isLoading, data, error } = useWallhavenSearching();
+function WallhavenGalleryContent(props) {
+  const { query } = props;
+  const actualQuery = useMemo(() => _defaults(query, defaultQuery), [query]);
+
+  const { isLoading, data, error } = useWallhavenSearching(actualQuery);
   if (error) {
     console.error('wallhaven searching failed', error);
   }
@@ -33,22 +48,12 @@ function WallhavenGalleryContent() {
   );
 }
 
-const resolutionOptions = ['3840x2160'];
 const wallhavenAPI = {
   search: 'https://taor-api.vercel.com/api/wallhaven/search',
   searchLocal: 'http://localhost:3000/api/wallhaven/search',
 };
 
-function useWallhavenSearching() {
-  const query = {
-    q: 'cat',
-    categories: '111', // general/anime/people
-    purity: '110', // sfw/sketchy/nsfw
-    sorting: 'relevance',
-    atleast: resolutionOptions[0],
-    ratios: '16x9,16x10',
-  };
-
+function useWallhavenSearching(query) {
   const url = new URL(wallhavenAPI.searchLocal);
   url.search = new URLSearchParams(query);
 
