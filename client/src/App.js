@@ -1,13 +1,13 @@
-import { useRef } from "react";
-import Modal from "react-modal";
-import { FullScreenModal } from "./components/common/modals/FullScreenModal";
-import { SearchBox } from "./components/searchbox/SearchBox";
-import { Wallpaper } from "./components/wallpaper/Wallpaper";
-import { WallhavenSelector } from "./pages/wallhaven";
+import { useRef } from 'react';
+import Modal from 'react-modal';
+import { FullScreenModal } from './components/common/modals/FullScreenModal';
+import { SearchBox } from './components/searchbox/SearchBox';
+import { Wallpaper } from './components/wallpaper/Wallpaper';
+import { WallhavenWrapper } from './pages/wallhaven';
 
-import "./App.css";
+import './App.css';
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 function App() {
   const pageModalRef = useRef(null);
@@ -23,7 +23,7 @@ function App() {
       <button onClick={openPageModal}>wallhaven</button>
 
       <FullScreenModal ref={pageModalRef} title="wallhaven">
-        <WallhavenSelector />
+        <WallhavenWrapper />
       </FullScreenModal>
     </div>
   );

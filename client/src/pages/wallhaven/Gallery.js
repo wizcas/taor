@@ -1,33 +1,22 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Gallery } from '../../components/wallpaper/Gallery';
-import _defaults from 'lodash/defaults';
-
-const defaultQuery = {
-  // q: 'cat',
-  // categories: '111', // general/anime/people
-  // purity: '110', // sfw/sketchy/nsfw
-  sorting: 'relevance',
-  // atleast: resolutionOptions[0],
-  ratios: '16x9,16x10',
-};
+import { WallhavenQueryContext } from './context';
 
 const client = new QueryClient();
 
-export function WallhavenGallery(props) {
+export function WallhavenGallery() {
   return (
     <QueryClientProvider client={client}>
-      <WallhavenGalleryContent {...props} />
+      <WallhavenGalleryContent />
     </QueryClientProvider>
   );
 }
 
-function WallhavenGalleryContent(props) {
-  const { query } = props;
-  console.log('request', query);
-  const actualQuery = useMemo(() => _defaults(query, defaultQuery), [query]);
+function WallhavenGalleryContent() {
+  const { query } = useContext(WallhavenQueryContext);
 
-  const { isLoading, data, error } = useWallhavenSearching(actualQuery);
+  const { isLoading, data, error } = useWallhavenSearching(query);
   if (error) {
     console.error('wallhaven searching failed', error);
   }
@@ -58,7 +47,7 @@ function useWallhavenSearching(query) {
   url.search = new URLSearchParams(query);
 
   return useQuery(['wallhaven', 'search', query], () => {
-    console.log('query', url);
+    console.log('<searching on wallhaven>', url.host, query);
     return fetch(url, {
       method: 'GET',
       headers: {

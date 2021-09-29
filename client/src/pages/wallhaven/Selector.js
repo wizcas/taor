@@ -1,11 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { MaskToggleGroup } from '../../components/common/form';
 import { WallhavenGallery } from './Gallery';
 import _debounce from 'lodash/debounce';
-import _omitBy from 'lodash/omitBy';
-import _isNil from 'lodash/isNil';
 
 import styles from './Selector.module.css';
+import { WallhavenQueryContext } from './context';
 
 const categoryOptions = [
   { label: 'General', value: 'general' },
@@ -32,7 +31,7 @@ export function WallhavenSelector() {
   const [purity, setPurity] = useState('');
   const [resolution, setResolution] = useState('');
 
-  const [query, setQuery] = useState({});
+  const { updateQuery } = useContext(WallhavenQueryContext);
   const debounceRef = useRef();
 
   useEffect(() => {
@@ -40,23 +39,15 @@ export function WallhavenSelector() {
       debounceRef.current.cancel();
     }
     debounceRef.current = _debounce(() => {
-      setQuery((prev) => {
-        const finalQuery = _omitBy(
-          {
-            ...prev,
-            q,
-            categories,
-            purity,
-            resolution,
-          },
-          (v) => _isNil(v) || v === ''
-        );
-        console.log('debounced query', finalQuery);
-        return finalQuery;
+      updateQuery({
+        q,
+        categories,
+        purity,
+        resolution,
       });
     }, 500);
     debounceRef.current();
-  }, [q, categories, purity, resolution]);
+  }, [q, categories, purity, resolution, updateQuery]);
 
   function onSearchTextSubmit(e) {
     const value = e.target.value;
@@ -101,7 +92,7 @@ export function WallhavenSelector() {
         </select>
       </section>
       <div className={styles.content}>
-        <WallhavenGallery query={query} />
+        <WallhavenGallery />
       </div>
     </div>
   );
