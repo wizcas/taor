@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Gallery } from '../../components/wallpaper/Gallery';
 import _defaults from 'lodash/defaults';
 
-const resolutionOptions = ['3840x2160'];
 const defaultQuery = {
   // q: 'cat',
   // categories: '111', // general/anime/people
@@ -25,6 +24,7 @@ export function WallhavenGallery(props) {
 
 function WallhavenGalleryContent(props) {
   const { query } = props;
+  console.log('request', query);
   const actualQuery = useMemo(() => _defaults(query, defaultQuery), [query]);
 
   const { isLoading, data, error } = useWallhavenSearching(actualQuery);
