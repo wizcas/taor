@@ -19,7 +19,7 @@ const purityOptions = [
 ];
 
 const resolutions = [
-  { label: 'Any', value: undefined },
+  { label: 'Any', value: '' },
   { label: '1440x900', value: '1440x900' },
   { label: '1920x1080 (1080p)', value: '1920x1080' },
   { label: '2560x1004 (2K)', value: '2560x1440' },
@@ -59,7 +59,6 @@ export function WallhavenSelector() {
     };
   }
   function onResolutionChange(e) {
-    console.log(e, e.target.value);
     const atleast = e.target.value;
     setResolution(atleast);
   }
