@@ -1,7 +1,8 @@
-import { useContext, useMemo } from 'react';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { useContext } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Gallery } from '../../components/wallpaper/Gallery';
 import { WallhavenQueryContext } from './context';
+import { useWallhavenSearch } from './api';
 
 const client = new QueryClient();
 
@@ -16,7 +17,7 @@ export function WallhavenGallery() {
 function WallhavenGalleryContent() {
   const { query } = useContext(WallhavenQueryContext);
 
-  const { isLoading, data, error } = useWallhavenSearching(query);
+  const { isLoading, data, error } = useWallhavenSearch(query);
   if (error) {
     console.error('wallhaven searching failed', error);
   }
@@ -35,24 +36,4 @@ function WallhavenGalleryContent() {
       />
     </div>
   );
-}
-
-const wallhavenAPI = {
-  search: 'https://taor-api.vercel.com/api/wallhaven/search',
-  searchLocal: 'http://localhost:3000/api/wallhaven/search',
-};
-
-function useWallhavenSearching(query) {
-  const url = new URL(wallhavenAPI.searchLocal);
-  url.search = new URLSearchParams(query);
-
-  return useQuery(['wallhaven', 'search', query], () => {
-    console.log('<searching on wallhaven>', url.host, query);
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => res.json());
-  });
 }

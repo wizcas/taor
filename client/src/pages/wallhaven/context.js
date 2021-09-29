@@ -1,11 +1,11 @@
 import { createContext } from 'react';
 
 export const defaultQuery = {
-  // q: 'cat',
-  // categories: '111', // general/anime/people
-  // purity: '110', // sfw/sketchy/nsfw
+  q: '',
+  categories: '111', // general/anime/people
+  purity: '110', // sfw/sketchy/nsfw
   sorting: 'relevance',
-  // atleast: resolutionOptions[0],
+  atleast: '',
   ratios: '16x9,16x10',
 };
 

@@ -26,12 +26,12 @@ const resolutions = [
   { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
 export function WallhavenSelector() {
-  const [q, setQ] = useState('');
-  const [categories, setCategories] = useState('');
-  const [purity, setPurity] = useState('');
-  const [resolution, setResolution] = useState('');
+  const { query, updateQuery } = useContext(WallhavenQueryContext);
+  const [q, setQ] = useState(query.q);
+  const [categories, setCategories] = useState(query.categories);
+  const [purity, setPurity] = useState(query.purity);
+  const [atleast, setAtLeast] = useState(query.atleast);
 
-  const { updateQuery } = useContext(WallhavenQueryContext);
   const debounceRef = useRef();
 
   useEffect(() => {
@@ -43,11 +43,11 @@ export function WallhavenSelector() {
         q,
         categories,
         purity,
-        resolution,
+        resolution: atleast,
       });
     }, 500);
     debounceRef.current();
-  }, [q, categories, purity, resolution, updateQuery]);
+  }, [q, categories, purity, atleast, updateQuery]);
 
   function onSearchTextSubmit(e) {
     const value = e.target.value;
@@ -60,7 +60,7 @@ export function WallhavenSelector() {
   }
   function onResolutionChange(e) {
     const atleast = e.target.value;
-    setResolution(atleast);
+    setAtLeast(atleast);
   }
 
   return (
@@ -82,7 +82,7 @@ export function WallhavenSelector() {
           value={purity}
           onChange={onMaskGroupChange(setPurity)}
         />
-        <select value={resolution} onChange={onResolutionChange}>
+        <select value={atleast} onChange={onResolutionChange}>
           {resolutions.map(({ label, value }) => (
             <option key={value ?? 'any'} value={value}>
               {label}
