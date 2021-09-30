@@ -10,7 +10,6 @@ export function useWallhavenSearch(query) {
   url.search = new URLSearchParams(query);
 
   return useQuery(['wallhaven', 'search', query], () => {
-    console.log('<searching on wallhaven>', url.host, query);
     return fetch(url, {
       method: 'GET',
       headers: {

@@ -1,3 +1,5 @@
+import { ImageBlock } from '../common/image/ImageBlock';
+
 export function Gallery(props) {
   const { wallpapers = [], onSelect } = props;
 
@@ -8,12 +10,8 @@ export function Gallery(props) {
   return (
     <div className="grid grid-cols-4 gap-4">
       {wallpapers.filter(Boolean).map((wallpaper) => {
-        const { id, thumbnail } = wallpaper;
-        return (
-          <div key={id} onClick={() => onItemSelect(wallpaper)}>
-            <img key={id} src={thumbnail} alt={id} />
-          </div>
-        );
+        const { id, thumbnail, url } = wallpaper;
+        return <ImageBlock key={id} thumbnail={thumbnail} original={url} />;
       })}
     </div>
   );
