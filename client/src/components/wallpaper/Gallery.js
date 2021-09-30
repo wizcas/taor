@@ -10,8 +10,8 @@ export function Gallery(props) {
   return (
     <div className="grid grid-cols-4 gap-4">
       {wallpapers.filter(Boolean).map((wallpaper) => {
-        const { id, thumbnail, url } = wallpaper;
-        return <ImageBlock key={id} thumbnail={thumbnail} original={url} />;
+        const { id, thumbnail, raw } = wallpaper;
+        return <ImageBlock key={id} thumbnail={thumbnail} raw={raw} />;
       })}
     </div>
   );
