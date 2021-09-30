@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
+import { useDebounce } from 'react-use';
 import { MaskToggleGroup } from '../../components/common/form';
 import { WallhavenGallery } from './Gallery';
-import _debounce from 'lodash/debounce';
 
 import styles from './Selector.module.css';
 import { WallhavenQueryContext } from './context';
@@ -32,22 +32,18 @@ export function WallhavenSelector() {
   const [purity, setPurity] = useState(query.purity);
   const [atleast, setAtLeast] = useState(query.atleast);
 
-  const debounceRef = useRef();
-
-  useEffect(() => {
-    if (debounceRef.current) {
-      debounceRef.current.cancel();
-    }
-    debounceRef.current = _debounce(() => {
+  useDebounce(
+    () => {
       updateQuery({
         q,
         categories,
         purity,
         resolution: atleast,
       });
-    }, 500);
-    debounceRef.current();
-  }, [q, categories, purity, atleast, updateQuery]);
+    },
+    500,
+    [q, categories, purity, atleast, updateQuery]
+  );
 
   function onSearchTextSubmit(e) {
     const value = e.target.value;

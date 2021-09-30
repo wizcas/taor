@@ -13,6 +13,7 @@
     "react-modal": "^3.14.3",
     "react-query": "^3.23.2",
     "react-scripts": "4.0.3",
+    "react-use": "^17.3.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
