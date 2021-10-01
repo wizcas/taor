@@ -4,8 +4,8 @@ import styles from './ImageLightBox.module.css';
 
 function Component(_, ref) {
   const [isOpen, setIsOpen] = useState(false);
-  const [raw, setRaw] = useState('');
-  console.log({ raw });
+  const [url, setUrl] = useState('');
+  console.log({ raw: url });
 
   useImperativeHandle(ref, () => ({
     open,
@@ -14,14 +14,14 @@ function Component(_, ref) {
 
   const imageStyle = useMemo(
     () => ({
-      backgroundImage: `url(${raw})`,
+      backgroundImage: `url(${url})`,
     }),
-    [raw]
+    [url]
   );
 
-  function open(raw) {
-    console.log('open raw', raw);
-    setRaw(raw);
+  function open(url) {
+    console.log('open raw', url);
+    setUrl(url);
     setIsOpen(true);
   }
   function close() {
@@ -33,11 +33,13 @@ function Component(_, ref) {
       onRequestClose={close}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
+      overlayClassName={styles.overlay}
+      className={styles.modalContent}
     >
       <div className={styles.wrapper}>
-        {raw && (
+        {url && (
           <div className={styles.image} style={imageStyle}>
-            <img src={raw} alt="" />
+            <img src={url} alt="" />
           </div>
         )}
       </div>

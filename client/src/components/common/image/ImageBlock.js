@@ -2,10 +2,9 @@ import { useState, useMemo, useRef } from 'react';
 import { useMeasure } from 'react-use';
 import classNames from 'classnames';
 import styles from './ImageBlock.module.css';
-import { ImageLightBox } from './ImageLightBox';
 
 export function ImageBlock(props) {
-  const { thumbnail, raw } = props;
+  const { thumbnail, raw, onViewImage } = props;
   const [ref, { width }] = useMeasure();
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState();
@@ -24,8 +23,6 @@ export function ImageBlock(props) {
     [thumbnail]
   );
 
-  const lightBoxRef = useRef(null);
-
   function onImageLoad() {
     setIsLoading(false);
   }
@@ -33,10 +30,8 @@ export function ImageBlock(props) {
     onImageLoad();
     setHasError(true);
   }
-
-  function showLightBox() {
-    console.log({ raw });
-    lightBoxRef.current.open(raw);
+  function viewImage() {
+    onViewImage?.(raw);
   }
 
   return (
@@ -48,7 +43,7 @@ export function ImageBlock(props) {
         })}
         ref={ref}
         style={blockStyle}
-        onClick={showLightBox}
+        onClick={viewImage}
       >
         <div className={styles.imageThumbnail} style={thumbnailStyle}>
           <img
@@ -59,7 +54,6 @@ export function ImageBlock(props) {
           />
         </div>
       </div>
-      <ImageLightBox ref={lightBoxRef} />
     </>
   );
 }

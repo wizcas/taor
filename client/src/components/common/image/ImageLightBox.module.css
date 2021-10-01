@@ -1,13 +1,19 @@
-.modal {
+.modalContent {
+  @apply absolute inset-4 p-0;
+  @apply flex flex-col;
+  @apply pointer-events-none;
 }
 .wrapper {
   @apply w-full h-full;
-  background: rgba(0, 0, 0, 0.8);
 }
 .image {
   @apply w-full h-full;
-  @apply bg-cover bg-center bg-clip-border bg-no-repeat;
+  @apply bg-contain bg-center bg-clip-border bg-no-repeat;
   img {
     @apply hidden;
   }
+}
+.overlay {
+  @apply fixed inset-0;
+  background: rgba(0, 0, 0, 0.85);
 }
