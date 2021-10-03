@@ -1,8 +1,9 @@
 import { forwardRef, useState, useImperativeHandle } from 'react';
 import Modal from 'react-modal';
-import styles from './ImageLightBox.module.css';
 import { ImageLoading } from './ImageLoading';
+import { ImageError } from './ImageError';
 import { useImageState } from './useImageState';
+import styles from './ImageLightBox.module.css';
 
 function Component(_, ref) {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,11 +28,15 @@ function Component(_, ref) {
     <>
       <div className={styles.image}>
         <img src={url} alt="" referrerPolicy="no-referrer" {...imgStateProps} />
-        <ImageLoading isLoading={isLoading} />
+        <ImageLoading isLoading={isLoading} dark={true} />
+        <ImageError
+          hasError={hasError}
+          dark={true}
+          message="An error occurs when downloading then wallpaper"
+        />
       </div>
     </>
   );
-
   return (
     <Modal
       isOpen={isOpen}

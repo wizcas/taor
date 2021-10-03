@@ -1,5 +1,5 @@
 .imageBlock {
-  @apply relative overflow-hidden cursor-pointer;
+  @apply relative overflow-hidden;
   &::after {
     content: '';
     display: block;
@@ -9,6 +9,9 @@
 
     @apply absolute inset-0;
   }
+  &.ready {
+    @apply cursor-pointer;
+  }
   .imageThumbnail {
     @apply w-full h-full;
     @apply bg-cover bg-center bg-no-repeat bg-clip-border;
@@ -17,13 +20,7 @@
       @apply hidden;
     }
   }
-  &.loading {
-    background: #eee;
-  }
-  &.error {
-    background: #330000;
-  }
-  &:not(.loading, .error):hover {
+  &.ready:hover {
     &::after {
       opacity: 0.5;
     }
