@@ -7,10 +7,10 @@ import { ImageLoading } from './ImageLoading';
 import { ImageError } from './ImageError';
 
 export function ImageBlock(props) {
-  const { thumbnail, raw, onViewImage } = props;
+  const { image, onViewImage } = props;
   const [ref, { width }] = useMeasure();
 
-  const { imgStateProps, isLoading, hasError } = useImageState(thumbnail);
+  const { imgStateProps, isLoading, hasError } = useImageState(image.thumbnail);
 
   const blockStyle = useMemo(
     () => ({
@@ -21,15 +21,15 @@ export function ImageBlock(props) {
 
   const thumbnailStyle = useMemo(
     () => ({
-      backgroundImage: `url(${thumbnail})`,
+      backgroundImage: `url(${image.thumbnail})`,
     }),
-    [thumbnail]
+    [image.thumbnail]
   );
 
   const viewImage = useCallback(
-    (url) => {
+    (image) => {
       if (isLoading || hasError) return;
-      onViewImage?.(url);
+      onViewImage?.(image.raw, image.width, image.height);
     },
     [isLoading, hasError, onViewImage]
   );
@@ -42,10 +42,10 @@ export function ImageBlock(props) {
         })}
         ref={ref}
         style={blockStyle}
-        onClick={() => viewImage(raw)}
+        onClick={() => viewImage(image)}
       >
         <div className={styles.imageThumbnail} style={thumbnailStyle}>
-          <img src={thumbnail} alt="" {...imgStateProps} />
+          <img src={image.thumbnail} alt="" {...imgStateProps} />
           <ImageLoading isLoading={isLoading} />
           <ImageError hasError={hasError} />
         </div>

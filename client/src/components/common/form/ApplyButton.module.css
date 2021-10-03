@@ -1,0 +1,9 @@
+.button {
+  @apply p-4;
+  @apply pointer-events-auto cursor-pointer;
+  background: white;
+  color: magenta;
+  &:hover {
+    background: #f0f0f0;
+  }
+}

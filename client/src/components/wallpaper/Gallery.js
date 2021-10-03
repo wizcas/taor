@@ -10,22 +10,17 @@ export function Gallery(props) {
     onSelect?.(wallpaper);
   }
 
-  function showLightBox(url) {
-    lightBoxRef.current.open(url);
+  function showLightBox(url, width, height) {
+    lightBoxRef.current.open(url, width, height);
   }
 
   return (
     <>
       <div className="grid grid-cols-4 gap-4">
         {wallpapers.filter(Boolean).map((wallpaper) => {
-          const { id, thumbnail, raw } = wallpaper;
+          const { id } = wallpaper;
           return (
-            <ImageBlock
-              key={id}
-              thumbnail={thumbnail}
-              raw={raw}
-              onViewImage={showLightBox}
-            />
+            <ImageBlock key={id} image={wallpaper} onViewImage={showLightBox} />
           );
         })}
       </div>

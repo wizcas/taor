@@ -3,31 +3,38 @@ import Modal from 'react-modal';
 import { ImageLoading } from './ImageLoading';
 import { ImageError } from './ImageError';
 import { useImageState } from './useImageState';
+import { ApplyButton } from '../form/ApplyButton';
 import styles from './ImageLightBox.module.css';
 
 function Component(_, ref) {
   const [isOpen, setIsOpen] = useState(false);
-  const [url, setUrl] = useState('');
-  const { imgStateProps, isLoading, hasError } = useImageState(url);
+  const [image, setImage] = useState(undefined);
+  const { imgStateProps, isLoading, hasError } = useImageState(image);
 
   useImperativeHandle(ref, () => ({
     open,
     close,
   }));
 
-  function open(url) {
-    console.log('open raw', url);
-    setUrl(url);
+  function open(url, width, height) {
+    setImage({ url, width, height });
     setIsOpen(true);
   }
   function close() {
     setIsOpen(false);
   }
 
-  const image = (
+  const content = image && (
     <>
-      <div className={styles.image}>
-        <img src={url} alt="" referrerPolicy="no-referrer" {...imgStateProps} />
+      <div className={styles.content}>
+        <img
+          src={image.url}
+          width={image.width}
+          height={image.height}
+          alt=""
+          referrerPolicy="no-referrer"
+          {...imgStateProps}
+        />
         <ImageLoading isLoading={isLoading} dark={true} />
         <ImageError
           hasError={hasError}
@@ -35,6 +42,7 @@ function Component(_, ref) {
           message="An error occurs when downloading then wallpaper"
         />
       </div>
+      <ApplyButton className={styles.button}>Select</ApplyButton>
     </>
   );
   return (
@@ -46,7 +54,7 @@ function Component(_, ref) {
       overlayClassName={styles.overlay}
       className={styles.modalContent}
     >
-      <div className={styles.wrapper}>{url && image}</div>
+      <div className={styles.wrapper}>{content}</div>
     </Modal>
   );
 }

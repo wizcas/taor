@@ -21,19 +21,13 @@ function WallhavenGalleryContent() {
   if (error) {
     console.error('wallhaven searching failed', error);
   }
-  const wallpapers = data?.data ?? [];
+  const wallpapers = data ?? [];
 
   return isLoading ? (
     <div>Loading...</div>
   ) : (
     <div>
-      <Gallery
-        wallpapers={wallpapers.map((w) => ({
-          id: w.id,
-          thumbnail: w.thumbs.original,
-          raw: w.path,
-        }))}
-      />
+      <Gallery wallpapers={wallpapers} />
     </div>
   );
 }
