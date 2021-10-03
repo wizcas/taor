@@ -1,13 +1,14 @@
-import { useState, useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import { useMeasure } from 'react-use';
 import classNames from 'classnames';
 import styles from './ImageBlock.module.css';
+import { useImageState } from './useImageState';
 
 export function ImageBlock(props) {
   const { thumbnail, raw, onViewImage } = props;
   const [ref, { width }] = useMeasure();
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState();
+
+  const { imgStateProps, isLoading, hasError } = useImageState(thumbnail);
 
   const blockStyle = useMemo(
     () => ({
@@ -23,13 +24,6 @@ export function ImageBlock(props) {
     [thumbnail]
   );
 
-  function onImageLoad() {
-    setIsLoading(false);
-  }
-  function onImageError() {
-    onImageLoad();
-    setHasError(true);
-  }
   function viewImage() {
     onViewImage?.(raw);
   }
@@ -46,12 +40,7 @@ export function ImageBlock(props) {
         onClick={viewImage}
       >
         <div className={styles.imageThumbnail} style={thumbnailStyle}>
-          <img
-            src={thumbnail}
-            alt=""
-            onLoad={onImageLoad}
-            onError={onImageError}
-          />
+          <img src={thumbnail} alt="" {...imgStateProps} />
         </div>
       </div>
     </>

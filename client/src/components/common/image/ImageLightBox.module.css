@@ -5,13 +5,10 @@
 }
 .wrapper {
   @apply w-full h-full;
+  @apply flex flex-col justify-center items-stretch;
 }
 .image {
-  @apply w-full h-full;
-  @apply bg-contain bg-center bg-clip-border bg-no-repeat;
-  img {
-    @apply hidden;
-  }
+  @apply relative;
 }
 .overlay {
   @apply fixed inset-0;

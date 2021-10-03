@@ -1,23 +1,18 @@
-import { forwardRef, useState, useImperativeHandle, useMemo } from 'react';
+import { forwardRef, useState, useImperativeHandle } from 'react';
 import Modal from 'react-modal';
 import styles from './ImageLightBox.module.css';
+import { ImageLoading } from './ImageLoading';
+import { useImageState } from './useImageState';
 
 function Component(_, ref) {
   const [isOpen, setIsOpen] = useState(false);
   const [url, setUrl] = useState('');
-  console.log({ raw: url });
+  const { imgStateProps, isLoading, hasError } = useImageState(url);
 
   useImperativeHandle(ref, () => ({
     open,
     close,
   }));
-
-  const imageStyle = useMemo(
-    () => ({
-      backgroundImage: `url(${url})`,
-    }),
-    [url]
-  );
 
   function open(url) {
     console.log('open raw', url);
@@ -27,6 +22,16 @@ function Component(_, ref) {
   function close() {
     setIsOpen(false);
   }
+
+  const image = (
+    <>
+      <div className={styles.image}>
+        <img src={url} alt="" referrerPolicy="no-referrer" {...imgStateProps} />
+        <ImageLoading isLoading={isLoading} />
+      </div>
+    </>
+  );
+
   return (
     <Modal
       isOpen={isOpen}
@@ -36,13 +41,7 @@ function Component(_, ref) {
       overlayClassName={styles.overlay}
       className={styles.modalContent}
     >
-      <div className={styles.wrapper}>
-        {url && (
-          <div className={styles.image} style={imageStyle}>
-            <img src={url} alt="" />
-          </div>
-        )}
-      </div>
+      <div className={styles.wrapper}>{url && image}</div>
     </Modal>
   );
 }
