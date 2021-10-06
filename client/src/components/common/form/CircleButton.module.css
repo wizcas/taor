@@ -1,0 +1,14 @@
+.button {
+  @apply p-4;
+  @apply pointer-events-auto cursor-pointer;
+  color: var(--color);
+  border: 5px solid var(--color);
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.2);
+  &:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}

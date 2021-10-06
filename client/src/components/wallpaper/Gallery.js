@@ -24,7 +24,7 @@ export function Gallery(props) {
           );
         })}
       </div>
-      <ImageLightBox ref={lightBoxRef} />
+      <ImageLightBox ref={lightBoxRef} onApply={onItemSelect} />
     </>
   );
 }

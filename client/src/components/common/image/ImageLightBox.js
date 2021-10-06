@@ -3,10 +3,13 @@ import Modal from 'react-modal';
 import { ImageLoading } from './ImageLoading';
 import { ImageError } from './ImageError';
 import { useImageState } from './useImageState';
-import { ApplyButton } from '../form/ApplyButton';
+import { ApplyButton } from '../form/CircleButton';
 import styles from './ImageLightBox.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function Component(_, ref) {
+function Component(props, ref) {
+  const { onApply } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState(undefined);
   const { imgStateProps, isLoading, hasError } = useImageState(image);
@@ -22,6 +25,9 @@ function Component(_, ref) {
   }
   function close() {
     setIsOpen(false);
+  }
+  function onApplyClick() {
+    onApply?.(image.url);
   }
 
   const content = image && (
@@ -42,7 +48,9 @@ function Component(_, ref) {
           message="An error occurs when downloading then wallpaper"
         />
       </div>
-      <ApplyButton className={styles.button}>Select</ApplyButton>
+      <ApplyButton className={styles.button} onClick={onApplyClick}>
+        <FontAwesomeIcon icon={faCheck} size="4x" />
+      </ApplyButton>
     </>
   );
   return (
