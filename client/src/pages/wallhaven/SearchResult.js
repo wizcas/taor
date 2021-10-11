@@ -6,16 +6,17 @@ import { useWallhavenSearch } from './api';
 
 const client = new QueryClient();
 
-export function WallhavenGallery() {
+export function WallhavenSearchResult(props) {
   return (
     <QueryClientProvider client={client}>
-      <WallhavenGalleryContent />
+      <SearchResultContent {...props} />
     </QueryClientProvider>
   );
 }
 
-function WallhavenGalleryContent() {
-  const { query } = useContext(WallhavenQueryContext);
+function SearchResultContent(props) {
+  const { onSelect } = props;
+  const [query] = useContext(WallhavenQueryContext);
 
   const { isLoading, data, error } = useWallhavenSearch(query);
   if (error) {
@@ -27,7 +28,7 @@ function WallhavenGalleryContent() {
     <div>Loading...</div>
   ) : (
     <div>
-      <Gallery wallpapers={wallpapers} />
+      <Gallery wallpapers={wallpapers} onSelect={onSelect} />
     </div>
   );
 }

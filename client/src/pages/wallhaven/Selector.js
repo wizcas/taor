@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react';
 import { useDebounce } from 'react-use';
 import { MaskToggleGroup } from '../../components/common/form';
-import { WallhavenGallery } from './Gallery';
+import { WallhavenSearchResult } from './SearchResult';
 
 import styles from './Selector.module.css';
 import { WallhavenQueryContext } from './context';
+import { PreferencesContext } from '../../context/preferences';
 
 const categoryOptions = [
   { label: 'General', value: 'general' },
@@ -26,7 +27,9 @@ const resolutions = [
   { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
 export function WallhavenSelector() {
-  const { query, updateQuery } = useContext(WallhavenQueryContext);
+  // eslint-disable-next-line no-unused-vars
+  const [_, setPreferences] = useContext(PreferencesContext);
+  const [query, updateQuery] = useContext(WallhavenQueryContext);
   const [q, setQ] = useState(query.q);
   const [categories, setCategories] = useState(query.categories);
   const [purity, setPurity] = useState(query.purity);
@@ -59,6 +62,10 @@ export function WallhavenSelector() {
     setAtLeast(atleast);
   }
 
+  function onSelectWallpaper(wallpaper) {
+    setPreferences({ wallpaper });
+  }
+
   return (
     <div className={styles.wrapper}>
       <section className={styles.toolbar}>
@@ -87,7 +94,7 @@ export function WallhavenSelector() {
         </select>
       </section>
       <div className={styles.content}>
-        <WallhavenGallery />
+        <WallhavenSearchResult onSelect={onSelectWallpaper} />
       </div>
     </div>
   );

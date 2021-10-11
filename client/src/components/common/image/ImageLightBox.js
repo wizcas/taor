@@ -28,6 +28,7 @@ function Component(props, ref) {
   }
   function onApplyClick() {
     onApply?.(image.url);
+    close();
   }
 
   const content = image && (

@@ -1,15 +1,11 @@
-import styles from "./Wallpaper.module.css";
-
-const testurl =
-  "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+import { useContext } from 'react';
+import { PreferencesContext } from '../../context/preferences';
+import styles from './Wallpaper.module.css';
 
 export function Wallpaper() {
+  const [preferences] = useContext(PreferencesContext);
   const style = {
-    "--wallpaper": `url(${testurl})`,
+    '--wallpaper': `url(${preferences.wallpaper})`,
   };
-  return (
-    <div className={styles.wallpaper} style={style}>
-      {/* <WallhavenWrapper /> */}
-    </div>
-  );
+  return <div className={styles.wallpaper} style={style}></div>;
 }
