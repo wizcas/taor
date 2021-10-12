@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { useDebounce } from 'react-use';
+import { observer } from 'mobx-react-lite';
 import { MaskToggleGroup } from '../../components/common/form';
 import { WallhavenSearchResult } from './SearchResult';
 
@@ -26,9 +27,9 @@ const resolutions = [
   { label: '2560x1004 (2K)', value: '2560x1440' },
   { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
-export function WallhavenSelector() {
+function Component() {
   // eslint-disable-next-line no-unused-vars
-  const [_, setPreferences] = useContext(PreferencesContext);
+  const preferences = useContext(PreferencesContext);
   const [query, updateQuery] = useContext(WallhavenQueryContext);
   const [q, setQ] = useState(query.q);
   const [categories, setCategories] = useState(query.categories);
@@ -63,7 +64,8 @@ export function WallhavenSelector() {
   }
 
   function onSelectWallpaper(wallpaper) {
-    setPreferences({ wallpaper });
+    // setPreferences({ wallpaper });
+    preferences.wallpaper = wallpaper;
   }
 
   return (
@@ -99,3 +101,5 @@ export function WallhavenSelector() {
     </div>
   );
 }
+
+export const WallhavenSettings = observer(Component);

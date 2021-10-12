@@ -1,12 +1,12 @@
 import { defaultQuery, WallhavenQueryContext } from './context';
-import { WallhavenSelector } from './Selector';
+import { WallhavenSettings } from './Settings';
 import { useStoredContext } from '../../hooks/useStoredContext';
 
 export function WallhavenWrapper() {
   const ctx = useStoredContext('wallhaven-search', defaultQuery);
   return (
     <WallhavenQueryContext.Provider value={ctx}>
-      <WallhavenSelector />
+      <WallhavenSettings />
     </WallhavenQueryContext.Provider>
   );
 }
