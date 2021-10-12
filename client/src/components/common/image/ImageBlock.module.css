@@ -1,3 +1,6 @@
+.imageBlockContainer {
+  @apply relative;
+}
 .imageBlock {
   @apply relative overflow-hidden;
   &::after {
@@ -8,6 +11,7 @@
     transition: all 0.5s;
 
     @apply absolute inset-0;
+    @apply pointer-events-none;
   }
   &.ready {
     @apply cursor-pointer;
@@ -28,4 +32,8 @@
       transform: scale(1.1);
     }
   }
+}
+.button {
+  @apply absolute right-0 bottom-0 m-4;
+  @apply p-2;
 }

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 function Component(props, ref) {
-  const { onApply } = props;
+  const { onSelect } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState(undefined);
   const { imgStateProps, isLoading, hasError } = useImageState(image);
@@ -27,7 +27,7 @@ function Component(props, ref) {
     setIsOpen(false);
   }
   function onApplyClick() {
-    onApply?.(image.url);
+    onSelect?.(image.url);
     close();
   }
 

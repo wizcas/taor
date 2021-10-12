@@ -20,11 +20,16 @@ export function Gallery(props) {
         {wallpapers.filter(Boolean).map((wallpaper) => {
           const { id } = wallpaper;
           return (
-            <ImageBlock key={id} image={wallpaper} onViewImage={showLightBox} />
+            <ImageBlock
+              key={id}
+              image={wallpaper}
+              onViewImage={showLightBox}
+              onSelect={onItemSelect}
+            />
           );
         })}
       </div>
-      <ImageLightBox ref={lightBoxRef} onApply={onItemSelect} />
+      <ImageLightBox ref={lightBoxRef} onSelect={onItemSelect} />
     </>
   );
 }

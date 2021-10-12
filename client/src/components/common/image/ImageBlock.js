@@ -1,13 +1,17 @@
 import { useMemo, useCallback } from 'react';
 import { useMeasure } from 'react-use';
 import classNames from 'classnames';
-import styles from './ImageBlock.module.css';
 import { useImageState } from './useImageState';
 import { ImageLoading } from './ImageLoading';
 import { ImageError } from './ImageError';
+import { ApplyButton } from '../form/CircleButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
+import styles from './ImageBlock.module.css';
 
 export function ImageBlock(props) {
-  const { image, onViewImage } = props;
+  const { image, onViewImage, onSelect } = props;
   const [ref, { width }] = useMeasure();
 
   const { imgStateProps, isLoading, hasError } = useImageState(image.thumbnail);
@@ -33,9 +37,14 @@ export function ImageBlock(props) {
     },
     [isLoading, hasError, onViewImage]
   );
+  function onApplyClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    onSelect?.(image.raw);
+  }
 
   return (
-    <>
+    <div className={styles.imageBlockContainer}>
       <div
         className={classNames(styles.imageBlock, {
           [styles.ready]: !isLoading && !hasError,
@@ -50,6 +59,9 @@ export function ImageBlock(props) {
           <ImageError hasError={hasError} />
         </div>
       </div>
-    </>
+      <ApplyButton className={styles.button} onClick={onApplyClick}>
+        <FontAwesomeIcon icon={faCheck} size="lg" />
+      </ApplyButton>
+    </div>
   );
 }
