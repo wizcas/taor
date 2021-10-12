@@ -1,0 +1,11 @@
+.toggleGroup {
+  @apply flex flex-row items-stretch;
+  label {
+    @apply p-1;
+    background: #fafafa;
+    border: 1px solid #666;
+    &.checked {
+      background: #ccc;
+    }
+  }
+}

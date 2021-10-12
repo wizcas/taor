@@ -1,0 +1,7 @@
+.header {
+  @apply flex flex-row w-full;
+
+  .title {
+    @apply flex-1;
+  }
+}

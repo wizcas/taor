@@ -1,9 +1,14 @@
-import { WallhavenWrapper } from "../../pages/wallhaven/gallery";
+import { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import { PreferencesContext } from '../../context/preferences';
+import styles from './Wallpaper.module.css';
 
-export function Wallpaper() {
-  return (
-    <div className="wallpaper inset-0 absolute flex flex-row-reverse align-stretch">
-      <WallhavenWrapper />
-    </div>
-  );
+function Component() {
+  const preferences = useContext(PreferencesContext);
+  const style = {
+    '--wallpaper': `url(${preferences.wallpaper})`,
+  };
+  return <div className={styles.wallpaper} style={style}></div>;
 }
+
+export const Wallpaper = observer(Component);
