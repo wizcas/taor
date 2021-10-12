@@ -3,10 +3,10 @@ import { useDebounce } from 'react-use';
 import { observer } from 'mobx-react-lite';
 import { MaskToggleGroup } from '../../components/common/form';
 import { WallhavenSearchResult } from './SearchResult';
-
-import styles from './Selector.module.css';
 import { WallhavenQueryContext } from './context';
 import { PreferencesContext } from '../../context/preferences';
+
+import styles from './Settings.module.css';
 
 const categoryOptions = [
   { label: 'General', value: 'general' },
