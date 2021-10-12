@@ -7,6 +7,7 @@ import { WallhavenQueryContext } from './context';
 import { PreferencesContext } from '../../context/preferences';
 
 import styles from './Settings.module.css';
+import { PageModalContext } from '../../context/pageModal';
 
 const categoryOptions = [
   { label: 'General', value: 'general' },
@@ -28,8 +29,8 @@ const resolutions = [
   { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
 function Component() {
-  // eslint-disable-next-line no-unused-vars
   const preferences = useContext(PreferencesContext);
+  const pageModal = useContext(PageModalContext);
   const [query, updateQuery] = useContext(WallhavenQueryContext);
   const [q, setQ] = useState(query.q);
   const [categories, setCategories] = useState(query.categories);
@@ -64,8 +65,8 @@ function Component() {
   }
 
   function onSelectWallpaper(wallpaper) {
-    // setPreferences({ wallpaper });
     preferences.wallpaper = wallpaper;
+    pageModal.close();
   }
 
   return (
