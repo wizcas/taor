@@ -1,32 +1,42 @@
 import { useContext } from 'react';
 import Modal from 'react-modal';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { PageModal } from './components/common/modals/PageModal';
 import { SearchBox } from './components/searchbox/SearchBox';
 import { Wallpaper } from './components/wallpaper/Wallpaper';
 import { WallhavenWrapper } from './pages/wallhaven';
 import { PreferencesWrapper } from './context/preferences';
+import { PageModalContext, PageModalWrapper } from './context/pageModal';
 
 import './App.css';
-import { PageModalContext, PageModalWrapper } from './context/pageModal';
 
 Modal.setAppElement('#root');
 
 export default function App() {
   return (
-    <PreferencesWrapper>
-      <PageModalWrapper>
-        <Home />
-      </PageModalWrapper>
-    </PreferencesWrapper>
+    <Router>
+      <PreferencesWrapper>
+        <PageModalWrapper>
+          <Home />
+        </PageModalWrapper>
+      </PreferencesWrapper>
+    </Router>
   );
 }
 
 const Home = observer(function () {
-  const pageModal = useContext(PageModalContext);
+  // const pageModal = useContext(PageModalContext);
+  const history = useHistory();
 
   function openPageModal() {
-    pageModal.open('/wallhaven');
+    // pageModal.open('/wallhaven');
+    history.push('/wallhaven');
   }
 
   return (
@@ -36,7 +46,11 @@ const Home = observer(function () {
       <button onClick={openPageModal}>wallhaven</button>
 
       <PageModal title="wallhaven">
-        <WallhavenWrapper />
+        <Switch>
+          <Route path="/wallhaven">
+            <WallhavenWrapper />
+          </Route>
+        </Switch>
       </PageModal>
     </div>
   );
