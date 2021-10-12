@@ -39,7 +39,6 @@ function Component(props, ref) {
           width={image.width}
           height={image.height}
           alt=""
-          referrerPolicy="no-referrer"
           {...imgStateProps}
         />
         <ImageLoading isLoading={isLoading} dark={true} />

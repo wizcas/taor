@@ -5,10 +5,9 @@ import styles from './Wallpaper.module.css';
 
 function Component() {
   const preferences = useContext(PreferencesContext);
-  const style = {
-    '--wallpaper': `url(${preferences.wallpaper})`,
-  };
-  return <div className={styles.wallpaper} style={style}></div>;
+  return (
+    <img className={styles.wallpaper} alt="" src={preferences.wallpaper} />
+  );
 }
 
 export const Wallpaper = observer(Component);
