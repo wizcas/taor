@@ -8,7 +8,7 @@ export function usePageModal() {
   }
 
   function close() {
-    history.push('/');
+    history.go(-history.length + 1);
   }
 
   return { open, close };
