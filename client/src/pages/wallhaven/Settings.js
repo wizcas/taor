@@ -5,9 +5,9 @@ import { MaskToggleGroup } from '../../components/common/form';
 import { WallhavenSearchResult } from './SearchResult';
 import { WallhavenQueryContext } from './context';
 import { PreferencesContext } from '../../context/preferences';
+import { usePageModal } from '../../hooks/usePageModal';
 
 import styles from './Settings.module.css';
-import { PageModalContext } from '../../context/pageModal';
 
 const categoryOptions = [
   { label: 'General', value: 'general' },
@@ -29,8 +29,8 @@ const resolutions = [
   { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
 function Component() {
+  const { close } = usePageModal();
   const preferences = useContext(PreferencesContext);
-  const pageModal = useContext(PageModalContext);
   const [query, updateQuery] = useContext(WallhavenQueryContext);
   const [q, setQ] = useState(query.q);
   const [categories, setCategories] = useState(query.categories);
@@ -66,7 +66,7 @@ function Component() {
 
   function onSelectWallpaper(wallpaper) {
     preferences.wallpaper = wallpaper;
-    pageModal.close();
+    close();
   }
 
   return (
