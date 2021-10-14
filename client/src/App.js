@@ -1,35 +1,47 @@
-import { useRef } from 'react';
 import Modal from 'react-modal';
-import { FullScreenModal } from './components/common/modals/FullScreenModal';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { PageModal } from './components/common/modals/PageModal';
 import { SearchBox } from './components/searchbox/SearchBox';
 import { Wallpaper } from './components/wallpaper/Wallpaper';
 import { WallhavenWrapper } from './pages/wallhaven';
+import { PreferencesWrapper } from './context/preferences';
 
 import './App.css';
-import { PreferencesWrapper } from './context/preferences';
+import { usePageModal } from './hooks/usePageModal';
 
 Modal.setAppElement('#root');
 
-function App() {
-  const pageModalRef = useRef(null);
-
-  function openPageModal() {
-    pageModalRef.current?.open();
-  }
-
+export default function App() {
   return (
-    <PreferencesWrapper>
-      <div className="App flex justify-center items-center w-screen h-screen">
-        <Wallpaper />
-        <SearchBox className="" />
-        <button onClick={openPageModal}>wallhaven</button>
-
-        <FullScreenModal ref={pageModalRef} title="wallhaven">
-          <WallhavenWrapper />
-        </FullScreenModal>
-      </div>
-    </PreferencesWrapper>
+    <Router>
+      <PreferencesWrapper>
+        <Home />
+      </PreferencesWrapper>
+    </Router>
   );
 }
 
-export default App;
+const Home = observer(function () {
+  const { open } = usePageModal();
+
+  function openPageModal() {
+    open('/wallhaven');
+  }
+
+  return (
+    <div className="App flex justify-center items-center w-screen h-screen">
+      <Wallpaper />
+      <SearchBox className="" />
+      <button onClick={openPageModal}>wallhaven</button>
+
+      <PageModal title="wallhaven">
+        <Switch>
+          <Route path="/wallhaven">
+            <WallhavenWrapper />
+          </Route>
+        </Switch>
+      </PageModal>
+    </div>
+  );
+});

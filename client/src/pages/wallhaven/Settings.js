@@ -5,6 +5,7 @@ import { MaskToggleGroup } from '../../components/common/form';
 import { WallhavenSearchResult } from './SearchResult';
 import { WallhavenQueryContext } from './context';
 import { PreferencesContext } from '../../context/preferences';
+import { usePageModal } from '../../hooks/usePageModal';
 
 import styles from './Settings.module.css';
 
@@ -28,7 +29,7 @@ const resolutions = [
   { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
 function Component() {
-  // eslint-disable-next-line no-unused-vars
+  const { close } = usePageModal();
   const preferences = useContext(PreferencesContext);
   const [query, updateQuery] = useContext(WallhavenQueryContext);
   const [q, setQ] = useState(query.q);
@@ -64,8 +65,8 @@ function Component() {
   }
 
   function onSelectWallpaper(wallpaper) {
-    // setPreferences({ wallpaper });
     preferences.wallpaper = wallpaper;
+    close();
   }
 
   return (
