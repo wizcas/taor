@@ -1,8 +1,8 @@
 import Modal from 'react-modal';
-import { ModalHeader } from './ModalHeader';
 import { observer } from 'mobx-react-lite';
-import styles from './Modal.module.css';
 import { useLocation } from 'react-router';
+import { ModalHeader } from './ModalHeader';
+import styles from './Modal.module.css';
 import { usePageModal } from '../../../hooks/usePageModal';
 
 function Component(props, ref) {

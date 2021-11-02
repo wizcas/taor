@@ -22,7 +22,7 @@ export default function App() {
   );
 }
 
-const Home = observer(function () {
+const Home = observer(() => {
   const { open } = usePageModal();
 
   function openPageModal() {

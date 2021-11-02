@@ -1,4 +1,4 @@
-import styles from "./ModalHeader.module.css";
+import styles from './ModalHeader.module.css';
 
 export function ModalHeader(props) {
   const { title, onClose } = props;

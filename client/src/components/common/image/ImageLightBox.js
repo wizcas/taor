@@ -1,12 +1,12 @@
 import { forwardRef, useState, useImperativeHandle } from 'react';
 import Modal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { ImageLoading } from './ImageLoading';
 import { ImageError } from './ImageError';
 import { useImageState } from './useImageState';
 import { ApplyButton } from '../form/CircleButton';
 import styles from './ImageLightBox.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 function Component(props, ref) {
   const { onSelect } = props;
@@ -41,10 +41,10 @@ function Component(props, ref) {
           alt=""
           {...imgStateProps}
         />
-        <ImageLoading isLoading={isLoading} dark={true} />
+        <ImageLoading isLoading={isLoading} dark />
         <ImageError
           hasError={hasError}
-          dark={true}
+          dark
           message="An error occurs when downloading then wallpaper"
         />
       </div>
@@ -57,8 +57,8 @@ function Component(props, ref) {
     <Modal
       isOpen={isOpen}
       onRequestClose={close}
-      shouldCloseOnOverlayClick={true}
-      shouldCloseOnEsc={true}
+      shouldCloseOnOverlayClick
+      shouldCloseOnEsc
       overlayClassName={styles.overlay}
       className={styles.modalContent}
     >

@@ -1,12 +1,12 @@
 import { useMemo, useCallback } from 'react';
 import { useMeasure } from 'react-use';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useImageState } from './useImageState';
 import { ImageLoading } from './ImageLoading';
 import { ImageError } from './ImageError';
 import { ApplyButton } from '../form/CircleButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './ImageBlock.module.css';
 
@@ -20,14 +20,14 @@ export function ImageBlock(props) {
     () => ({
       height: (width * 9) / 16,
     }),
-    [width]
+    [width],
   );
 
   const thumbnailStyle = useMemo(
     () => ({
       backgroundImage: `url(${image.thumbnail})`,
     }),
-    [image.thumbnail]
+    [image.thumbnail],
   );
 
   const viewImage = useCallback(
@@ -35,7 +35,7 @@ export function ImageBlock(props) {
       if (isLoading || hasError) return;
       onViewImage?.(image.raw, image.width, image.height);
     },
-    [isLoading, hasError, onViewImage]
+    [isLoading, hasError, onViewImage],
   );
   function onApplyClick(e) {
     e.preventDefault();

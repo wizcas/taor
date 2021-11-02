@@ -15,13 +15,13 @@ export function useStoredContext(key, defaultValue) {
             ...prev,
             ...values,
           },
-          (v) => _isNil(v) || v === ''
+          (v) => _isNil(v) || v === '',
         );
         setStoredValue(newValue);
         return newValue;
       });
     },
-    [setStoredValue]
+    [setStoredValue],
   );
   return [value, setter];
 }

@@ -17,7 +17,9 @@ export function useWallhavenSearch(query) {
       },
     });
     const { data } = await resp.json();
-    return data.map(({ id, thumbs, path, dimension_x, dimension_y }) => ({
+    return data.map(({
+      id, thumbs, path, dimension_x, dimension_y,
+    }) => ({
       id,
       thumbnail: thumbs.original,
       raw: path,
