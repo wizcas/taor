@@ -7,7 +7,7 @@ export function ToggleGroup(props) {
 
   const initialValues = useMemo(
     () => options.map((_, i) => Boolean(values[i] ?? false)),
-    [options, values],
+    [options, values]
   );
 
   function onToggleButtonChange(index) {
@@ -35,9 +35,7 @@ export function ToggleGroup(props) {
 }
 
 function ToggleButton(props) {
-  const {
-    label, value, checked, onToggle,
-  } = props;
+  const { label, value, checked, onToggle } = props;
 
   function onStateChange(e) {
     onToggle?.(e.target.checked);

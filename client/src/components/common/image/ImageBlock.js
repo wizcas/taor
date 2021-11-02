@@ -20,14 +20,14 @@ export function ImageBlock(props) {
     () => ({
       height: (width * 9) / 16,
     }),
-    [width],
+    [width]
   );
 
   const thumbnailStyle = useMemo(
     () => ({
       backgroundImage: `url(${image.thumbnail})`,
     }),
-    [image.thumbnail],
+    [image.thumbnail]
   );
 
   const viewImage = useCallback(
@@ -35,7 +35,7 @@ export function ImageBlock(props) {
       if (isLoading || hasError) return;
       onViewImage?.(image.raw, image.width, image.height);
     },
-    [isLoading, hasError, onViewImage],
+    [isLoading, hasError, onViewImage]
   );
   function onApplyClick(e) {
     e.preventDefault();

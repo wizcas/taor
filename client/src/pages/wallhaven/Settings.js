@@ -47,7 +47,7 @@ function Component() {
       });
     },
     500,
-    [q, categories, purity, atleast, updateQuery],
+    [q, categories, purity, atleast, updateQuery]
   );
 
   function onSearchTextSubmit(e) {
