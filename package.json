@@ -1,6 +1,10 @@
 {
   "name": "taor",
   "version": "0.1.0",
+  "author": {
+    "name": "Zhuo Chen",
+    "email": "chen@0x1c.dev"
+  },
   "private": true,
-  "license": "BSD"
+  "license": "GPL-3.0-or-later"
 }
