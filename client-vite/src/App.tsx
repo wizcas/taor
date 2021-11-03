@@ -2,9 +2,14 @@ import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CircleIconButton from './components/form/CircleIconButton';
+import MaskToggleGroup from './components/form/MaskToggleGroup';
 
 function App() {
   const [count, setCount] = useState(0);
+
+  function onChange(v: string) {
+    console.log(v);
+  }
 
   return (
     <div className="App">
@@ -41,6 +46,14 @@ function App() {
         <CircleIconButton size="80px" className="aspect-1">
           Hi
         </CircleIconButton>
+        <MaskToggleGroup
+          options={[
+            { label: 'A', key: 'a' },
+            { label: 'B', key: 'b' },
+          ]}
+          values="1 0"
+          onChange={onChange}
+        />
       </header>
     </div>
   );

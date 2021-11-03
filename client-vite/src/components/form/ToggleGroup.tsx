@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import styles from './ToggleGroup.module.css';
 import { ToggleButton } from './ToggleButton';
+
+import styles from './ToggleGroup.module.css';
 
 export interface ToggleGroupOption {
   key: string;

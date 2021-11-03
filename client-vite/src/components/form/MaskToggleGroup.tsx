@@ -1,15 +1,22 @@
 import { useMemo } from 'react';
-import { ToggleGroup } from './ToggleGroup';
+import { ToggleGroup, ToggleGroupProps } from './ToggleGroup';
 
-export function MaskToggleGroup(props) {
-  const { value, onChange, ...rest } = props;
+interface Props extends Omit<ToggleGroupProps, 'onChange' | 'values'> {
+  values: string;
+  onChange: (value: string) => void;
+}
+export default function MaskToggleGroup(props: Props) {
+  const { values: value, onChange, ...rest } = props;
 
-  const groupValues = useMemo(
-    () => value.split('').reduce((ret, char) => [...ret, char === '1'], []),
+  const groupValues = useMemo<boolean[]>(
+    () =>
+      value
+        .split('')
+        .reduce((ret, char) => [...ret, char === '1'], [] as boolean[]),
     [value]
   );
 
-  function onGroupValueChange(values) {
+  function onGroupValueChange(values: boolean[]) {
     const maskedValue = values.map((value) => (value ? '1' : '0')).join('');
     return onChange?.(maskedValue);
   }
