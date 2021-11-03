@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CircleIconButton from './components/form/CircleIconButton';
+import CircleButton from './components/form/CircleButton';
 import MaskToggleGroup from './components/form/MaskToggleGroup';
 
 function App() {
@@ -43,9 +43,9 @@ function App() {
             Vite Docs
           </a>
         </p>
-        <CircleIconButton size="80px" className="aspect-1">
+        <CircleButton size="80px" className="aspect-1">
           Hi
-        </CircleIconButton>
+        </CircleButton>
         <MaskToggleGroup
           options={[
             { label: 'A', key: 'a' },

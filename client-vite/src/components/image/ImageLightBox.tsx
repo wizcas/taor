@@ -5,7 +5,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import ImageLoading from './ImageLoading';
 import ImageError from './ImageError';
 import useImageState from './useImageState';
-import CircleIconButton from '../form/CircleIconButton';
+import CircleButton from '../form/CircleButton';
 import styles from './ImageLightBox.module.css';
 import { ImageMetadata } from './types';
 
@@ -61,9 +61,9 @@ function ImageLightBox(props: Props, ref: ForwardedRef<RefMethods>) {
           message="An error occurs when downloading then wallpaper"
         />
       </div>
-      <CircleIconButton className={styles.button} onClick={onApplyClick}>
+      <CircleButton className={styles.button} onClick={onApplyClick}>
         <FontAwesomeIcon icon={faCheck} size="4x" />
-      </CircleIconButton>
+      </CircleButton>
     </>
   );
   return (

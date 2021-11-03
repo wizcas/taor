@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import classNames from 'classnames';
-import styles from './CircleIconButton.module.css';
+import styles from './CircleButton.module.css';
 
 interface Props {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface Props {
 
 type ButtonProps = Props & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function CircleIconButton(props: ButtonProps) {
+export default function CircleButton(props: ButtonProps) {
   const { children, color = 'white', className, size, ...rest } = props;
   return (
     <button

@@ -3,7 +3,7 @@ import { useMeasure } from 'react-use';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import CircleIconButton from '../form/CircleIconButton';
+import CircleButton from '../form/CircleButton';
 import type { ImageMetadata } from './types';
 import useImageState from './useImageState';
 import ImageLoading from './ImageLoading';
@@ -79,9 +79,9 @@ export default function ImageBlock(props: Props) {
           <ImageError hasError={hasError} />
         </div>
       </div>
-      <CircleIconButton className={styles.button} onClick={onApplyClick}>
+      <CircleButton className={styles.button} onClick={onApplyClick}>
         <FontAwesomeIcon icon={faCheck} size="lg" />
-      </CircleIconButton>
+      </CircleButton>
     </div>
   );
 }
