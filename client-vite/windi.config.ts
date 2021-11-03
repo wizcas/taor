@@ -2,6 +2,12 @@ import { defineConfig } from 'windicss/helpers';
 import colors from 'windicss/colors';
 import plugin from 'windicss/plugin';
 
+function range(size, startAt = 1) {
+  return Array.from(Array(size).keys()).map((i) => i + startAt);
+}
+
+const sizeList = range(190, 10);
+
 export default defineConfig({
   darkMode: 'class', // or 'media'
   theme: {
@@ -32,6 +38,11 @@ export default defineConfig({
       },
     },
   },
+  safelist: [
+    sizeList.map((i) => `w-${i}px`),
+    sizeList.map((i) => `h-${i}px`),
+    'w-xs w-sm w-md w-lg w-xl w-2xl w-3xl',
+  ],
   plugins: [
     plugin(({ addUtilities }) => {
       const newUtilities = {

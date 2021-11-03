@@ -1,14 +1,16 @@
 .button {
   @apply p-4;
   @apply pointer-events-auto cursor-pointer;
-  color: var(--color);
-  border: 5px solid var(--color);
-  border-radius: 50%;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.2);
+  @apply opacity-50;
+  @apply border-solid border-5 rounded-1/2;
+  @apply transition duration-200 ease-out;
+  @apply bg-opacity-50 bg-black;
+  @apply flex items-center justify-center;
   &:hover {
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.5);
+    @apply opacity-70;
+    @apply transform scale-105;
+  }
+  &:active {
+    @apply opacity-100;
   }
 }

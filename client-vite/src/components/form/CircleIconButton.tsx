@@ -13,14 +13,17 @@ type ButtonProps = Props & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function CircleIconButton(props: ButtonProps) {
   const { children, color = 'white', className, size, ...rest } = props;
-  const style = {
-    '--color': color,
-  } as React.CSSProperties;
   return (
     <button
       type="button"
-      className={classNames(styles.button, `w-${size}`, `h-${size}`, className)}
-      style={style}
+      className={classNames(
+        styles.button,
+        `bg-${color}`,
+        `border-${color}`,
+        `w-${size}`,
+        `h-${size}`,
+        className
+      )}
       {...rest}
     >
       {children}
