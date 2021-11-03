@@ -1,0 +1,26 @@
+.modalContent {
+  @apply absolute inset-4 p-0;
+  @apply flex flex-col;
+  @apply pointer-events-none;
+  @apply outline-none;
+}
+.wrapper {
+  @apply w-full h-full;
+  @apply flex flex-col justify-center items-stretch;
+}
+.content {
+  @apply relative;
+  @apply max-w-full max-h-full;
+
+  img {
+    @apply max-w-full max-h-full object-contain;
+  }
+}
+.overlay {
+  @apply fixed inset-0;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.button {
+  @apply absolute bottom-0 left-1/2 transform -translate-x-1/2;
+}

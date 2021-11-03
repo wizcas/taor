@@ -1,0 +1,39 @@
+.imageBlockContainer {
+  @apply relative;
+}
+.imageBlock {
+  @apply relative overflow-hidden;
+  &::after {
+    content: '';
+    display: block;
+    background: #000;
+    opacity: 0;
+    transition: all 0.5s;
+
+    @apply absolute inset-0;
+    @apply pointer-events-none;
+  }
+  &.ready {
+    @apply cursor-pointer;
+  }
+  .imageThumbnail {
+    @apply w-full h-full;
+    @apply bg-cover bg-center bg-no-repeat bg-clip-border;
+    transition: all 0.5s;
+    img {
+      @apply hidden;
+    }
+  }
+  &.ready:hover {
+    &::after {
+      opacity: 0.5;
+    }
+    .imageThumbnail {
+      transform: scale(1.1);
+    }
+  }
+}
+.button {
+  @apply absolute right-0 bottom-0 m-4;
+  @apply p-2;
+}
