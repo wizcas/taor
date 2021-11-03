@@ -25,9 +25,14 @@ module.exports = {
 
     '@typescript-eslint/no-use-before-define': ['error'],
 
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
+    'react/jsx-props-no-spreading': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 'off',
 
-    'import/no-unresolved': [2, { caseSensitive: false }],
-    'import/extensions': [2, { ts: 'never', tsx: 'never' }],
+    'jsx-a11y/label-has-associated-control': 'off',
+
+    'import/no-unresolved': ['error', { caseSensitive: false }],
+    'import/extensions': ['error', { ts: 'never', tsx: 'never' }],
   },
 };

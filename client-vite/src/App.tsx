@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CircleIconButton from './components/form/CircleIconButton';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -37,6 +38,7 @@ function App() {
             Vite Docs
           </a>
         </p>
+        <CircleIconButton size="xl">Hi</CircleIconButton>
       </header>
     </div>
   );
