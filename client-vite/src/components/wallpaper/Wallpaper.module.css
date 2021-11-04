@@ -1,0 +1,7 @@
+.wallpaper {
+  @apply fixed inset-0 flex flex-row-reverse items-stretch w-screen h-screen;
+  z-index: -1;
+  /* background: var(--wallpaper) no-repeat center center fixed;
+  background-size: cover; */
+  object-fit: cover;
+}

@@ -13,12 +13,12 @@ interface Props {
   onSelect(image: ImageMetadata): void;
 }
 
-interface RefMethods {
+export interface ImageLightBoxRef {
   open(image: ImageMetadata): void;
   close(): void;
 }
 
-function ImageLightBox(props: Props, ref: ForwardedRef<RefMethods>) {
+function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
   const { onSelect } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<ImageMetadata | undefined>(undefined);

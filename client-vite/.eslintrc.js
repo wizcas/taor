@@ -22,8 +22,11 @@ module.exports = {
   rules: {
     'no-shadow': 'off',
     'no-use-before-define': 'off',
+    camelcase: 'off',
+    'no-param-reassign': 'off',
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
 
-    '@typescript-eslint/no-use-before-define': ['error'],
+    '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
 
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
     'react/jsx-props-no-spreading': 'off',
