@@ -6,7 +6,7 @@ function range(size, startAt = 1) {
   return Array.from(Array(size).keys()).map((i) => i + startAt);
 }
 
-const sizeList = range(190, 10);
+const sizeList = range(40, 60);
 
 export default defineConfig({
   darkMode: 'class', // or 'media'
