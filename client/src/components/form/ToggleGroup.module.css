@@ -1,0 +1,3 @@
+.toggleGroup {
+  @apply flex flex-row items-stretch;
+}

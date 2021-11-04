@@ -1,0 +1,16 @@
+.button {
+  @apply p-4;
+  @apply pointer-events-auto cursor-pointer;
+  @apply opacity-50;
+  @apply border-solid border-5 rounded-1/2;
+  @apply transition duration-200 ease-out;
+  @apply bg-opacity-50 bg-black;
+  @apply flex items-center justify-center;
+  &:hover {
+    @apply opacity-70;
+    @apply transform scale-105;
+  }
+  &:active {
+    @apply opacity-100;
+  }
+}

@@ -1,0 +1,8 @@
+.toggleButton {
+  @apply p-1;
+  @apply bg-gray-200;
+  @apply border-solid border-1 border-gray-500;
+  &.checked {
+    @bg-gray-300;
+  }
+}
