@@ -1,62 +1,45 @@
-import { useState } from 'react';
-import logo from './logo.svg';
+import Modal from 'react-modal';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { PreferencesWrapper } from './context/preferences';
+import usePageModal from './hooks/usePageModal';
+import Wallpaper from './components/wallpaper/Wallpaper';
+import PageModal from './components/modals/PageModal';
+import WallhavenWrapper from './pages/wallhaven/Wrapper';
+
 import './App.css';
-import CircleButton from './components/form/CircleButton';
-import MaskToggleGroup from './components/form/MaskToggleGroup';
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  function onChange(v: string) {
-    console.log(v);
-  }
-
+Modal.setAppElement('#root');
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="italic">Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-        <CircleButton size="80px" className="aspect-1">
-          Hi
-        </CircleButton>
-        <MaskToggleGroup
-          options={[
-            { label: 'A', key: 'a' },
-            { label: 'B', key: 'b' },
-          ]}
-          values="1 0"
-          onChange={onChange}
-        />
-      </header>
-    </div>
+    <Router>
+      <PreferencesWrapper>
+        <Home />
+      </PreferencesWrapper>
+    </Router>
   );
 }
 
-export default App;
+function Home() {
+  const { open } = usePageModal();
+
+  function openPageModal() {
+    open('/wallhaven');
+  }
+
+  return (
+    <div className="App flex justify-center items-center w-screen h-screen">
+      <Wallpaper />
+      <button type="button" className="bg-white" onClick={openPageModal}>
+        wallhaven
+      </button>
+
+      <PageModal title="wallhaven">
+        <Switch>
+          <Route path="/wallhaven">
+            <WallhavenWrapper />
+          </Route>
+        </Switch>
+      </PageModal>
+    </div>
+  );
+}

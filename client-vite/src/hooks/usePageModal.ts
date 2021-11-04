@@ -9,7 +9,7 @@ export default function usePageModal() {
   }
 
   function close() {
-    history.go(-history.length + 1);
+    history.go(-1);
   }
 
   return { open, close };
