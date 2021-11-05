@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path');
+
 module.exports = {
   env: {
     browser: true,
@@ -17,6 +20,15 @@ module.exports = {
     },
     ecmaVersion: 13,
     sourceType: 'module',
+    // project:
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: path.resolve(__dirname, 'tsconfig.json'),
+      },
+    },
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
@@ -38,5 +50,20 @@ module.exports = {
 
     'import/no-unresolved': ['error', { caseSensitive: false }],
     'import/extensions': ['error', { ts: 'never', tsx: 'never' }],
+    'import/order': [
+      'warn',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+          'type',
+          'object',
+        ],
+      },
+    ],
   },
 };

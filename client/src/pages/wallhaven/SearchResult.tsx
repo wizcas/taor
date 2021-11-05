@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Gallery from '../../components/wallpaper/Gallery';
+import { ImageMetadata } from 'src/components/image/types';
+import Gallery from 'src/components/wallpaper/Gallery';
 import { WallhavenQueryContext } from './context';
 import { useWallhavenSearch } from './api';
-import { ImageMetadata } from '../../components/image/types';
 
 const client = new QueryClient();
 
