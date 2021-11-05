@@ -61,9 +61,11 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
           message="An error occurs when downloading then wallpaper"
         />
       </div>
-      <CircleButton className={styles.button} onClick={onApplyClick}>
-        <FontAwesomeIcon icon={faCheck} size="4x" />
-      </CircleButton>
+      <div className={styles.buttonContainer}>
+        <CircleButton onClick={onApplyClick}>
+          <FontAwesomeIcon icon={faCheck} size="4x" />
+        </CircleButton>
+      </div>
     </>
   );
   return (
