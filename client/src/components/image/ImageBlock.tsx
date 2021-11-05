@@ -29,7 +29,7 @@ export default function ImageBlock(props: Props) {
 
   const thumbnailStyle = useMemo(
     () => ({
-      backgroundImage: `url(${image.thumbnail})`,
+      backgroundColor: image.primaryColor,
     }),
     [image.thumbnail]
   );
@@ -72,7 +72,6 @@ export default function ImageBlock(props: Props) {
         <div className={styles.imageThumbnail} style={thumbnailStyle}>
           <LazyImage
             src={image.thumbnail}
-            color={image.primaryColor}
             onLoading={() => setIsLoading(true)}
             onLoad={() => setIsLoading(false)}
           />
