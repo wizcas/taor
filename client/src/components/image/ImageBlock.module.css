@@ -19,10 +19,7 @@
   .imageThumbnail {
     @apply w-full h-full;
     @apply bg-cover bg-center bg-no-repeat bg-clip-border;
-    transition: all 0.5s;
-    img {
-      @apply hidden;
-    }
+    @apply transition-all duration-500;
   }
   &.ready:hover {
     &::after {

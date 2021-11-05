@@ -4,4 +4,5 @@ export interface ImageMetadata {
   thumbnail: string;
   width?: number;
   height?: number;
+  primaryColor?: string;
 }

@@ -3,11 +3,10 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CircleButton from '../form/CircleButton';
-import ImageLoading from './ImageLoading';
-import ImageError from './ImageError';
-import useImageState from './useImageState';
-import styles from './ImageLightBox.module.css';
 import { ImageMetadata } from './types';
+import LazyImage from './LazyImage';
+
+import styles from './ImageLightBox.module.css';
 
 interface Props {
   onSelect(image: ImageMetadata): void;
@@ -22,7 +21,6 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
   const { onSelect } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<ImageMetadata | undefined>(undefined);
-  const { imgStateProps, isLoading, hasError } = useImageState(image?.raw);
 
   function open(image: ImageMetadata) {
     setImage(image);
@@ -47,18 +45,12 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
   const content = image && (
     <>
       <div className={styles.content}>
-        <img
+        <LazyImage
+          className={styles.image}
           src={image.raw}
+          placeholder={image.thumbnail}
           width={image.width}
           height={image.height}
-          alt=""
-          {...imgStateProps}
-        />
-        <ImageLoading isLoading={isLoading} dark />
-        <ImageError
-          hasError={hasError}
-          dark
-          message="An error occurs when downloading then wallpaper"
         />
       </div>
       <div className={styles.buttonContainer}>

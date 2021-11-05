@@ -21,6 +21,7 @@ export interface WallhavenSearchResult {
   dimension_x: number;
   dimension_y: number;
   ratio: string;
+  colors: string[];
 }
 
 const wallhavenAPI = {
@@ -50,13 +51,15 @@ export function useWallhavenSearch(query: WallhavenSearchQuery | undefined) {
           path,
           dimension_x,
           dimension_y,
+          colors,
         }: WallhavenSearchResult) =>
           ({
             id,
-            thumbnail: thumbs.original,
+            thumbnail: thumbs.small,
             raw: path,
             width: dimension_x,
             height: dimension_y,
+            primaryColor: colors[0],
           } as ImageMetadata)
       );
     }

@@ -1,14 +1,12 @@
-import { useMemo, MouseEvent, KeyboardEvent } from 'react';
+import { useMemo, MouseEvent, KeyboardEvent, useState } from 'react';
 import { useMeasure } from 'react-use';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CircleButton from '../form/CircleButton';
-import useImageState from './useImageState';
-import ImageLoading from './ImageLoading';
-import ImageError from './ImageError';
 
 import styles from './ImageBlock.module.css';
+import LazyImage from './LazyImage';
 import type { ImageMetadata } from './types';
 
 interface Props {
@@ -20,8 +18,7 @@ interface Props {
 export default function ImageBlock(props: Props) {
   const { image, onViewImage, onSelect } = props;
   const [ref, { width }] = useMeasure<HTMLDivElement>();
-
-  const { imgStateProps, isLoading, hasError } = useImageState(image.thumbnail);
+  const [isLoading, setIsLoading] = useState(false);
 
   const blockStyle = useMemo(
     () => ({
@@ -38,7 +35,6 @@ export default function ImageBlock(props: Props) {
   );
 
   function viewImage() {
-    if (isLoading || hasError) return;
     onViewImage?.(image);
   }
 
@@ -66,7 +62,7 @@ export default function ImageBlock(props: Props) {
         role="button"
         tabIndex={0}
         className={classNames(styles.imageBlock, {
-          [styles.ready]: !isLoading && !hasError,
+          [styles.ready]: !isLoading,
         })}
         ref={ref}
         style={blockStyle}
@@ -74,9 +70,12 @@ export default function ImageBlock(props: Props) {
         onKeyDown={onKeyDown}
       >
         <div className={styles.imageThumbnail} style={thumbnailStyle}>
-          <img src={image.thumbnail} alt="" {...imgStateProps} />
-          <ImageLoading isLoading={isLoading} />
-          <ImageError hasError={hasError} />
+          <LazyImage
+            src={image.thumbnail}
+            color={image.primaryColor}
+            onLoading={() => setIsLoading(true)}
+            onLoad={() => setIsLoading(false)}
+          />
         </div>
       </div>
       <CircleButton className={styles.button} onClick={onApplyClick}>
