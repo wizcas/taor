@@ -2,10 +2,10 @@ import { forwardRef, useState, useImperativeHandle, ForwardedRef } from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import CircleButton from '../form/CircleButton';
 import ImageLoading from './ImageLoading';
 import ImageError from './ImageError';
 import useImageState from './useImageState';
-import CircleButton from '../form/CircleButton';
 import styles from './ImageLightBox.module.css';
 import { ImageMetadata } from './types';
 

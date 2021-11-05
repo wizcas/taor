@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CircleButton from '../form/CircleButton';
-import type { ImageMetadata } from './types';
 import useImageState from './useImageState';
 import ImageLoading from './ImageLoading';
 import ImageError from './ImageError';
 
 import styles from './ImageBlock.module.css';
+import type { ImageMetadata } from './types';
 
 interface Props {
   image: ImageMetadata;

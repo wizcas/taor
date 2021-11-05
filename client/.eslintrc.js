@@ -20,7 +20,6 @@ module.exports = {
     },
     ecmaVersion: 13,
     sourceType: 'module',
-    // project:
   },
   settings: {
     'import/resolver': {

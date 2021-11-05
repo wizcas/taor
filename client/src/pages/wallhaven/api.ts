@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { ImageMetadata } from '../../components/image/types';
+import { ImageMetadata } from 'src/components/image/types';
 
 export interface WallhavenSearchQuery {
   q?: string;
