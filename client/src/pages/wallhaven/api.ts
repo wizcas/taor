@@ -37,13 +37,16 @@ interface WallhavenSearchResult {
 }
 
 const wallhavenAPI = {
-  search: 'https://taor-api.vercel.com/api/wallhaven/search',
-  searchLocal: 'http://localhost:3000/api/wallhaven/search',
+  remote: 'https://taor-api.vercel.com/api/wallhaven/search',
+  local: 'http://localhost:3000/api/wallhaven/search',
+  official: 'https://wallhaven.cc/api/v1/search',
 };
 
 export function useWallhavenSearch(query: WallhavenSearchQuery | undefined) {
   query ??= {};
-  const url = new URL(wallhavenAPI.searchLocal);
+  const url = new URL(wallhavenAPI.local);
+  // const url = new URL(wallhavenAPI.remote);
+  // const url = new URL(wallhavenAPI.official);
   url.search = new URLSearchParams(query as Record<string, string>).toString();
 
   return useQuery<ImageList, Error>(
