@@ -27,7 +27,7 @@ function SearchResultContent(props: Props) {
   if (error) {
     console.error('wallhaven searching failed', error);
   }
-  const wallpapers = data ?? [];
+  const wallpapers = data?.images ?? [];
 
   return isLoading ? (
     <div>Loading...</div>

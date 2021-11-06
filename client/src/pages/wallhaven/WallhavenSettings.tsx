@@ -6,9 +6,9 @@ import { PreferencesContext } from 'src/context/preferences';
 import usePageModal from 'src/hooks/usePageModal';
 import { ImageMetadata } from 'src/components/image/types';
 import { WallhavenQueryContext } from './context';
-import WallhavenSearchResult from './SearchResult';
+import WallhavenSearchResult from './WallhavenSearchResult';
 
-import styles from './Settings.module.css';
+import styles from './WallhavenSettings.module.css';
 
 const categoryOptions = [
   { label: 'General', key: 'general' },
