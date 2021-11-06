@@ -97,9 +97,10 @@ function WallhavenSettings() {
           ))}
         </select>
       </section>
-      <div className={styles.content}>
-        <WallhavenSearchResult onSelect={onSelectWallpaper} />
-      </div>
+      <WallhavenSearchResult
+        className="overflow-y-auto flex-1"
+        onSelect={onSelectWallpaper}
+      />
     </div>
   );
 }

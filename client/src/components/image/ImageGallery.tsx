@@ -1,13 +1,13 @@
 import { useRef } from 'react';
-import ImageBlock from '../image/ImageBlock';
-import ImageLightBox, { ImageLightBoxRef } from '../image/ImageLightBox';
-import { ImageMetadata } from '../image/types';
+import ImageBlock from './ImageBlock';
+import ImageLightBox, { ImageLightBoxRef } from './ImageLightBox';
+import { ImageMetadata } from './types';
 
 interface Props {
   wallpapers: ImageMetadata[];
   onSelect(wallpaper: ImageMetadata): void;
 }
-export default function Gallery(props: Props) {
+export default function ImageGallery(props: Props) {
   const { wallpapers = [], onSelect } = props;
   const lightBoxRef = useRef<ImageLightBoxRef>(null);
 

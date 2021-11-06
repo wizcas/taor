@@ -6,5 +6,5 @@
 }
 
 .content {
-  @apply overflow-y-auto;
+  @apply relative flex-1 overflow-hidden;
 }

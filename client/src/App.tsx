@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { PreferencesWrapper } from 'src/context/preferences';
 import usePageModal from 'src/hooks/usePageModal';
-import Wallpaper from 'src/components/wallpaper/Wallpaper';
+import Wallpaper from 'src/components/image/Wallpaper';
 import PageModal from 'src/components/modals/PageModal';
 import WallhavenWrapper from 'src/pages/wallhaven/Wrapper';
 

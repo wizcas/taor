@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import ImageGallery from 'src/components/image/ImageGallery';
 import { ImageMetadata } from 'src/components/image/types';
-import Gallery from 'src/components/wallpaper/Gallery';
 import { WallhavenQueryContext } from './context';
 import { useWallhavenSearch } from './api';
 
@@ -11,10 +11,15 @@ interface Props {
   onSelect(wallpaper: ImageMetadata): void;
 }
 
-export default function WallhavenSearchResult(props: Props) {
+export default function WallhavenSearchResult(
+  props: Props & { className: string }
+) {
+  const { className, ...rest } = props;
   return (
     <QueryClientProvider client={client}>
-      <SearchResultContent {...props} />
+      <div className={className}>
+        <SearchResultContent {...rest} />
+      </div>
     </QueryClientProvider>
   );
 }
@@ -32,8 +37,6 @@ function SearchResultContent(props: Props) {
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <div>
-      <Gallery wallpapers={wallpapers} onSelect={onSelect} />
-    </div>
+    <ImageGallery wallpapers={wallpapers} onSelect={onSelect} />
   );
 }
