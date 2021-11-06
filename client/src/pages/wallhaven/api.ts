@@ -1,9 +1,5 @@
 import { useQuery } from 'react-query';
-import {
-  ImageList,
-  ImageListPagination,
-  ImageMetadata,
-} from 'src/components/image/types';
+import type { ImageList, ImageMetadata, Pagination } from 'src/types';
 
 export interface WallhavenSearchQuery {
   q?: string;
@@ -70,7 +66,7 @@ export function useWallhavenSearch(query: WallhavenSearchQuery | undefined) {
           primaryColor: colors[0],
         })
       );
-      const pagination: ImageListPagination = {
+      const pagination: Pagination = {
         currentPage: meta.current_page,
         lastPage: meta.last_page,
         perPage: meta.per_page,

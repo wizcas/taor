@@ -3,10 +3,10 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CircleButton from '../form/CircleButton';
-import { ImageMetadata } from './types';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
+import type { ImageMetadata } from 'src/types';
 
 interface Props {
   onSelect(image: ImageMetadata): void;

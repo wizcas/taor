@@ -12,10 +12,9 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CircleButton from '../form/CircleButton';
-
-import styles from './ImageBlock.module.css';
 import LazyImage from './LazyImage';
-import type { ImageMetadata } from './types';
+import styles from './ImageBlock.module.css';
+import type { ImageMetadata } from 'src/types';
 
 const ratio16to9 = 16 / 9;
 
