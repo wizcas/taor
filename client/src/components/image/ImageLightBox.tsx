@@ -6,7 +6,7 @@ import CircleButton from '../form/CircleButton';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
-import type { ImageMetadata } from 'src/types';
+import type { ImageMetadata } from '@/types';
 
 interface Props {
   onSelect(image: ImageMetadata): void;

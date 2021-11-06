@@ -1,10 +1,10 @@
 import { useState, useContext, ChangeEvent } from 'react';
 import { useDebounce } from 'react-use';
 import { observer } from 'mobx-react-lite';
-import { ImageMetadata } from 'src/types';
-import MaskToggleGroup from 'src/components/form/MaskToggleGroup';
-import { PreferencesContext } from 'src/context/preferences';
-import usePageModal from 'src/hooks/usePageModal';
+import { ImageMetadata } from '@/types';
+import MaskToggleGroup from '@/components/form/MaskToggleGroup';
+import { PreferencesContext } from '@/context/preferences';
+import usePageModal from '@/hooks/usePageModal';
 import { WallhavenQueryContext } from './context';
 import WallhavenSearchResult from './WallhavenSearchResult';
 

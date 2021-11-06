@@ -1,4 +1,4 @@
-import useStoredContext from 'src/hooks/useStoredContext';
+import useStoredContext from '@/hooks/useStoredContext';
 import { defaultQuery, WallhavenQueryContext } from './context';
 import WallhavenSettings from './WallhavenSettings';
 

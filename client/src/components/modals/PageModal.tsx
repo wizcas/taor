@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 import { observer } from 'mobx-react-lite';
 import { useLocation } from 'react-router-dom';
 import { ReactNode } from 'react';
-import usePageModal from 'src/hooks/usePageModal';
+import usePageModal from '@/hooks/usePageModal';
 import ModalHeader from './ModalHeader';
 import styles from './PageModal.module.css';
 

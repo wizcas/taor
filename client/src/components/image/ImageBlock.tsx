@@ -14,7 +14,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CircleButton from '../form/CircleButton';
 import LazyImage from './LazyImage';
 import styles from './ImageBlock.module.css';
-import type { ImageMetadata } from 'src/types';
+import type { ImageMetadata } from '@/types';
 
 const ratio16to9 = 16 / 9;
 

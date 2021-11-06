@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import ImageBlock from './ImageBlock';
 import ImageLightBox, { ImageLightBoxRef } from './ImageLightBox';
-import type { ImageMetadata } from 'src/types';
+import type { ImageMetadata } from '@/types';
 
 interface Props {
   wallpapers: ImageMetadata[];

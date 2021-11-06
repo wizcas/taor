@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import type { ImageList, ImageMetadata, Pagination } from 'src/types';
+import type { ImageList, ImageMetadata, Pagination } from '@/types';
 
 export interface WallhavenSearchQuery {
   q?: string;

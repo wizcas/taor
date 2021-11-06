@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import classNames from 'classnames';
-import ImageGallery from 'src/components/image/ImageGallery';
-import LoadMoreHint from 'src/components/list/LoadMoreHint';
-import { EMPTY_PAGINATION, Pagination, ImageMetadata } from 'src/types';
 import { WallhavenQueryContext } from './context';
 import { useWallhavenSearch } from './api';
+import ImageGallery from '@/components/image/ImageGallery';
+import LoadMoreHint from '@/components/list/LoadMoreHint';
+import { EMPTY_PAGINATION, Pagination, ImageMetadata } from '@/types';
 
 const client = new QueryClient();
 
