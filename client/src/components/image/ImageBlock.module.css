@@ -1,6 +1,6 @@
 .imageBlockContainer {
   @apply relative overflow-hidden;
-  height: 200px;
+  height: 20vh;
 }
 .imageBlock {
   @apply relative overflow-hidden w-full h-full;
