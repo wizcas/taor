@@ -1,24 +1,20 @@
 import classNames from 'classnames';
-import { MoonLoader } from 'react-spinners';
+import Spinner from '../spinner/Spinner';
 import styles from './ImageLoading.module.css';
 
 interface Props {
-  isLoading?: boolean;
+  loading?: boolean;
   dark?: boolean;
 }
 export default function ImageLoading(props: Props) {
-  const { isLoading, dark } = props;
-  return isLoading ? (
+  const { loading, dark } = props;
+  return loading ? (
     <div
       className={classNames(styles.wrapper, {
         [styles.dark]: dark,
       })}
     >
-      <MoonLoader
-        size={50}
-        color={dark ? 'white' : 'black'}
-        loading={isLoading}
-      />
+      <Spinner size={50} dark={dark} loading={loading} />
     </div>
   ) : (
     <></>

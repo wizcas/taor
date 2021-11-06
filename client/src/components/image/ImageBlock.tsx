@@ -26,7 +26,7 @@ export default function ImageBlock(props: Props) {
     () => ({
       backgroundColor: image.primaryColor,
     }),
-    [image.thumbnail]
+    [image.primaryColor]
   );
 
   function viewImage() {
@@ -62,8 +62,9 @@ export default function ImageBlock(props: Props) {
         onClick={() => viewImage()}
         onKeyDown={onKeyDown}
       >
-        <div className={styles.imageThumbnail} style={thumbnailStyle}>
+        <div className={styles.thumbnail} style={thumbnailStyle}>
           <LazyImage
+            className={styles.innerImage}
             src={image.thumbnail}
             onLoading={() => setIsLoading(true)}
             onLoad={() => setIsLoading(false)}

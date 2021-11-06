@@ -17,10 +17,14 @@
   &.ready {
     @apply cursor-pointer;
   }
-  .imageThumbnail {
+  .thumbnail {
     @apply w-full h-full;
     @apply bg-cover bg-center bg-no-repeat bg-clip-border;
     @apply transition-all duration-500;
+    @apply relative;
+  }
+  .innerImage {
+    @apply w-full h-full;
   }
   &.ready:hover {
     &::after {

@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import classNames from 'classnames';
 import ImageGallery from 'src/components/image/ImageGallery';
 import { ImageMetadata } from 'src/components/image/types';
+import LoadMoreHint from 'src/components/list/LoadMoreHint';
 import { WallhavenQueryContext } from './context';
 import { useWallhavenSearch } from './api';
 
@@ -17,8 +19,9 @@ export default function WallhavenSearchResult(
   const { className, ...rest } = props;
   return (
     <QueryClientProvider client={client}>
-      <div className={className}>
+      <div className={classNames('flex flex-col items-stretch', className)}>
         <SearchResultContent {...rest} />
+        <LoadMoreHint hasMore />
       </div>
     </QueryClientProvider>
   );

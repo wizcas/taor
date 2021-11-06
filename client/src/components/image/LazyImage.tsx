@@ -32,7 +32,7 @@ export default function LazyImage(props: Props) {
       {content && (
         <img alt={alt} src={content} className="w-full h-full" {...rest} />
       )}
-      <ImageLoading isLoading={isLoading} dark />
+      <ImageLoading loading={isLoading} dark />
     </div>
   );
 }
