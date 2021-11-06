@@ -1,4 +1,12 @@
-import { useMemo, MouseEvent, KeyboardEvent, useState, useRef } from 'react';
+import {
+  useMemo,
+  MouseEvent,
+  KeyboardEvent,
+  useState,
+  useRef,
+  CSSProperties,
+  useEffect,
+} from 'react';
 import { useIntersection } from 'react-use';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +17,8 @@ import styles from './ImageBlock.module.css';
 import LazyImage from './LazyImage';
 import type { ImageMetadata } from './types';
 
+const ratio16to9 = 16 / 9;
+
 interface Props {
   image: ImageMetadata;
   onViewImage(image: ImageMetadata): void;
@@ -18,9 +28,36 @@ interface Props {
 export default function ImageBlock(props: Props) {
   const { image, onViewImage, onSelect } = props;
   const [isLoading, setIsLoading] = useState(false);
+  const [preferredHeight, setPreferredHeight] = useState<number | undefined>();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const intersection = useIntersection(containerRef, {});
+
+  useEffect(() => {
+    if (!containerRef.current) {
+      return undefined;
+    }
+    const resizeOb = new ResizeObserver((entries) => {
+      if (entries.length === 0) {
+        return;
+      }
+      const el = entries[0];
+
+      const h = el.contentRect.width / ratio16to9;
+      setPreferredHeight(h);
+    });
+
+    const container = containerRef.current;
+    resizeOb.observe(container);
+    return () => {
+      resizeOb.unobserve(container);
+    };
+  }, []);
+
+  const containerStyle = useMemo<CSSProperties>(
+    () => ({ height: preferredHeight }),
+    [preferredHeight]
+  );
 
   const thumbnailStyle = useMemo(
     () => ({
@@ -78,7 +115,11 @@ export default function ImageBlock(props: Props) {
   );
 
   return (
-    <div className={styles.imageBlockContainer} ref={containerRef}>
+    <div
+      className={styles.imageBlockContainer}
+      ref={containerRef}
+      style={containerStyle}
+    >
       {intersection?.isIntersecting ? block : null}
     </div>
   );

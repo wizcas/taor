@@ -1,6 +1,5 @@
 .imageBlockContainer {
   @apply relative overflow-hidden;
-  height: 20vh;
 }
 .imageBlock {
   @apply relative overflow-hidden w-full h-full;
@@ -30,7 +29,7 @@
     &::after {
       opacity: 0.5;
     }
-    .imageThumbnail {
+    .thumbnail {
       transform: scale(1.1);
     }
   }
