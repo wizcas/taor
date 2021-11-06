@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
+import classNames from 'classnames';
+import {
+  CSSProperties,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import { useMeasure } from 'react-use';
 import ImageLoading from './ImageLoading';
 
 interface Props {
@@ -19,19 +27,35 @@ export default function LazyImage(props: Props) {
     className,
     onLoading,
     onLoad,
-    ...rest
+    width,
+    height,
   } = props;
-  const { content, isLoading } = useAsyncImage(
-    src,
-    placeholder,
-    onLoad,
-    onLoading
-  );
+  const { url, isLoading } = useAsyncImage(src, placeholder, onLoad, onLoading);
+  const [rootRef, { width: viewWidth }] = useMeasure<HTMLDivElement>();
+  const style = useMemo(() => {
+    const result = {
+      backgroundImage: `url(${url})`,
+    } as CSSProperties;
+    if (width && viewWidth && height) {
+      result.height = (viewWidth * height) / width;
+    }
+    return result;
+  }, [url, width, height, viewWidth]);
   return (
-    <div className={className}>
-      {content && (
-        <img alt={alt} src={content} className="w-full h-full" {...rest} />
+    <div
+      className={classNames(
+        'bg-clip-border',
+        'bg-no-repeat',
+        'bg-cover',
+        'bg-origin-border',
+        'bg-center',
+        'object-cover',
+        className
       )}
+      ref={rootRef}
+      style={style}
+      aria-label={alt}
+    >
       <ImageLoading loading={isLoading} dark />
     </div>
   );
@@ -43,10 +67,10 @@ function useAsyncImage(
   onLoad?: () => void,
   onLoading?: () => void
 ): {
-  content: string | undefined;
+  url: string | undefined;
   isLoading: boolean;
 } {
-  const [content, setContent] = useState<string | undefined>(placeholder);
+  const [url, setContent] = useState<string | undefined>(placeholder);
   const [isLoading, setIsLoading] = useState(true);
   const downloadImage = useCallback((src: string) => {
     const resultImage = new Image();
@@ -62,5 +86,5 @@ function useAsyncImage(
     setContent(placeholder);
     downloadImage(src);
   }, [downloadImage, src]);
-  return { content, isLoading };
+  return { url, isLoading };
 }
