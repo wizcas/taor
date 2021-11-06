@@ -23,7 +23,7 @@ export default function ImageGallery(props: Props) {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="relative grid grid-cols-4 gap-4 auto-rows-fr">
         {wallpapers.filter(Boolean).map((wallpaper) => {
           const { id } = wallpaper;
           return (

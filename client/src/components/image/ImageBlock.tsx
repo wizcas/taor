@@ -1,5 +1,5 @@
-import { useMemo, MouseEvent, KeyboardEvent, useState } from 'react';
-import { useMeasure } from 'react-use';
+import { useMemo, MouseEvent, KeyboardEvent, useState, useRef } from 'react';
+import { useIntersection } from 'react-use';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -17,15 +17,10 @@ interface Props {
 
 export default function ImageBlock(props: Props) {
   const { image, onViewImage, onSelect } = props;
-  const [ref, { width }] = useMeasure<HTMLDivElement>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const blockStyle = useMemo(
-    () => ({
-      height: (width * 9) / 16,
-    }),
-    [width]
-  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const intersection = useIntersection(containerRef, {});
 
   const thumbnailStyle = useMemo(
     () => ({
@@ -56,16 +51,14 @@ export default function ImageBlock(props: Props) {
     }
   }
 
-  return (
-    <div className={styles.imageBlockContainer}>
+  const block = (
+    <>
       <div
         role="button"
         tabIndex={0}
         className={classNames(styles.imageBlock, {
           [styles.ready]: !isLoading,
         })}
-        ref={ref}
-        style={blockStyle}
         onClick={() => viewImage()}
         onKeyDown={onKeyDown}
       >
@@ -80,6 +73,12 @@ export default function ImageBlock(props: Props) {
       <CircleButton className={styles.button} onClick={onApplyClick}>
         <FontAwesomeIcon icon={faCheck} size="lg" />
       </CircleButton>
+    </>
+  );
+
+  return (
+    <div className={styles.imageBlockContainer} ref={containerRef}>
+      {intersection?.isIntersecting ? block : null}
     </div>
   );
 }

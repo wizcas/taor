@@ -1,8 +1,7 @@
 .wrapper {
   @apply absolute inset-0;
   @apply flex justify-center items-center;
-  /* background: rgba(0, 0, 0, 0.05); */
+  @apply bg-dark-50 bg-opacity-10;
   &.dark {
-    /* background: rgba(0, 0, 0, 0.5); */
   }
 }
