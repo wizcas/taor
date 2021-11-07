@@ -4,10 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { WallhavenQueryContext } from './context';
 import WallhavenSearchResult from './WallhavenSearchResult';
 import styles from './WallhavenSettings.module.css';
-import { ImageMetadata } from '@/types';
 import MaskToggleGroup from '@/components/form/MaskToggleGroup';
-import { PreferencesContext } from '@/context/preferences';
-import usePageModal from '@/hooks/usePageModal';
 
 const categoryOptions = [
   { label: 'General', key: 'general' },
@@ -29,8 +26,6 @@ const resolutions = [
   { label: '3840x2160 (4K)', value: '3840x2160' },
 ];
 function WallhavenSettings() {
-  const { close } = usePageModal();
-  const preferences = useContext(PreferencesContext);
   const [query, updateQuery] = useContext(WallhavenQueryContext);
   const [q, setQ] = useState(query?.q);
   const [categories, setCategories] = useState(query?.categories);
@@ -64,11 +59,6 @@ function WallhavenSettings() {
     setAtLeast(atleast);
   }
 
-  function onSelectWallpaper(image: ImageMetadata) {
-    preferences.wallpaperUrl = image.raw;
-    close();
-  }
-
   return (
     <div className={styles.wrapper}>
       <section className={styles.toolbar}>
@@ -96,10 +86,7 @@ function WallhavenSettings() {
           ))}
         </select>
       </section>
-      <WallhavenSearchResult
-        className="overflow-y-auto flex-1"
-        onSelect={onSelectWallpaper}
-      />
+      <WallhavenSearchResult className="overflow-y-auto flex-1" />
     </div>
   );
 }

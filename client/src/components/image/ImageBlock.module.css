@@ -1,5 +1,23 @@
 .imageBlockContainer {
   @apply relative overflow-hidden;
+  @apply rounded-md;
+  .button {
+    @apply hidden absolute right-0 bottom-0 m-4;
+    @apply p-2;
+  }
+  &:hover .button {
+    @apply block;
+  }
+  .toolbar {
+    @apply absolute bottom-0 right-0 transition-all duration-500;
+    @apply transform translate-x-full;
+  }
+  &:hover .toolbar {
+    @apply translate-x-0;
+  }
+  &:focus-within .toolbar {
+    @apply translate-x-0;
+  }
 }
 .imageBlock {
   @apply relative overflow-hidden w-full h-full;
@@ -33,8 +51,4 @@
       transform: scale(1.1);
     }
   }
-}
-.button {
-  @apply absolute right-0 bottom-0 m-4;
-  @apply p-2;
 }

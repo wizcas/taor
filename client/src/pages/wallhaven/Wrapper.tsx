@@ -1,6 +1,6 @@
-import useStoredContext from '@/hooks/useStoredContext';
 import { defaultQuery, WallhavenQueryContext } from './context';
 import WallhavenSettings from './WallhavenSettings';
+import useStoredContext from '@/hooks/useStoredContext';
 
 export default function WallhavenWrapper() {
   const ctx = useStoredContext('wallhaven-search', defaultQuery);

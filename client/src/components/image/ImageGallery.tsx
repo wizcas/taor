@@ -5,15 +5,10 @@ import type { ImageMetadata } from '@/types';
 
 interface Props {
   images: ImageMetadata[];
-  onSelect(wallpaper: ImageMetadata): void;
 }
 export default function ImageGallery(props: Props) {
-  const { images = [], onSelect } = props;
+  const { images = [] } = props;
   const lightBoxRef = useRef<ImageLightBoxRef>(null);
-
-  function onItemSelect(wallpaper: ImageMetadata) {
-    onSelect?.(wallpaper);
-  }
 
   function showLightBox(wallpaper: ImageMetadata) {
     if (lightBoxRef.current) {
@@ -27,16 +22,11 @@ export default function ImageGallery(props: Props) {
         {images.filter(Boolean).map((wallpaper) => {
           const { id } = wallpaper;
           return (
-            <ImageBlock
-              key={id}
-              image={wallpaper}
-              onViewImage={showLightBox}
-              onSelect={onItemSelect}
-            />
+            <ImageBlock key={id} image={wallpaper} onViewImage={showLightBox} />
           );
         })}
       </div>
-      <ImageLightBox ref={lightBoxRef} onSelect={onItemSelect} />
+      <ImageLightBox ref={lightBoxRef} />
     </>
   );
 }

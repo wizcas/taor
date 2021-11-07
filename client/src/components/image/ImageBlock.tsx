@@ -1,6 +1,5 @@
 import {
   useMemo,
-  MouseEvent,
   KeyboardEvent,
   useState,
   useRef,
@@ -9,11 +8,9 @@ import {
 } from 'react';
 import { useIntersection } from 'react-use';
 import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import CircleButton from '../form/CircleButton';
 import LazyImage from './LazyImage';
 import styles from './ImageBlock.module.css';
+import ImageToolbar from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
 
 const ratio16to9 = 16 / 9;
@@ -21,11 +18,10 @@ const ratio16to9 = 16 / 9;
 interface Props {
   image: ImageMetadata;
   onViewImage(image: ImageMetadata): void;
-  onSelect(image: ImageMetadata): void;
 }
 
 export default function ImageBlock(props: Props) {
-  const { image, onViewImage, onSelect } = props;
+  const { image, onViewImage } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [preferredHeight, setPreferredHeight] = useState<number | undefined>();
 
@@ -69,16 +65,9 @@ export default function ImageBlock(props: Props) {
     onViewImage?.(image);
   }
 
-  function onApplyClick(e?: MouseEvent<HTMLButtonElement>) {
-    e?.preventDefault();
-    e?.stopPropagation();
-    onSelect?.(image);
-  }
   function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     switch (e.key) {
       case 'Enter':
-        onApplyClick();
-        break;
       case 'Space':
         viewImage();
         break;
@@ -107,9 +96,6 @@ export default function ImageBlock(props: Props) {
           />
         </div>
       </div>
-      <CircleButton className={styles.button} onClick={onApplyClick}>
-        <FontAwesomeIcon icon={faCheck} size="lg" />
-      </CircleButton>
     </>
   );
 
@@ -120,6 +106,7 @@ export default function ImageBlock(props: Props) {
       style={containerStyle}
     >
       {intersection?.isIntersecting ? block : null}
+      {!isLoading && <ImageToolbar image={image} className={styles.toolbar} />}
     </div>
   );
 }

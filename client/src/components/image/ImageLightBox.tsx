@@ -6,19 +6,15 @@ import CircleButton from '../form/CircleButton';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
+import ImageToolbar from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
-
-interface Props {
-  onSelect(image: ImageMetadata): void;
-}
 
 export interface ImageLightBoxRef {
   open(image: ImageMetadata): void;
   close(): void;
 }
 
-function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
-  const { onSelect } = props;
+function ImageLightBox(_: unknown, ref: ForwardedRef<ImageLightBoxRef>) {
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<ImageMetadata | undefined>(undefined);
 
@@ -35,13 +31,6 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
     close,
   }));
 
-  function onApplyClick() {
-    if (image) {
-      onSelect?.(image);
-    }
-    close();
-  }
-
   const content = image && (
     <>
       <div className={styles.content}>
@@ -54,9 +43,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
         />
       </div>
       <div className={styles.buttonContainer}>
-        <CircleButton onClick={onApplyClick}>
-          <FontAwesomeIcon icon={faCheck} size="4x" />
-        </CircleButton>
+        <ImageToolbar image={image} onSetWallpaper={close} />
       </div>
     </>
   );

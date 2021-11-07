@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode, useMemo } from 'react';
 import classNames from 'classnames';
 import styles from './CircleButton.module.css';
 
@@ -13,6 +13,13 @@ type ButtonProps = Props & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function CircleButton(props: ButtonProps) {
   const { children, color = 'white', className, size, ...rest } = props;
+  const style = useMemo<CSSProperties>(
+    () => ({
+      width: size,
+      height: size,
+    }),
+    [size]
+  );
   return (
     <button
       type="button"
@@ -20,11 +27,10 @@ export default function CircleButton(props: ButtonProps) {
         styles.button,
         `bg-${color}`,
         `border-${color}`,
-        `w-${size}`,
-        `h-${size}`,
         className
       )}
       {...rest}
+      style={style}
     >
       {children}
     </button>
