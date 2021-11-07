@@ -1,10 +1,12 @@
-import { useState, useContext, ChangeEvent } from 'react';
+import { useState, useContext, ChangeEvent, useRef } from 'react';
 import { useDebounce } from 'react-use';
 import { observer } from 'mobx-react-lite';
 import { WallhavenQueryContext } from './context';
 import WallhavenSearchResult from './WallhavenSearchResult';
 import styles from './WallhavenSettings.module.css';
+import WallhavenFilters from './WallhavenFilters';
 import MaskToggleGroup from '@/components/form/MaskToggleGroup';
+import DrawerModal, { DrawerModalRef } from '@/components/modals/DrawerModal';
 
 const categoryOptions = [
   { label: 'General', key: 'general' },
@@ -31,6 +33,8 @@ function WallhavenSettings() {
   const [categories, setCategories] = useState(query?.categories);
   const [purity, setPurity] = useState(query?.purity);
   const [atleast, setAtLeast] = useState(query?.atleast);
+
+  const filtersRef = useRef<DrawerModalRef>(null);
 
   useDebounce(
     () => {
@@ -59,6 +63,10 @@ function WallhavenSettings() {
     setAtLeast(atleast);
   }
 
+  function openFilters() {
+    filtersRef.current?.open();
+  }
+
   return (
     <div className={styles.wrapper}>
       <section className={styles.toolbar}>
@@ -85,8 +93,14 @@ function WallhavenSettings() {
             </option>
           ))}
         </select>
+        <button type="button" onClick={openFilters}>
+          settings
+        </button>
       </section>
       <WallhavenSearchResult className="overflow-y-auto flex-1" />
+      <DrawerModal ref={filtersRef}>
+        <WallhavenFilters />
+      </DrawerModal>
     </div>
   );
 }

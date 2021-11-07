@@ -15,21 +15,53 @@ code {
 .ReactModal__Overlay {
   @apply transition-all duration-300 ease-in-out;
   @apply opacity-0;
-  @apply transform scale-0;
 }
 
 .ReactModal__Overlay--after-open {
   @apply opacity-100;
-  @apply scale-100;
 }
 
 .ReactModal__Overlay--before-close {
   @apply opacity-0;
-  @apply scale-0;
 }
 
 .ReactModal__Content {
   @apply backdrop-filter backdrop-blur-md;
+  @apply transition-all duration-300 ease-in-out;
+  &:not(.drawer) {
+    @apply transform scale-0;
+  }
+  &.drawer {
+    @apply transform;
+    &.left {
+      @apply -translate-x-full;
+    }
+    &.right {
+      @apply translate-x-full;
+    }
+  }
+}
+.ReactModal__Content--after-open {
+  &:not(.drawer) {
+    @apply scale-100;
+  }
+  &.drawer.left,
+  &.drawer.right {
+    @apply translate-x-0;
+  }
+}
+.ReactModal__Content--before-close {
+  &:not(.drawer) {
+    @apply scale-0;
+  }
+  &.drawer {
+    &.left {
+      @apply -translate-x-full;
+    }
+    &.right {
+      @apply translate-x-full;
+    }
+  }
 }
 
 h3 {
