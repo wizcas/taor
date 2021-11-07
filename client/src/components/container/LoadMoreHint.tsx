@@ -9,7 +9,7 @@ interface Props {
   noMoreText?: string;
   loadingText?: string;
   hasMore?: boolean;
-  isLoading?: boolean;
+  loading?: boolean;
   className?: string;
 }
 function LoadMoreHint(props: Props, ref: ForwardedRef<HTMLDivElement>) {
@@ -18,14 +18,14 @@ function LoadMoreHint(props: Props, ref: ForwardedRef<HTMLDivElement>) {
     noMoreText = 'No more content',
     loadingText = 'Loading',
     hasMore,
-    isLoading,
+    loading,
     className,
   } = props;
 
   let prefix: JSX.Element;
   let text: string;
-  if (isLoading) {
-    prefix = <Spinner loading={isLoading} size={16} />;
+  if (loading) {
+    prefix = <Spinner loading={loading} size={16} />;
     text = loadingText;
   } else if (hasMore) {
     prefix = <FontAwesomeIcon icon={faArrowDown} />;

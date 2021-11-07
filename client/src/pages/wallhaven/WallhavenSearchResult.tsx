@@ -1,11 +1,10 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import classNames from 'classnames';
 import { WallhavenQueryContext } from './context';
 import { useWallhavenSearch } from './api';
 import ImageGallery from '@/components/image/ImageGallery';
-import LoadMoreHint from '@/components/list/LoadMoreHint';
 import { EMPTY_PAGINATION, Pagination, ImageMetadata } from '@/types';
+import InfiniteLoadContainer from '@/components/container/InfiniteView';
 
 const client = new QueryClient();
 
@@ -36,12 +35,19 @@ function SearchResultContent(props: Props) {
   const pagination: Pagination = data?.pagination ?? EMPTY_PAGINATION;
   const hasMore = pagination.currentPage < pagination.lastPage;
 
+  const loadMore = useCallback(() => {
+    console.log('load more');
+  }, []);
+
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <div className={classNames('flex flex-col items-stretch', className)}>
+    <InfiniteLoadContainer
+      hasMore={hasMore}
+      className={className}
+      loadMore={loadMore}
+    >
       <ImageGallery wallpapers={wallpapers} onSelect={onSelect} />
-      <LoadMoreHint hasMore={hasMore} />
-    </div>
+    </InfiniteLoadContainer>
   );
 }
