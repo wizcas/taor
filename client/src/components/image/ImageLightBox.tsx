@@ -1,22 +1,55 @@
-import { forwardRef, useState, useImperativeHandle, ForwardedRef } from 'react';
+import {
+  forwardRef,
+  useState,
+  useImperativeHandle,
+  ForwardedRef,
+  useMemo,
+  MouseEvent,
+  useEffect,
+} from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import CircleButton from '../form/CircleButton';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
 import ImageToolbar from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
 
+interface Props {
+  images?: ImageMetadata[];
+}
+
 export interface ImageLightBoxRef {
   open(image: ImageMetadata): void;
   close(): void;
 }
 
-function ImageLightBox(_: unknown, ref: ForwardedRef<ImageLightBoxRef>) {
+interface NavigationContext {
+  nextImage?: ImageMetadata;
+  prevImage?: ImageMetadata;
+}
+
+function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<ImageMetadata | undefined>(undefined);
+
+  const { images } = props;
+  const { prevImage, nextImage } = useMemo<NavigationContext>(() => {
+    if (!images) return {};
+    const index = image ? images.indexOf(image) : -1;
+    if (index < 0) {
+      return {};
+    }
+    return {
+      nextImage: index < images.length - 1 ? images[index + 1] : undefined,
+      prevImage: index > 0 ? images[index - 1] : undefined,
+    };
+  }, [images, image]);
 
   function open(image: ImageMetadata) {
     setImage(image);
@@ -25,15 +58,52 @@ function ImageLightBox(_: unknown, ref: ForwardedRef<ImageLightBoxRef>) {
   function close() {
     setIsOpen(false);
   }
+  function next() {
+    if (nextImage) {
+      open(nextImage);
+    }
+  }
+  function prev() {
+    if (prevImage) {
+      open(prevImage);
+    }
+  }
+  function onKeyDown(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'Escape':
+        close();
+        break;
+      case 'ArrowLeft':
+        prev();
+        break;
+      case 'ArrowRight':
+        next();
+        break;
+      default:
+        break;
+    }
+  }
+  function onNavigate(fn: () => void) {
+    return (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      fn();
+    };
+  }
 
   useImperativeHandle(ref, () => ({
     open,
     close,
   }));
 
+  useEffect(() => {
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [onKeyDown]);
+
   const content = image && (
     <>
-      <div className={styles.content}>
+      <div role="presentation" className={styles.content} onClick={close}>
         <LazyImage
           className={styles.image}
           src={image.raw}
@@ -41,6 +111,24 @@ function ImageLightBox(_: unknown, ref: ForwardedRef<ImageLightBoxRef>) {
           width={image.width}
           height={image.height}
         />
+        {prevImage && (
+          <button
+            type="button"
+            className={classNames(styles.navigation, 'left-0')}
+            onClick={onNavigate(prev)}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+          </button>
+        )}
+        {nextImage && (
+          <button
+            type="button"
+            className={classNames(styles.navigation, 'right-0')}
+            onClick={onNavigate(next)}
+          >
+            <FontAwesomeIcon icon={faChevronRight} size="2x" />
+          </button>
+        )}
       </div>
       <div className={styles.buttonContainer}>
         <ImageToolbar image={image} onSetWallpaper={close} />
@@ -56,7 +144,9 @@ function ImageLightBox(_: unknown, ref: ForwardedRef<ImageLightBoxRef>) {
       overlayClassName={styles.overlay}
       className={styles.modalContent}
     >
-      <div className={styles.wrapper}>{content}</div>
+      <div role="presentation" className={styles.wrapper}>
+        {content}
+      </div>
     </Modal>
   );
 }

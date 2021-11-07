@@ -26,7 +26,7 @@ export default function ImageGallery(props: Props) {
           );
         })}
       </div>
-      <ImageLightBox ref={lightBoxRef} />
+      <ImageLightBox ref={lightBoxRef} images={images} />
     </>
   );
 }
