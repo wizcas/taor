@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useMeasure } from 'react-use';
+import { useDebounce, useMeasure } from 'react-use';
 import ImageLoading from './ImageLoading';
 
 interface Props {
@@ -30,7 +30,7 @@ export default function LazyImage(props: Props) {
     width,
     height,
   } = props;
-  const { url, isLoading } = useAsyncImage(src, placeholder, onLoad, onLoading);
+  const { url, loading } = useAsyncImage(src, placeholder, onLoad, onLoading);
   const [rootRef, { width: viewWidth }] = useMeasure<HTMLDivElement>();
   const style = useMemo(() => {
     const result = {
@@ -56,7 +56,7 @@ export default function LazyImage(props: Props) {
       style={style}
       aria-label={alt}
     >
-      <ImageLoading loading={isLoading} dark />
+      <ImageLoading loading={loading} dark />
     </div>
   );
 }
@@ -68,24 +68,44 @@ function useAsyncImage(
   onLoading?: () => void
 ): {
   url: string | undefined;
-  isLoading: boolean;
+  loading: boolean;
 } {
   const [url, setContent] = useState<string | undefined>(placeholder);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [debouncedLoading, setDebouncedLoading] = useState(false);
+
+  // debouncing the loading state to prevent spinner flickering
+  const [, cancelDebounce] = useDebounce(
+    () => {
+      setDebouncedLoading(loading);
+    },
+    100,
+    [loading]
+  );
+
   const downloadImage = useCallback((src: string) => {
-    setIsLoading(true);
+    setLoading(true);
     const resultImage = new Image();
     resultImage.onload = () => {
-      setIsLoading(false);
+      setLoading(false);
       setContent(resultImage.src);
       onLoad?.();
     };
     onLoading?.();
     resultImage.src = src;
+    // returns a cancel function that do not update the image
+    // element after loaded;
+    return () => {
+      resultImage.onload = null;
+    };
   }, []);
   useEffect(() => {
     setContent(placeholder);
-    downloadImage(src);
-  }, [downloadImage, src]);
-  return { url, isLoading };
+    const cancelDownload = downloadImage(src);
+    return () => {
+      cancelDebounce();
+      cancelDownload();
+    };
+  }, [downloadImage, src, cancelDebounce]);
+  return { url, loading: debouncedLoading };
 }
