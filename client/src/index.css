@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ReactModal__Overlay {
+  @apply transition-all duration-300 ease-in-out;
+  @apply opacity-0;
+  @apply transform scale-0;
+}
+
+.ReactModal__Overlay--after-open {
+  @apply opacity-100;
+  @apply scale-100;
+}
+
+.ReactModal__Overlay--before-close {
+  @apply opacity-0;
+  @apply scale-0;
+}

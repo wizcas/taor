@@ -23,6 +23,7 @@ function Component(props: Props) {
       onRequestClose={close}
       className={styles.modal}
       overlayClassName={styles.overlay}
+      closeTimeoutMS={300}
     >
       <ModalHeader title={title} onClose={close} />
       <div className={styles.content}>{children}</div>

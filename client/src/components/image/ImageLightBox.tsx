@@ -143,6 +143,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
       shouldCloseOnEsc
       overlayClassName={styles.overlay}
       className={styles.modalContent}
+      closeTimeoutMS={300}
     >
       <div role="presentation" className={styles.wrapper} onClick={close}>
         {content}
