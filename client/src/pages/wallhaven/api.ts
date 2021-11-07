@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { QueryKey, useInfiniteQuery } from 'react-query';
 import type { ImageList, ImageMetadata, Pagination } from '@/types';
 
 export interface WallhavenSearchQuery {
@@ -42,40 +42,62 @@ const wallhavenAPI = {
   official: 'https://wallhaven.cc/api/v1/search',
 };
 
-export function useWallhavenSearch(query: WallhavenSearchQuery | undefined) {
-  query ??= {};
+async function search(
+  query: WallhavenSearchQuery | undefined,
+  page = 1
+): Promise<ImageList> {
+  const fullQuery: Record<string, string> = {
+    ...query,
+    page: `${page}`,
+  };
   const url = new URL(wallhavenAPI.local);
   // const url = new URL(wallhavenAPI.remote);
   // const url = new URL(wallhavenAPI.official);
-  url.search = new URLSearchParams(query as Record<string, string>).toString();
+  url.search = new URLSearchParams(fullQuery).toString();
 
-  return useQuery<ImageList, Error>(
-    ['wallhaven', 'search', query],
-    async () => {
-      const resp = await fetch(url.toString(), {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const { data, meta } = (await resp.json()) as WallhavenSearchResult;
-      const images: ImageMetadata[] = data.map(
-        ({ id, thumbs, path, dimension_x, dimension_y, colors }) => ({
-          id,
-          thumbnail: thumbs.small,
-          raw: path,
-          width: dimension_x,
-          height: dimension_y,
-          primaryColor: colors[0],
-        })
-      );
-      const pagination: Pagination = {
-        currentPage: meta.current_page,
-        lastPage: meta.last_page,
-        perPage: meta.per_page,
-        total: meta.total,
-      };
-      return { images, pagination };
+  const resp = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const { data, meta } = (await resp.json()) as WallhavenSearchResult;
+  const images: ImageMetadata[] = data.map(
+    ({ id, thumbs, path, dimension_x, dimension_y, colors }) => ({
+      id,
+      thumbnail: thumbs.small,
+      raw: path,
+      width: dimension_x,
+      height: dimension_y,
+      primaryColor: colors[0],
+    })
+  );
+  const pagination: Pagination = {
+    currentPage: meta.current_page,
+    lastPage: meta.last_page,
+    perPage: meta.per_page,
+    total: meta.total,
+  };
+  return { images, pagination };
+}
+
+export function useWallhavenSearch(query: WallhavenSearchQuery | undefined) {
+  const queryKey: QueryKey = ['wallhaven', 'search', query];
+  return useInfiniteQuery<ImageList, Error>(
+    queryKey,
+    async ({ pageParam = 1 }) => {
+      return search(query, pageParam);
+    },
+    {
+      getNextPageParam: (lastPage) => {
+        if (lastPage.pagination.currentPage === lastPage.pagination.lastPage)
+          return undefined;
+        return lastPage.pagination.currentPage + 1;
+      },
+      getPreviousPageParam: (firstPage) => {
+        if (firstPage.pagination.currentPage === 0) return undefined;
+        return firstPage.pagination.currentPage - 1;
+      },
     }
   );
 }
