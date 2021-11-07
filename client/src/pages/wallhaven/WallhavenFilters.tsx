@@ -32,14 +32,13 @@ export default function WallhavenFilters() {
   useDebounce(
     () => {
       updateQuery({
-        q: query?.q,
         categories,
         purity,
         atleast,
       });
     },
     500,
-    [query?.q, categories, purity, atleast, updateQuery]
+    [categories, purity, atleast, updateQuery]
   );
   function onMaskGroupChange(setter: (value: string) => void) {
     return function fn(value: string) {
