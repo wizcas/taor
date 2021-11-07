@@ -1,14 +1,13 @@
 import { useState, useContext, ChangeEvent } from 'react';
 import { useDebounce } from 'react-use';
 import { observer } from 'mobx-react-lite';
+import { WallhavenQueryContext } from './context';
+import WallhavenSearchResult from './WallhavenSearchResult';
+import styles from './WallhavenSettings.module.css';
 import { ImageMetadata } from '@/types';
 import MaskToggleGroup from '@/components/form/MaskToggleGroup';
 import { PreferencesContext } from '@/context/preferences';
 import usePageModal from '@/hooks/usePageModal';
-import { WallhavenQueryContext } from './context';
-import WallhavenSearchResult from './WallhavenSearchResult';
-
-import styles from './WallhavenSettings.module.css';
 
 const categoryOptions = [
   { label: 'General', key: 'general' },
@@ -65,8 +64,8 @@ function WallhavenSettings() {
     setAtLeast(atleast);
   }
 
-  function onSelectWallpaper(wallpaper: ImageMetadata) {
-    preferences.wallpaperUrl = wallpaper.raw;
+  function onSelectWallpaper(image: ImageMetadata) {
+    preferences.wallpaperUrl = image.raw;
     close();
   }
 

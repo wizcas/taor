@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { WallhavenQueryContext } from './context';
 import { useWallhavenSearch } from './api';
@@ -9,7 +9,7 @@ import InfiniteLoadContainer from '@/components/container/InfiniteView';
 const client = new QueryClient();
 
 interface Props {
-  onSelect(wallpaper: ImageMetadata): void;
+  onSelect(image: ImageMetadata): void;
   className?: string;
 }
 
@@ -27,37 +27,22 @@ function SearchResultContent(props: Props) {
   const { onSelect, className } = props;
   const [query] = useContext(WallhavenQueryContext);
 
-  const {
-    isLoading,
-    data,
-    error,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useWallhavenSearch(query);
+  const { images, isLoading, error, hasMore, isLoadingMore, loadMore } =
+    useWallhavenSearch(query);
   if (error) {
     console.error('wallhaven searching failed', error);
   }
-  const wallpapers: ImageMetadata[] =
-    data?.pages.reduce((all, page) => {
-      all.push(...page.images);
-      return all;
-    }, [] as ImageMetadata[]) ?? [];
-
-  const loadMore = useCallback(() => {
-    fetchNextPage();
-  }, []);
 
   return isLoading ? (
     <div>Loading...</div>
   ) : (
     <InfiniteLoadContainer
-      hasMore={hasNextPage}
+      hasMore={hasMore}
       className={className}
       loadMore={loadMore}
-      loading={isFetchingNextPage}
+      loading={isLoadingMore}
     >
-      <ImageGallery wallpapers={wallpapers} onSelect={onSelect} />
+      <ImageGallery images={images} onSelect={onSelect} />
     </InfiniteLoadContainer>
   );
 }

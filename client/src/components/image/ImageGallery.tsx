@@ -4,11 +4,11 @@ import ImageLightBox, { ImageLightBoxRef } from './ImageLightBox';
 import type { ImageMetadata } from '@/types';
 
 interface Props {
-  wallpapers: ImageMetadata[];
+  images: ImageMetadata[];
   onSelect(wallpaper: ImageMetadata): void;
 }
 export default function ImageGallery(props: Props) {
-  const { wallpapers = [], onSelect } = props;
+  const { images = [], onSelect } = props;
   const lightBoxRef = useRef<ImageLightBoxRef>(null);
 
   function onItemSelect(wallpaper: ImageMetadata) {
@@ -24,7 +24,7 @@ export default function ImageGallery(props: Props) {
   return (
     <>
       <div className="relative grid grid-cols-4 gap-4 auto-rows-fr">
-        {wallpapers.filter(Boolean).map((wallpaper) => {
+        {images.filter(Boolean).map((wallpaper) => {
           const { id } = wallpaper;
           return (
             <ImageBlock

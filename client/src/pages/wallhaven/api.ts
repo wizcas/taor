@@ -83,7 +83,14 @@ async function search(
 
 export function useWallhavenSearch(query: WallhavenSearchQuery | undefined) {
   const queryKey: QueryKey = ['wallhaven', 'search', query];
-  return useInfiniteQuery<ImageList, Error>(
+  const {
+    data,
+    isLoading,
+    error,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery<ImageList, Error>(
     queryKey,
     async ({ pageParam = 1 }) => {
       return search(query, pageParam);
@@ -100,4 +107,13 @@ export function useWallhavenSearch(query: WallhavenSearchQuery | undefined) {
       },
     }
   );
+  const images: ImageMetadata[] =
+    data?.pages.reduce((all, page) => {
+      all.push(...page.images);
+      return all;
+    }, [] as ImageMetadata[]) ?? [];
+  const hasMore = hasNextPage;
+  const loadMore = fetchNextPage;
+  const isLoadingMore = isFetchingNextPage;
+  return { isLoading, error, images, hasMore, loadMore, isLoadingMore };
 }
