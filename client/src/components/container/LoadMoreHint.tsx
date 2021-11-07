@@ -2,7 +2,7 @@ import { faArrowDown, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { ForwardedRef, forwardRef } from 'react';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../wait/Spinner';
 
 interface Props {
   loadMoreText?: string;
@@ -16,23 +16,23 @@ function LoadMoreHint(props: Props, ref: ForwardedRef<HTMLDivElement>) {
   const {
     loadMoreText = 'Load more',
     noMoreText = 'No more content',
-    loadingText = 'Loading',
+    loadingText = 'Loading more',
     hasMore,
     loading,
     className,
   } = props;
 
   let prefix: JSX.Element;
-  let text: string;
+  let text: JSX.Element;
   if (loading) {
     prefix = <Spinner loading={loading} size={16} />;
-    text = loadingText;
+    text = <span>{loadingText}&hellip;</span>;
   } else if (hasMore) {
     prefix = <FontAwesomeIcon icon={faArrowDown} />;
-    text = loadMoreText;
+    text = <span>{loadMoreText}</span>;
   } else {
     prefix = <FontAwesomeIcon icon={faCheck} />;
-    text = noMoreText;
+    text = <span>{noMoreText}</span>;
   }
 
   return (
@@ -42,12 +42,12 @@ function LoadMoreHint(props: Props, ref: ForwardedRef<HTMLDivElement>) {
         'p-4',
         'flex flex-row items-center justify-center gap-2',
         'text-sm',
-        'text-gray-400',
+        'text-gray-600',
         className
       )}
     >
       {prefix}
-      <span>{text}</span>
+      {text}
     </div>
   );
 }

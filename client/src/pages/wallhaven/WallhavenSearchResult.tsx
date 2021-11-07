@@ -4,6 +4,7 @@ import { WallhavenQueryContext } from './context';
 import { useWallhavenSearch } from './api';
 import ImageGallery from '@/components/image/ImageGallery';
 import InfiniteLoadContainer from '@/components/container/InfiniteView';
+import LoadingBanner from '@/components/wait/LoadingBanner';
 
 const client = new QueryClient();
 
@@ -31,8 +32,11 @@ function SearchResultContent(props: Props) {
     console.error('wallhaven searching failed', error);
   }
 
-  return isLoading ? (
-    <div>Loading...</div>
+  const l = false;
+  return isLoading || l ? (
+    <div className="flex-1 flex flex-col justify-center items-stretch">
+      <LoadingBanner loading>Searching for wallpapers</LoadingBanner>
+    </div>
   ) : (
     <InfiniteLoadContainer
       hasMore={hasMore}

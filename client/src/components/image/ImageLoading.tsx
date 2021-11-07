@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../wait/Spinner';
 import styles from './ImageLoading.module.css';
 
 interface Props {

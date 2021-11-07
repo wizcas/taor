@@ -13,9 +13,9 @@ export default function ModalHeader(props: Props) {
 
   return (
     <div className={styles.header}>
-      <div className={styles.title}>{title}</div>
+      <h3 className={styles.title}>{title}</h3>
       <button type="button" onClick={onClose}>
-        <FontAwesomeIcon icon={faTimes} />
+        <FontAwesomeIcon icon={faTimes} size="2x" />
       </button>
     </div>
   );

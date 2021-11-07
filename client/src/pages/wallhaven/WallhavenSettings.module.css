@@ -1,5 +1,5 @@
 .wrapper {
-  @apply flex flex-col items-stretch h-full min-h-full max-h-full;
+  @apply flex flex-col items-stretch h-full min-h-full max-h-full gap-4;
 }
 
 .toolbar {

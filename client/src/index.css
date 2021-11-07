@@ -27,3 +27,11 @@ code {
   @apply opacity-0;
   @apply scale-0;
 }
+
+.ReactModal__Content {
+  @apply backdrop-filter backdrop-blur-md;
+}
+
+h3 {
+  @apply text-2xl font-bold;
+}
