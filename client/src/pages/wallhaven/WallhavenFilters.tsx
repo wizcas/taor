@@ -1,6 +1,7 @@
 import { ChangeEvent, useContext, useState } from 'react';
 import { useDebounce } from 'react-use';
 import { WallhavenQueryContext } from './context';
+import styles from './WallhavenFilters.module.css';
 import MaskToggleGroup from '@/components/form/MaskToggleGroup';
 
 const CATEGORY_OPTIONS = [
@@ -50,24 +51,33 @@ export default function WallhavenFilters() {
     setAtLeast(atleast);
   }
   return (
-    <div>
-      <MaskToggleGroup
-        options={CATEGORY_OPTIONS}
-        values={categories ?? ''}
-        onChange={onMaskGroupChange(setCategories)}
-      />
-      <MaskToggleGroup
-        options={PURITY_OPTIONS}
-        values={purity ?? ''}
-        onChange={onMaskGroupChange(setPurity)}
-      />
-      <select value={atleast} onChange={onResolutionChange}>
-        {RESOLUTIONS.map(({ label, value }) => (
-          <option key={value ?? 'any'} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
+    <div className={styles.container}>
+      <label className={styles.fieldSet}>
+        <span>Categories</span>
+        <MaskToggleGroup
+          options={CATEGORY_OPTIONS}
+          values={categories ?? ''}
+          onChange={onMaskGroupChange(setCategories)}
+        />
+      </label>
+      <label className={styles.fieldSet}>
+        <span>Purity</span>
+        <MaskToggleGroup
+          options={PURITY_OPTIONS}
+          values={purity ?? ''}
+          onChange={onMaskGroupChange(setPurity)}
+        />
+      </label>
+      <label className={styles.fieldSet}>
+        <span>Min. Resolution</span>
+        <select value={atleast} onChange={onResolutionChange}>
+          {RESOLUTIONS.map(({ label, value }) => (
+            <option key={value ?? 'any'} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   );
 }

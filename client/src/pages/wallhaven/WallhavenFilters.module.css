@@ -1,0 +1,9 @@
+.container {
+  @apply flex flex-col items-stretch gap-4;
+}
+.fieldSet {
+  @apply flex flex-col items-stretch gap-2;
+  & > span {
+    @apply font-medium;
+  }
+}
