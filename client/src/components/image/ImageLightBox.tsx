@@ -103,7 +103,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
 
   const content = image && (
     <>
-      <div role="presentation" className={styles.content} onClick={close}>
+      <div role="presentation" className={styles.content}>
         <LazyImage
           className={styles.image}
           src={image.raw}
@@ -144,7 +144,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
       overlayClassName={styles.overlay}
       className={styles.modalContent}
     >
-      <div role="presentation" className={styles.wrapper}>
+      <div role="presentation" className={styles.wrapper} onClick={close}>
         {content}
       </div>
     </Modal>

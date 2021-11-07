@@ -73,6 +73,7 @@ function useAsyncImage(
   const [url, setContent] = useState<string | undefined>(placeholder);
   const [isLoading, setIsLoading] = useState(true);
   const downloadImage = useCallback((src: string) => {
+    setIsLoading(true);
     const resultImage = new Image();
     resultImage.onload = () => {
       setIsLoading(false);
