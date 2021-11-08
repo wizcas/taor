@@ -1,16 +1,27 @@
-import { forwardRef, useState, useImperativeHandle, ForwardedRef } from 'react';
+import {
+  forwardRef,
+  useState,
+  useImperativeHandle,
+  ForwardedRef,
+  useMemo,
+  MouseEvent,
+  useEffect,
+} from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import CircleButton from '../form/CircleButton';
-import ImageLoading from './ImageLoading';
-import ImageError from './ImageError';
-import useImageState from './useImageState';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
+import LazyImage from './LazyImage';
+
 import styles from './ImageLightBox.module.css';
-import { ImageMetadata } from './types';
+import ImageToolbar from './ImageToolbar';
+import type { ImageMetadata } from '@/types';
 
 interface Props {
-  onSelect(image: ImageMetadata): void;
+  images?: ImageMetadata[];
 }
 
 export interface ImageLightBoxRef {
@@ -18,11 +29,27 @@ export interface ImageLightBoxRef {
   close(): void;
 }
 
+interface NavigationContext {
+  nextImage?: ImageMetadata;
+  prevImage?: ImageMetadata;
+}
+
 function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
-  const { onSelect } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<ImageMetadata | undefined>(undefined);
-  const { imgStateProps, isLoading, hasError } = useImageState(image?.raw);
+
+  const { images } = props;
+  const { prevImage, nextImage } = useMemo<NavigationContext>(() => {
+    if (!images) return {};
+    const index = image ? images.indexOf(image) : -1;
+    if (index < 0) {
+      return {};
+    }
+    return {
+      nextImage: index < images.length - 1 ? images[index + 1] : undefined,
+      prevImage: index > 0 ? images[index - 1] : undefined,
+    };
+  }, [images, image]);
 
   function open(image: ImageMetadata) {
     setImage(image);
@@ -31,39 +58,81 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
   function close() {
     setIsOpen(false);
   }
+  function next() {
+    if (nextImage) {
+      open(nextImage);
+    }
+  }
+  function prev() {
+    if (prevImage) {
+      open(prevImage);
+    }
+  }
+  function onKeyDown(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'Escape':
+        close();
+        break;
+      case 'ArrowLeft':
+        prev();
+        break;
+      case 'ArrowRight':
+        next();
+        break;
+      default:
+        break;
+    }
+  }
+  function onNavigate(fn: () => void) {
+    return (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      fn();
+    };
+  }
 
   useImperativeHandle(ref, () => ({
     open,
     close,
   }));
 
-  function onApplyClick() {
-    if (image) {
-      onSelect?.(image);
-    }
-    close();
-  }
+  useEffect(() => {
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [onKeyDown]);
 
   const content = image && (
     <>
-      <div className={styles.content}>
-        <img
+      <div role="presentation" className={styles.content}>
+        <LazyImage
+          className={styles.image}
           src={image.raw}
+          placeholder={image.thumbnail}
           width={image.width}
           height={image.height}
-          alt=""
-          {...imgStateProps}
         />
-        <ImageLoading isLoading={isLoading} dark />
-        <ImageError
-          hasError={hasError}
-          dark
-          message="An error occurs when downloading then wallpaper"
-        />
+        {prevImage && (
+          <button
+            type="button"
+            className={classNames(styles.navigation, 'left-0')}
+            onClick={onNavigate(prev)}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+          </button>
+        )}
+        {nextImage && (
+          <button
+            type="button"
+            className={classNames(styles.navigation, 'right-0')}
+            onClick={onNavigate(next)}
+          >
+            <FontAwesomeIcon icon={faChevronRight} size="2x" />
+          </button>
+        )}
       </div>
-      <CircleButton className={styles.button} onClick={onApplyClick}>
-        <FontAwesomeIcon icon={faCheck} size="4x" />
-      </CircleButton>
+      <div className={styles.buttonContainer}>
+        <ImageToolbar image={image} onSetWallpaper={close} />
+      </div>
     </>
   );
   return (
@@ -74,8 +143,11 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
       shouldCloseOnEsc
       overlayClassName={styles.overlay}
       className={styles.modalContent}
+      closeTimeoutMS={300}
     >
-      <div className={styles.wrapper}>{content}</div>
+      <div role="presentation" className={styles.wrapper} onClick={close}>
+        {content}
+      </div>
     </Modal>
   );
 }

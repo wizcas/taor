@@ -1,7 +1,13 @@
 .header {
-  @apply flex flex-row w-full;
+  @apply flex flex-row items-center w-full;
+  @apply mb-4;
 
   .title {
     @apply flex-1;
+  }
+
+  button {
+    @apply transform hover:scale-110;
+    @apply transition-transform duration-200 ease-in-out;
   }
 }

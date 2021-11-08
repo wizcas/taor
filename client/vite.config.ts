@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react(), WindiCSS()],
   resolve: {
     alias: {
-      src: path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './src'),
     },
   },
 });

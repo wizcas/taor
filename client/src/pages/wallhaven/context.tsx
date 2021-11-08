@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { UseStoredContextReturns } from 'src/hooks/useStoredContext';
+import { UseStoredContextReturns } from '@/hooks/useStoredContext';
 import { WallhavenSearchQuery } from './api';
 
 export const defaultQuery: WallhavenSearchQuery = {

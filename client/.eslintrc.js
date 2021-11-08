@@ -36,6 +36,7 @@ module.exports = {
     camelcase: 'off',
     'no-param-reassign': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-nested-ternary': 'off',
 
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
 
