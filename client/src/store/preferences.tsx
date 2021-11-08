@@ -21,7 +21,7 @@ class Preferences {
 
 export const PreferencesContext = createContext<Preferences>(new Preferences());
 
-export function PreferencesWrapper({ children }: PropsWithChildren<unknown>) {
+export function PreferencesProvider({ children }: PropsWithChildren<unknown>) {
   const preferences = new Preferences();
   return (
     <PreferencesContext.Provider value={preferences}>

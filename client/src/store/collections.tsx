@@ -65,7 +65,7 @@ class Collections {
 
 export const CollectionsContext = createContext<Collections>(new Collections());
 
-export function PreferencesWrapper({ children }: PropsWithChildren<unknown>) {
+export function CollectionsProvider({ children }: PropsWithChildren<unknown>) {
   const preferences = new Collections();
   return (
     <CollectionsContext.Provider value={preferences}>
