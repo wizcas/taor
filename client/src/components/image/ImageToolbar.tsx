@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useContext } from 'react';
 import CircleButton from '../form/CircleButton';
 import { ImageMetadata } from '@/types';
-import { PreferencesContext } from '@/context/preferences';
+import { PreferencesContext } from '@/store/preferences';
 
 interface Props {
   image: ImageMetadata;

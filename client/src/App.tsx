@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { PreferencesWrapper } from '@/context/preferences';
+import { PreferencesWrapper } from '@/store/preferences';
 import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';

@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren } from 'react';
+import { createContext, PropsWithChildren } from 'react';
 import { makeAutoObservable, reaction } from 'mobx';
 
 const defaultWallpaper =
