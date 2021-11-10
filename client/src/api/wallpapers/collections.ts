@@ -1,17 +1,18 @@
-import { createContext, PropsWithChildren } from 'react';
-import Dexie from 'dexie';
-import { Collection } from '@/types';
+import WALLPAPER_DB from './db';
+import { ImageMetadata } from '@/types';
+import { useRef } from 'react';
 
 const PAGE_SIZE = 32;
 
-const wallpaperDb = new Dexie('WallpaperDatabase');
-wallpaperDb.version(1).stores({
-  collections: '++id, name, images',
-});
+export interface Collection {
+  id: number;
+  name: string;
+  images: ImageMetadata[];
+}
 
-class Collections {
+class CollectionsApi {
   private get table() {
-    return wallpaperDb.table<Collection, number>('collections');
+    return WALLPAPER_DB.table<Collection, number>('collections');
   }
 
   async list(page = 0): Promise<Collection[]> {
@@ -43,13 +44,7 @@ class Collections {
   }
 }
 
-export const CollectionsContext = createContext<Collections>(new Collections());
-
-export function CollectionsProvider({ children }: PropsWithChildren<unknown>) {
-  const preferences = new Collections();
-  return (
-    <CollectionsContext.Provider value={preferences}>
-      {children}
-    </CollectionsContext.Provider>
-  );
+export function useCollectionsApi() {
+  const ref = useRef(new CollectionsApi());
+  return ref.current;
 }

@@ -4,7 +4,6 @@ import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';
 import WallhavenWrapper from '@/pages/wallhaven/Wrapper';
-import { CollectionsProvider } from '@/store/collections';
 import { PreferencesProvider } from '@/store/preferences';
 
 import './App.css';
@@ -14,9 +13,7 @@ export default function App() {
   return (
     <Router>
       <PreferencesProvider>
-        <CollectionsProvider>
-          <Home />
-        </CollectionsProvider>
+        <Home />
       </PreferencesProvider>
     </Router>
   );
