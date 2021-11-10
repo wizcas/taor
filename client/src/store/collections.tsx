@@ -1,64 +1,44 @@
 import { createContext, PropsWithChildren } from 'react';
-import { Collection, CollectionDbRow, ToCollectionDbRow } from '@/types';
+import Dexie from 'dexie';
+import { Collection } from '@/types';
 
 const PAGE_SIZE = 32;
 
-class Collections {
-  private readonly db = new PouchDB<CollectionDbRow>('collections');
+const wallpaperDb = new Dexie('WallpaperDatabase');
+wallpaperDb.version(1).stores({
+  collections: '++id, name, images',
+});
 
-  async list(page = 0): Promise<Collection[]> {
-    const result = await this.db.allDocs({
-      include_docs: true,
-      limit: PAGE_SIZE,
-      skip: page * PAGE_SIZE,
-    });
-    return result.rows
-      .map((row) => {
-        if (!row.doc) return null;
-        const { _id, _rev, ...values } = row.doc;
-        return {
-          id: _id,
-          rev: _rev,
-          ...values,
-        } as Collection;
-      })
-      .filter(Boolean) as Collection[];
+class Collections {
+  private get table() {
+    return wallpaperDb.table<Collection, number>('collections');
   }
 
-  async create(collection: Collection) {
-    const doc = ToCollectionDbRow(
-      { ...collection, id: Date.now().toString() },
-      { isNew: true }
-    );
+  async list(page = 0): Promise<Collection[]> {
     try {
-      const response = await this.db.put(doc);
-      if (!response.ok) {
-        throw new Error('writing failed');
-      }
+      return this.table
+        .offset(page * PAGE_SIZE)
+        .limit(PAGE_SIZE)
+        .toArray();
     } catch (e) {
-      console.error('Error creating collection', e);
+      console.error('Error listing collections', e);
+      return [];
     }
   }
 
-  async update(collection: Collection) {
+  async upsert(collection: Collection) {
     try {
-      const response = await this.db.put(ToCollectionDbRow(collection));
-      if (!response.ok) {
-        throw new Error('writing failed');
-      }
+      await this.table.put(collection, collection.id);
     } catch (e) {
-      console.error('Error updating collection', e);
+      console.error('Error upserting collection', e);
     }
   }
 
   async delete(collection: Collection) {
     try {
-      const response = await this.db.remove(ToCollectionDbRow(collection));
-      if (!response.ok) {
-        throw new Error('writing failed');
-      }
+      await this.table.delete(collection.id);
     } catch (e) {
-      console.error('Error updating collection', e);
+      console.error('Error deleting collection', e);
     }
   }
 }

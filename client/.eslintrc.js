@@ -39,6 +39,9 @@ module.exports = {
     'no-nested-ternary': 'off',
     'no-underscore-dangle': 'off',
 
+    'max-classes-per-file': 'off',
+    'class-methods-use-this': 'off',
+
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
 
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
