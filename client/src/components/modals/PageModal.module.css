@@ -1,5 +1,6 @@
 .modal {
-  @apply absolute inset-4;
+  @apply absolute inset-16 lg:max-w-screen-lg;
+  @apply mx-auto;
   @apply flex flex-col items-stretch overflow-hidden;
   @apply p-4;
   @apply bg-white bg-opacity-80;
