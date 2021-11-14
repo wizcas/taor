@@ -67,3 +67,14 @@ code {
 h3 {
   @apply text-2xl font-bold;
 }
+
+button,
+input,
+select,
+*[role='button'] {
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    @apply ring ring-primary-400 ring-opacity-80;
+  }
+}

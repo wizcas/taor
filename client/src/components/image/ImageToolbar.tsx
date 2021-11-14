@@ -27,10 +27,11 @@ export default function ImageToolbar(props: Props) {
         'bg-opacity-50',
         'p-2',
         'rounded-md',
+        'text-white',
         className
       )}
     >
-      <CircleButton onClick={setWallpaper} size="32px">
+      <CircleButton onClick={setWallpaper} size="sm">
         <FeatherIcon icon="check-circle" />
       </CircleButton>
     </div>

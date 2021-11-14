@@ -24,6 +24,10 @@ export default defineConfig({
         blue: colors.lightBlue,
         red: colors.rose,
         pink: colors.fuchsia,
+        primary: {
+          400: '#ffbd38',
+          500: '#ffaa00',
+        },
       },
       fontFamily: {
         sans: ['Graphik', 'sans-serif'],
@@ -92,7 +96,7 @@ export default defineConfig({
       );
     }),
     require('windicss/plugin/filters'),
-    require('windicss/plugin/forms'),
+    // require('windicss/plugin/forms'),
     require('windicss/plugin/aspect-ratio'),
     require('windicss/plugin/line-clamp'),
     require('windicss/plugin/typography')({

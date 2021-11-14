@@ -15,7 +15,7 @@ interface Props {
 export default function FeatherIcon({
   icon,
   className,
-  color,
+  color = 'currentColor',
   width,
   height,
   size,

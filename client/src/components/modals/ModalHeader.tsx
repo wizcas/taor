@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import CircleButton from '../form/CircleButton';
 import FeatherIcon from '../icon/FeatherIcon';
 import styles from './ModalHeader.module.css';
 
@@ -13,9 +14,9 @@ export default function ModalHeader(props: Props) {
   return (
     <div className={styles.header}>
       <h3 className={styles.title}>{title}</h3>
-      <button type="button" onClick={onClose}>
+      <CircleButton type="button" onClick={onClose} color="black">
         <FeatherIcon icon="x" size="32px" />
-      </button>
+      </CircleButton>
     </div>
   );
 }

@@ -7,6 +7,8 @@ import WallhavenWrapper from '@/pages/wallhaven/Wrapper';
 import { PreferencesProvider } from '@/store/preferences';
 
 import './App.css';
+import CircleButton from './components/form/CircleButton';
+import FeatherIcon from './components/icon/FeatherIcon';
 
 Modal.setAppElement('#root');
 export default function App() {
@@ -29,9 +31,11 @@ function Home() {
   return (
     <div className="App flex justify-center items-center w-screen h-screen">
       <Wallpaper />
-      <button type="button" className="bg-white" onClick={openPageModal}>
-        wallhaven
-      </button>
+      <div className="fixed right-0 bottom-0 flex gap-4 items-center p-4">
+        <CircleButton color="white" onClick={openPageModal}>
+          <FeatherIcon icon="settings" size={32} />
+        </CircleButton>
+      </div>
 
       <PageModal title="wallhaven">
         <Switch>
