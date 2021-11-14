@@ -12,6 +12,7 @@ import LazyImage from './LazyImage';
 import styles from './ImageBlock.module.css';
 import ImageToolbar from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
+import FeatherIcon from '../icon/FeatherIcon';
 
 const ratio16to9 = 16 / 9;
 
@@ -95,6 +96,7 @@ export default function ImageBlock(props: Props) {
             onLoad={() => setIsLoading(false)}
           />
         </div>
+        <FeatherIcon icon="maximize" className={styles.expand} />
       </div>
     </>
   );

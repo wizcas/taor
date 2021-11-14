@@ -21,6 +21,25 @@
 }
 .imageBlock {
   @apply relative overflow-hidden w-full h-full;
+
+  .thumbnail {
+    @apply w-full h-full;
+    @apply bg-cover bg-center bg-no-repeat bg-clip-border;
+    @apply transition-all duration-500;
+    @apply relative;
+    @apply transform;
+  }
+
+  .innerImage {
+    @apply w-full h-full;
+  }
+
+  .expand {
+    @apply absolute top-2 left-2;
+    @apply text-white opacity-0;
+    @apply transition-all duration-300 z-1;
+  }
+
   &::after {
     content: '';
     display: block;
@@ -31,24 +50,19 @@
     @apply absolute inset-0;
     @apply pointer-events-none;
   }
+
   &.ready {
     @apply cursor-pointer;
-  }
-  .thumbnail {
-    @apply w-full h-full;
-    @apply bg-cover bg-center bg-no-repeat bg-clip-border;
-    @apply transition-all duration-500;
-    @apply relative;
-  }
-  .innerImage {
-    @apply w-full h-full;
-  }
-  &.ready:hover {
-    &::after {
-      opacity: 0.5;
-    }
-    .thumbnail {
-      transform: scale(1.1);
+    &:hover {
+      &::after {
+        opacity: 0.5;
+      }
+      .thumbnail {
+        @apply scale-110;
+      }
+      .expand {
+        @apply opacity-60;
+      }
     }
   }
 }
