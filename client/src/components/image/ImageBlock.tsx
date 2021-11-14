@@ -8,11 +8,11 @@ import {
 } from 'react';
 import { useIntersection } from 'react-use';
 import classNames from 'classnames';
+import FeatherIcon from '../icon/FeatherIcon';
 import LazyImage from './LazyImage';
 import styles from './ImageBlock.module.css';
 import ImageToolbar from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
-import FeatherIcon from '../icon/FeatherIcon';
 
 const ratio16to9 = 16 / 9;
 
@@ -108,7 +108,9 @@ export default function ImageBlock(props: Props) {
       style={containerStyle}
     >
       {intersection?.isIntersecting ? block : null}
-      {!isLoading && <ImageToolbar image={image} className={styles.toolbar} />}
+      {!isLoading && (
+        <ImageToolbar image={image} className={styles.toolbar} size="sm" />
+      )}
     </div>
   );
 }

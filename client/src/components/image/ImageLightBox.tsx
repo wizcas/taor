@@ -9,12 +9,12 @@ import {
 } from 'react';
 import Modal from 'react-modal';
 import classNames from 'classnames';
+import FeatherIcon from '../icon/FeatherIcon';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
 import ImageToolbar from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
-import FeatherIcon from '../icon/FeatherIcon';
 
 interface Props {
   images?: ImageMetadata[];
@@ -113,7 +113,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
             className={classNames(styles.navigation, 'left-0')}
             onClick={onNavigate(prev)}
           >
-            <FeatherIcon icon="chevron-left" size="64px" />
+            <FeatherIcon icon="chevron-left" size="lg" />
           </button>
         )}
         {nextImage && (
@@ -122,12 +122,12 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
             className={classNames(styles.navigation, 'right-0')}
             onClick={onNavigate(next)}
           >
-            <FeatherIcon icon="chevron-right" size="64px" />
+            <FeatherIcon icon="chevron-right" size="lg" />
           </button>
         )}
       </div>
       <div className={styles.buttonContainer}>
-        <ImageToolbar image={image} onSetWallpaper={close} />
+        <ImageToolbar image={image} onSetWallpaper={close} size="lg" />
       </div>
     </>
   );

@@ -1,4 +1,5 @@
 import * as feather from 'feather-icons';
+import { Size, SizedStringValues } from '@/types';
 
 interface Props {
   icon: string;
@@ -6,11 +7,17 @@ interface Props {
   color?: string;
   width?: number | string;
   height?: number | string;
-  size?: number | string;
+  size?: Size;
   strokeWidth?: number;
   strokeLineCap?: string;
   strokeLineJoin?: string;
 }
+
+const SIZES: SizedStringValues = {
+  sm: '24px',
+  md: '32px',
+  lg: '64px',
+};
 
 export default function FeatherIcon({
   icon,
@@ -37,8 +44,9 @@ export default function FeatherIcon({
     attrs.height = height;
   }
   if (size !== undefined) {
-    attrs.width = size;
-    attrs.height = size;
+    const sizeValue = SIZES[size];
+    attrs.width = sizeValue;
+    attrs.height = sizeValue;
   }
   if (strokeWidth !== undefined) {
     attrs['stroke-width'] = strokeWidth;

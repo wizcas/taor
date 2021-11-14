@@ -1,23 +1,14 @@
 import { CSSProperties, ReactNode, useMemo } from 'react';
 import classNames from 'classnames';
 import styles from './CircleButton.module.css';
-
-type Sizes = 'sm' | 'md' | 'lg';
+import { Size, SIZED_PADDINGS } from '@/types';
 
 interface Props {
   children: ReactNode;
   color?: string;
   className?: string;
-  size?: Sizes;
+  size?: Size;
 }
-
-type SizedClassMap = Record<Sizes, string>;
-
-const paddingMap: SizedClassMap = {
-  sm: 'p-1',
-  md: 'p-2',
-  lg: 'p-3',
-};
 
 type ButtonProps = Props & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -40,7 +31,7 @@ export default function CircleButton(props: ButtonProps) {
   return (
     <button
       type="button"
-      className={classNames(styles.button, paddingMap[size], className)}
+      className={classNames(styles.button, SIZED_PADDINGS[size], className)}
       {...rest}
       style={style}
     >

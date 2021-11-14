@@ -15,7 +15,7 @@ export default function ModalHeader(props: Props) {
     <div className={styles.header}>
       <h3 className={styles.title}>{title}</h3>
       <CircleButton type="button" onClick={onClose} color="black">
-        <FeatherIcon icon="x" size="32px" />
+        <FeatherIcon icon="x" size="md" />
       </CircleButton>
     </div>
   );

@@ -1,18 +1,19 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
 import CircleButton from '../form/CircleButton';
-import { ImageMetadata } from '@/types';
-import { PreferencesContext } from '@/store/preferences';
 import FeatherIcon from '../icon/FeatherIcon';
+import { ImageMetadata, Size, SIZED_PADDINGS } from '@/types';
+import { PreferencesContext } from '@/store/preferences';
 
 interface Props {
   image: ImageMetadata;
   className?: string;
+  size?: Size;
   onSetWallpaper?(image: ImageMetadata): void;
 }
 
 export default function ImageToolbar(props: Props) {
-  const { image, className, onSetWallpaper } = props;
+  const { image, className, onSetWallpaper, size = 'md' } = props;
   const preferences = useContext(PreferencesContext);
 
   function setWallpaper() {
@@ -25,14 +26,14 @@ export default function ImageToolbar(props: Props) {
       className={classNames(
         'bg-black',
         'bg-opacity-50',
-        'p-2',
+        SIZED_PADDINGS[size],
         'rounded-md',
         'text-white',
         className
       )}
     >
-      <CircleButton onClick={setWallpaper} size="sm">
-        <FeatherIcon icon="check-circle" />
+      <CircleButton onClick={setWallpaper} size={size}>
+        <FeatherIcon icon="check-circle" size={size} />
       </CircleButton>
     </div>
   );
