@@ -1,6 +1,6 @@
+import { useRef } from 'react';
 import WALLPAPER_DB from './db';
 import { ImageMetadata } from '@/types';
-import { useRef } from 'react';
 
 const PAGE_SIZE = 32;
 

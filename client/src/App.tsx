@@ -1,5 +1,7 @@
 import Modal from 'react-modal';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import CircleButton from './components/form/CircleButton';
+import FeatherIcon from './components/icon/FeatherIcon';
 import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';
@@ -7,8 +9,6 @@ import WallhavenWrapper from '@/pages/wallhaven/Wrapper';
 import { PreferencesProvider } from '@/store/preferences';
 
 import './App.css';
-import CircleButton from './components/form/CircleButton';
-import FeatherIcon from './components/icon/FeatherIcon';
 
 Modal.setAppElement('#root');
 export default function App() {
@@ -33,7 +33,7 @@ function Home() {
       <Wallpaper />
       <div className="fixed right-0 bottom-0 flex gap-4 items-center p-4">
         <CircleButton color="white" onClick={openPageModal}>
-          <FeatherIcon icon="settings" size={32} />
+          <FeatherIcon icon="settings" />
         </CircleButton>
       </div>
 

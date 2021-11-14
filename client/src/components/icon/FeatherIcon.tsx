@@ -25,7 +25,7 @@ export default function FeatherIcon({
   color = 'currentColor',
   width,
   height,
-  size,
+  size = 'md',
   strokeWidth,
   strokeLineCap,
   strokeLineJoin,
