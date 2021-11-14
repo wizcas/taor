@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import CircleButton from '../form/CircleButton';
 import { ImageMetadata } from '@/types';
 import { PreferencesContext } from '@/store/preferences';
+import FeatherIcon from '../icon/FeatherIcon';
 
 interface Props {
   image: ImageMetadata;
@@ -32,7 +33,8 @@ export default function ImageToolbar(props: Props) {
       )}
     >
       <CircleButton onClick={setWallpaper} size="32px">
-        <FontAwesomeIcon icon={faCheck} size="lg" />
+        {/* <FontAwesomeIcon icon={faCheck} size="lg" /> */}
+        <FeatherIcon icon="check-circle" />
       </CircleButton>
     </div>
   );
