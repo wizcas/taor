@@ -1,5 +1,3 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useContext } from 'react';
 import CircleButton from '../form/CircleButton';
@@ -33,7 +31,6 @@ export default function ImageToolbar(props: Props) {
       )}
     >
       <CircleButton onClick={setWallpaper} size="32px">
-        {/* <FontAwesomeIcon icon={faCheck} size="lg" /> */}
         <FeatherIcon icon="check-circle" />
       </CircleButton>
     </div>

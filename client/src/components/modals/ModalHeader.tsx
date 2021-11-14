@@ -1,6 +1,5 @@
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactNode } from 'react';
+import FeatherIcon from '../icon/FeatherIcon';
 import styles from './ModalHeader.module.css';
 
 interface Props {
@@ -15,7 +14,7 @@ export default function ModalHeader(props: Props) {
     <div className={styles.header}>
       <h3 className={styles.title}>{title}</h3>
       <button type="button" onClick={onClose}>
-        <FontAwesomeIcon icon={faTimes} size="2x" />
+        <FeatherIcon icon="x" size="32px" />
       </button>
     </div>
   );

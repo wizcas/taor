@@ -8,17 +8,13 @@ import {
   useEffect,
 } from 'react';
 import Modal from 'react-modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
 import ImageToolbar from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
+import FeatherIcon from '../icon/FeatherIcon';
 
 interface Props {
   images?: ImageMetadata[];
@@ -117,7 +113,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
             className={classNames(styles.navigation, 'left-0')}
             onClick={onNavigate(prev)}
           >
-            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+            <FeatherIcon icon="chevron-left" size="64px" />
           </button>
         )}
         {nextImage && (
@@ -126,7 +122,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
             className={classNames(styles.navigation, 'right-0')}
             onClick={onNavigate(next)}
           >
-            <FontAwesomeIcon icon={faChevronRight} size="2x" />
+            <FeatherIcon icon="chevron-right" size="64px" />
           </button>
         )}
       </div>

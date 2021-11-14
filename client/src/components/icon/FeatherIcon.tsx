@@ -4,8 +4,9 @@ interface Props {
   icon: string;
   className?: string;
   color?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
+  size?: number | string;
   strokeWidth?: number;
   strokeLineCap?: string;
   strokeLineJoin?: string;
@@ -17,6 +18,7 @@ export default function FeatherIcon({
   color,
   width,
   height,
+  size,
   strokeWidth,
   strokeLineCap,
   strokeLineJoin,
@@ -33,6 +35,10 @@ export default function FeatherIcon({
   }
   if (height !== undefined) {
     attrs.height = height;
+  }
+  if (size !== undefined) {
+    attrs.width = size;
+    attrs.height = size;
   }
   if (strokeWidth !== undefined) {
     attrs['stroke-width'] = strokeWidth;

@@ -10,9 +10,6 @@
     "lint.fix": "eslint src/**/*.{ts,tsx} --fix"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.16",
     "classnames": "^2.3.1",
     "dexie": "^3.0.3",
     "feather-icons": "^4.28.0",
