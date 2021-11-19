@@ -1,4 +1,6 @@
 import { makeAutoObservable } from 'mobx';
+import { createContext } from 'react';
+import { ProvidableContext } from './ContextProvider';
 import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 
 const PAGE_SIZE = 24;
@@ -41,3 +43,12 @@ class CollectionsStore {
     await this.api.delete(collection);
   }
 }
+
+export const CollectionsContext = createContext<CollectionsStore>(
+  new CollectionsStore()
+);
+
+export const COLLECTIONS_PROVIDER: ProvidableContext<CollectionsStore> = {
+  context: CollectionsContext,
+  initialValue: () => new CollectionsStore(),
+};

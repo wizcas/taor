@@ -2,21 +2,25 @@ import Modal from 'react-modal';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import CircleButton from './components/form/CircleButton';
 import FeatherIcon from './components/icon/FeatherIcon';
+import ContextProvider from './providers/ContextProvider';
+import { COLLECTIONS_PROVIDER, PREFERENCES_PROVIDER } from './providers';
 import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';
 import WallhavenWrapper from '@/pages/wallhaven/Wrapper';
-import { PreferencesProvider } from '@/providers/PreferencesStore';
 
 import './App.css';
 
 Modal.setAppElement('#root');
+
+const CONTEXT_PROVIDERS = [PREFERENCES_PROVIDER, COLLECTIONS_PROVIDER];
+
 export default function App() {
   return (
     <Router>
-      <PreferencesProvider>
+      <ContextProvider providers={CONTEXT_PROVIDERS}>
         <Home />
-      </PreferencesProvider>
+      </ContextProvider>
     </Router>
   );
 }
