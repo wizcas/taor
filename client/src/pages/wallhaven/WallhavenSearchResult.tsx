@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useWallhavenSearch, WallhavenQueryContext } from '@/api/wallhaven';
 import ImageGallery from '@/components/image/ImageGallery';
-import InfiniteLoadContainer from '@/components/container/InfiniteView';
+import InfiniteView from '@/components/container/InfiniteView';
 import LoadingBanner from '@/components/wait/LoadingBanner';
 
 const client = new QueryClient();
@@ -37,13 +37,13 @@ function SearchResultContent(props: Props) {
       <LoadingBanner loading>Searching for wallpapers</LoadingBanner>
     </div>
   ) : (
-    <InfiniteLoadContainer
+    <InfiniteView
       hasMore={hasMore}
       className={className}
       loadMore={loadMore}
       loading={isLoadingMore}
     >
       <ImageGallery images={images} />
-    </InfiniteLoadContainer>
+    </InfiniteView>
   );
 }
