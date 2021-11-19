@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { createContext } from 'react';
 import { ProvidableContext } from './ContextProvider';
+import type { ModalActions } from '@/types';
 import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 
 const PAGE_SIZE = 24;
@@ -9,6 +10,8 @@ class CollectionsStore {
   list: Collection[] = [];
 
   offset = 0;
+
+  creationModal?: ModalActions = undefined;
 
   private readonly api = new CollectionsApi();
 

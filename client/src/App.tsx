@@ -4,6 +4,7 @@ import CircleButton from './components/form/CircleButton';
 import FeatherIcon from './components/icon/FeatherIcon';
 import ContextProvider from './providers/ContextProvider';
 import { COLLECTIONS_PROVIDER, PREFERENCES_PROVIDER } from './providers';
+import NewCollectionModal from './pages/collection/NewCollectionModal';
 import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';
@@ -48,6 +49,8 @@ function Home() {
           </Route>
         </Switch>
       </PageModal>
+
+      <NewCollectionModal />
     </div>
   );
 }
