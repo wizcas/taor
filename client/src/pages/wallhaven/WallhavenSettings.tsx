@@ -4,14 +4,15 @@ import { observer } from 'mobx-react-lite';
 import WallhavenSearchResult from './WallhavenSearchResult';
 import styles from './WallhavenSettings.module.css';
 import WallhavenFilters from './WallhavenFilters';
+import type { ModalRef } from '@/types';
 import { WallhavenQueryContext } from '@/api/wallhaven';
-import DrawerModal, { DrawerModalRef } from '@/components/modals/DrawerModal';
+import DrawerModal from '@/components/modals/DrawerModal';
 
 function WallhavenSettings() {
   const [query, updateQuery] = useContext(WallhavenQueryContext);
   const [q, setQ] = useState(query?.q);
 
-  const filtersRef = useRef<DrawerModalRef>(null);
+  const filtersRef = useRef<ModalRef>(null);
 
   useDebounce(() => updateQuery({ q }), 500, [q, updateQuery]);
 

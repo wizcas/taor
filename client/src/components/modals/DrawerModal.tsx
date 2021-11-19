@@ -1,19 +1,15 @@
 import classNames from 'classnames';
 import { ForwardedRef, forwardRef, useImperativeHandle, useState } from 'react';
 import Modal, { ModalProps } from './Modal';
+import type { ModalRef } from '@/types';
 
 interface Props extends Pick<ModalProps, 'title' | 'children'> {
   side?: 'left' | 'right';
 }
 
-export interface DrawerModalRef {
-  open: () => void;
-  close: () => void;
-}
-
 function DrawerModal(
   { title, side = 'right', children }: Props,
-  ref: ForwardedRef<DrawerModalRef>
+  ref: ForwardedRef<ModalRef>
 ) {
   const [isOpen, setIsOpen] = useState(false);
 
