@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 import CircleButton from '../form/CircleButton';
 import FeatherIcon from '../icon/FeatherIcon';
 import styles from './ModalHeader.module.css';
 
 interface Props {
-  title: ReactNode;
-  onClose(): void;
+  title?: ReactNode;
+  onClose?(e: MouseEvent): void;
 }
 
 export default function ModalHeader(props: Props) {
