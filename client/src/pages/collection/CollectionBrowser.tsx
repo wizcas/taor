@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import classNames from 'classnames';
+import CollectionList from './CollectionList';
 import { CollectionsContext } from '@/providers';
 import Modal from '@/components/modals/Modal';
 
@@ -28,7 +29,7 @@ export default function CollectionBrowser({ title = 'Collections' }: Props) {
       onRequestClose={close}
       className={classNames('w-80vw min-w-600px max-w-900px')}
     >
-      xxx
+      <CollectionList />
     </Modal>
   );
 }

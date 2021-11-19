@@ -1,17 +1,21 @@
 import { makeAutoObservable } from 'mobx';
 import { createContext } from 'react';
+import unionWith from 'lodash/fp/unionWith';
 import { ProvidableContext } from './ContextProvider';
 import type { ModalRef } from '@/types';
 import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 
 const PAGE_SIZE = 24;
+const unionCollections = unionWith<Collection>((c1, c2) => c1.id === c2.id);
 
 class CollectionsStore {
-  list: Collection[] = [];
-
   offset = 0;
 
+  isLoading = false;
+
   creationModal?: ModalRef = undefined;
+
+  private _list: Collection[] = [];
 
   private readonly api = new CollectionsApi();
 
@@ -19,10 +23,31 @@ class CollectionsStore {
     makeAutoObservable(this);
   }
 
+  get list() {
+    return this._list.filter(Boolean);
+  }
+
+  set list(value) {
+    this._list = value;
+  }
+
+  private upsertList(upsertedItems: Collection[]) {
+    this.list = unionCollections(upsertedItems, this.list);
+  }
+
+  private deleteFromList(deletingItems: Collection[]) {
+    this.list = this.list.filter(
+      (collection) =>
+        !deletingItems.some((excluded) => excluded.id === collection.id)
+    );
+  }
+
   async loadMore() {
+    this.isLoading = true;
     const result = await this.api.list(this.offset, PAGE_SIZE);
     this.offset += PAGE_SIZE;
-    this.list.push(...result);
+    this.upsertList(result);
+    this.isLoading = false;
   }
 
   async create(collection: Collection) {
@@ -32,7 +57,7 @@ class CollectionsStore {
     }
     const newOne = await this.api.upsert(collection);
     if (newOne) {
-      this.list.push(newOne);
+      this.upsertList([newOne]);
     }
   }
 
@@ -44,6 +69,7 @@ class CollectionsStore {
 
   async delete(collection: Collection) {
     await this.api.delete(collection);
+    this.deleteFromList([collection]);
   }
 }
 

@@ -1,9 +1,9 @@
 .header {
-  @apply flex flex-row items-center gap-2 w-full;
+  @apply flex flex-row justify-between items-center gap-2 w-full;
   @apply mb-4;
 
   .title {
-    @apply flex-1;
+    @apply text-lg;
   }
 
   .closeButton {

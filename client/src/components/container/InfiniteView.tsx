@@ -1,22 +1,27 @@
 import classNames from 'classnames';
 import { PropsWithChildren, useEffect, useRef } from 'react';
 import { useIntersection } from 'react-use';
-import LoadMoreHint from './LoadMoreHint';
+import LoadMoreHint, { LoadMoreHintProps } from './LoadMoreHint';
 
 const HINT_THRESHOLD = 0.95;
 
-interface ComponentProps {
+interface Props extends LoadMoreHintProps {
   className?: string;
-  hasMore?: boolean;
-  loading?: boolean;
+  hintClassName?: string;
   loadMore?(): void;
   cancel?(): void;
 }
 
-type Props = PropsWithChildren<ComponentProps>;
-export default function InfiniteView(props: Props) {
-  const { children, className, hasMore, loading, loadMore, cancel } = props;
-
+export default function InfiniteView({
+  children,
+  className,
+  hintClassName,
+  hasMore,
+  loading,
+  loadMore,
+  cancel,
+  ...hintProps
+}: PropsWithChildren<Props>) {
   const hintRef = useRef<HTMLDivElement>(null);
   const intersection = useIntersection(hintRef, { threshold: HINT_THRESHOLD });
 
@@ -31,7 +36,13 @@ export default function InfiniteView(props: Props) {
   return (
     <div className={classNames('flex flex-col items-stretch', className)}>
       {children}
-      <LoadMoreHint hasMore={hasMore} ref={hintRef} loading={loading} />
+      <LoadMoreHint
+        hasMore={hasMore}
+        ref={hintRef}
+        loading={loading}
+        className={hintClassName}
+        {...hintProps}
+      />
     </div>
   );
 }

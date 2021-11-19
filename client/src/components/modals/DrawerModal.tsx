@@ -28,7 +28,6 @@ function DrawerModal(
   return (
     <Modal
       title={title}
-      titleSize="sm"
       isOpen={isOpen}
       onRequestClose={close}
       closeTimeoutMS={300}
