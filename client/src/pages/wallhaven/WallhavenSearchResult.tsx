@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { WallhavenQueryContext } from './context';
-import { useWallhavenSearch } from './api';
+import { useWallhavenSearch, WallhavenQueryContext } from '@/api/wallhaven';
 import ImageGallery from '@/components/image/ImageGallery';
 import InfiniteLoadContainer from '@/components/container/InfiniteView';
 import LoadingBanner from '@/components/wait/LoadingBanner';
