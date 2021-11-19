@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import styles from './Wallpaper.module.css';
-import { PreferencesContext } from '@/store/preferences';
+import { PreferencesContext } from '@/providers/PreferencesStore';
 
 function Wallpaper() {
   const preferences = useContext(PreferencesContext);

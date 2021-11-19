@@ -6,7 +6,7 @@ import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';
 import WallhavenWrapper from '@/pages/wallhaven/Wrapper';
-import { PreferencesProvider } from '@/store/preferences';
+import { PreferencesProvider } from '@/providers/PreferencesStore';
 
 import './App.css';
 

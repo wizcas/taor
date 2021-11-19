@@ -1,10 +1,10 @@
 import { useState, useContext, ChangeEvent, useRef } from 'react';
 import { useDebounce } from 'react-use';
 import { observer } from 'mobx-react-lite';
-import { WallhavenQueryContext } from './context';
 import WallhavenSearchResult from './WallhavenSearchResult';
 import styles from './WallhavenSettings.module.css';
 import WallhavenFilters from './WallhavenFilters';
+import { WallhavenQueryContext } from '@/api/wallhaven';
 import DrawerModal, { DrawerModalRef } from '@/components/modals/DrawerModal';
 
 function WallhavenSettings() {

@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useState } from 'react';
 import { useDebounce } from 'react-use';
-import { WallhavenQueryContext } from './context';
 import styles from './WallhavenFilters.module.css';
+import { WallhavenQueryContext } from '@/api/wallhaven';
 import MaskToggleGroup from '@/components/form/MaskToggleGroup';
 
 const CATEGORY_OPTIONS = [

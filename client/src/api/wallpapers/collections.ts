@@ -1,26 +1,21 @@
-import { useRef } from 'react';
+import cloneDeep from 'lodash/cloneDeep';
 import WALLPAPER_DB from './db';
 import { ImageMetadata } from '@/types';
 
-const PAGE_SIZE = 32;
-
 export interface Collection {
-  id: number;
+  id?: number;
   name: string;
   images: ImageMetadata[];
 }
 
-class CollectionsApi {
+export class CollectionsApi {
   private get table() {
     return WALLPAPER_DB.table<Collection, number>('collections');
   }
 
-  async list(page = 0): Promise<Collection[]> {
+  async list(offset: number, limit: number): Promise<Collection[]> {
     try {
-      return this.table
-        .offset(page * PAGE_SIZE)
-        .limit(PAGE_SIZE)
-        .toArray();
+      return this.table.offset(offset).limit(limit).toArray();
     } catch (e) {
       console.error('Error listing collections', e);
       return [];
@@ -29,22 +24,22 @@ class CollectionsApi {
 
   async upsert(collection: Collection) {
     try {
-      await this.table.put(collection, collection.id);
+      const newId = await this.table.put(collection, collection.id);
+      const result = cloneDeep(collection);
+      result.id = newId;
+      return result;
     } catch (e) {
       console.error('Error upserting collection', e);
+      return null;
     }
   }
 
   async delete(collection: Collection) {
     try {
+      if (collection.id === undefined) return;
       await this.table.delete(collection.id);
     } catch (e) {
       console.error('Error deleting collection', e);
     }
   }
-}
-
-export function useCollectionsApi() {
-  const ref = useRef(new CollectionsApi());
-  return ref.current;
 }

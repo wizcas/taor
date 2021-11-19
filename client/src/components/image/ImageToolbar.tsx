@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import CircleButton from '../form/CircleButton';
 import FeatherIcon from '../icon/FeatherIcon';
 import { ImageMetadata, Size, SIZED_PADDINGS } from '@/types';
-import { PreferencesContext } from '@/store/preferences';
+import { PreferencesContext } from '@/providers/PreferencesStore';
 
 interface Props {
   image: ImageMetadata;
