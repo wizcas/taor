@@ -1,0 +1,19 @@
+.block {
+  @apply relative;
+  @apply border border-solid border-gray-200 rounded-md;
+  @apply h-128px;
+  @apply shadow-lg;
+  @apply p-4;
+
+  &.interactive {
+    @apply cursor-pointer;
+  }
+
+  & > * {
+    @apply w-full h-full;
+  }
+
+  &:hover {
+    @apply bg-dark-100 bg-opacity-5;
+  }
+}

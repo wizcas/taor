@@ -23,7 +23,7 @@ export default function ImageToolbar(props: Props) {
   }
 
   function addToCollection() {
-    collections.creationModal?.open();
+    collections.browserModal?.open({ canCreate: true });
   }
 
   return (

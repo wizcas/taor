@@ -23,6 +23,7 @@ class PreferencesStore {
 export const PreferencesContext = createContext<PreferencesStore>(
   new PreferencesStore()
 );
+PreferencesContext.displayName = 'PreferencesContext';
 
 export const PREFERENCES_PROVIDER: ProvidableContext<PreferencesStore> = {
   context: PreferencesContext,

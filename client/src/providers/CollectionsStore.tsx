@@ -8,12 +8,16 @@ import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 const PAGE_SIZE = 24;
 const unionCollections = unionWith<Collection>((c1, c2) => c1.id === c2.id);
 
+export interface CollectionBrowserArgs {
+  canCreate?: boolean;
+}
+
 class CollectionsStore {
   offset = 0;
 
   isLoading = false;
 
-  creationModal?: ModalRef = undefined;
+  browserModal?: ModalRef<CollectionBrowserArgs> = undefined;
 
   private _list: Collection[] = [];
 
@@ -21,6 +25,7 @@ class CollectionsStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.loadMore();
   }
 
   get list() {
@@ -76,6 +81,7 @@ class CollectionsStore {
 export const CollectionsContext = createContext<CollectionsStore>(
   new CollectionsStore()
 );
+CollectionsContext.displayName = 'CollectionsContext';
 
 export const COLLECTIONS_PROVIDER: ProvidableContext<CollectionsStore> = {
   context: CollectionsContext,

@@ -1,0 +1,100 @@
+import { useContext, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import classNames from 'classnames';
+import styles from './BlockCommon.module.css';
+import { Collection } from '@/api/wallpapers/collections';
+import FieldHint from '@/components/form/FieldHint';
+import { CollectionsContext } from '@/providers';
+import FeatherIcon from '@/components/icon/FeatherIcon';
+import CircleButton from '@/components/form/CircleButton';
+
+interface CreationFormData {
+  name: string;
+}
+
+const NAME_ERRORS: Record<string, string> = {
+  required: 'Please enter a collection name',
+  maxLength: 'The collection name must be short than 50 characters',
+};
+
+export default function NewCollectionBlock() {
+  const [isEditing, setIsEditing] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    clearErrors,
+    setFocus,
+    formState: { errors },
+  } = useForm();
+  const collections = useContext(CollectionsContext);
+
+  if (errors && Object.keys(errors).length > 0) {
+    console.error('New collection creation form error: ', errors);
+  }
+
+  function onSubmit(data: CreationFormData) {
+    const newCollection: Collection = {
+      name: data.name,
+      images: [],
+    };
+    collections.create(newCollection);
+  }
+
+  useEffect(() => {
+    if (isEditing) {
+      setFocus('name');
+    } else {
+      clearErrors();
+    }
+  }, [isEditing]);
+
+  return (
+    <div
+      className={classNames(styles.block, {
+        [styles.interactive]: !isEditing,
+      })}
+    >
+      {!isEditing ? (
+        <button
+          type="button"
+          className="flex flex-col justify-center items-center"
+          onClick={() => setIsEditing(true)}
+        >
+          <FeatherIcon icon="plus" />
+          <div>New collection</div>
+        </button>
+      ) : (
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={classNames(
+            'flex flex-col justify-center items-stretch gap-4'
+          )}
+        >
+          <input
+            placeholder="Collection Name"
+            {...register('name', { required: true, maxLength: 50 })}
+          />
+          {
+            // FIXME: show in somewhere that do not affect the layout.
+            // ex. tooltip, alert box, etc.
+            errors.name && (
+              <FieldHint type="error" message={NAME_ERRORS[errors.name.type]} />
+            )
+          }
+          <div className="flex flex-row-reverse justify-between">
+            <CircleButton type="submit" className="text-green-800">
+              <FeatherIcon icon="check" />
+            </CircleButton>
+            <CircleButton
+              type="button"
+              className="text-gray-600"
+              onClick={() => setIsEditing(false)}
+            >
+              <FeatherIcon icon="x" />
+            </CircleButton>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+}

@@ -57,6 +57,13 @@ export default function FeatherIcon({
   if (strokeLineJoin) {
     attrs['stroke-linejoin'] = strokeLineJoin;
   }
+
+  const iconData = feather.icons[icon];
+  if (!iconData) {
+    console.error('Cannot find icon: ', icon);
+    return <></>;
+  }
+
   const html = feather.icons[icon].toSvg(attrs);
   return (
     <div

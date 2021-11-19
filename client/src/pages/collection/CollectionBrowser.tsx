@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import classNames from 'classnames';
 import CollectionList from './CollectionList';
-import { CollectionsContext } from '@/providers';
+import { CollectionBrowserArgs, CollectionsContext } from '@/providers';
 import Modal from '@/components/modals/Modal';
 
 interface Props {
@@ -10,11 +10,13 @@ interface Props {
 
 export default function CollectionBrowser({ title = 'Collections' }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [canCreate, setCanCreate] = useState(false);
 
   const collections = useContext(CollectionsContext);
-  collections.creationModal = {
-    open() {
+  collections.browserModal = {
+    open(args: CollectionBrowserArgs) {
       setIsOpen(true);
+      setCanCreate(!!args?.canCreate);
     },
     close,
   };
@@ -29,7 +31,7 @@ export default function CollectionBrowser({ title = 'Collections' }: Props) {
       onRequestClose={close}
       className={classNames('w-80vw min-w-600px max-w-900px')}
     >
-      <CollectionList />
+      <CollectionList canCreate={canCreate} />
     </Modal>
   );
 }
