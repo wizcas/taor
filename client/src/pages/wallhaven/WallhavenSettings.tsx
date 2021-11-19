@@ -38,7 +38,7 @@ function WallhavenSettings() {
         </button>
       </section>
       <WallhavenSearchResult className="overflow-y-auto flex-1" />
-      <DrawerModal ref={filtersRef}>
+      <DrawerModal title="Wallhaven Search Settings" ref={filtersRef}>
         <WallhavenFilters />
       </DrawerModal>
     </div>

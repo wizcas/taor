@@ -3,10 +3,12 @@ import { PropsWithChildren, ReactNode } from 'react';
 import classNames from 'classnames';
 import styles from './Modal.module.css';
 import ModalHeader from './ModalHeader';
+import type { Size } from '@/types';
 
-interface Props extends ReactModal.Props {
+export interface ModalProps extends PropsWithChildren<ReactModal.Props> {
   title?: ReactNode;
   contentClassName?: string;
+  titleSize?: Size;
 }
 
 export default function Modal({
@@ -16,8 +18,9 @@ export default function Modal({
   onRequestClose,
   className,
   overlayClassName,
+  titleSize,
   ...rest
-}: PropsWithChildren<Props>) {
+}: ModalProps) {
   return (
     <ReactModal
       className={classNames(styles.modal, className)}
@@ -27,7 +30,11 @@ export default function Modal({
       {...rest}
     >
       {(title || onRequestClose) && (
-        <ModalHeader title={title} onClose={(e) => onRequestClose?.(e)} />
+        <ModalHeader
+          title={title}
+          size={titleSize}
+          onClose={(e) => onRequestClose?.(e)}
+        />
       )}
       <div className={styles.content}>{children}</div>
     </ReactModal>

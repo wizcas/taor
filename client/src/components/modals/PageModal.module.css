@@ -1,5 +1,6 @@
 .modal {
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  @apply absolute inset-16 lg:max-w-screen-lg;
+  @apply mx-auto;
 }
 
 .overlay {
