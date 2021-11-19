@@ -28,6 +28,7 @@ code {
 .ReactModal__Content {
   @apply backdrop-filter backdrop-blur-md;
   @apply transition-all duration-300 ease-in-out;
+
   &:not(.drawer) {
     @apply transform scale-0;
   }

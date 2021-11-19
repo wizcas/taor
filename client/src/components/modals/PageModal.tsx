@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useLocation } from 'react-router-dom';
 import { ReactNode } from 'react';
+import classNames from 'classnames';
 import styles from './PageModal.module.css';
 import Modal from './Modal';
 import usePageModal from '@/hooks/usePageModal';
@@ -20,13 +21,12 @@ function Component(props: Props) {
     <Modal
       isOpen={isOpen}
       onRequestClose={close}
-      className={styles.modal}
+      className={classNames(styles.modal)}
       overlayClassName={styles.overlay}
       closeTimeoutMS={300}
       title={title}
-      shouldCloseOnOverlayClick
     >
-      <div className={styles.content}>{children}</div>
+      {children}
     </Modal>
   );
 }

@@ -1,8 +1,13 @@
 import { useContext, useState } from 'react';
-import Modal from 'react-modal';
+import classNames from 'classnames';
 import { CollectionsContext } from '@/providers';
+import Modal from '@/components/modals/Modal';
 
-export default function NewCollectionModal() {
+interface Props {
+  title?: string;
+}
+
+export default function CollectionBrowser({ title = 'Collections' }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const collections = useContext(CollectionsContext);
@@ -17,7 +22,12 @@ export default function NewCollectionModal() {
     setIsOpen(false);
   }
   return (
-    <Modal isOpen={isOpen} onRequestClose={close} shouldCloseOnEsc>
+    <Modal
+      title={title}
+      isOpen={isOpen}
+      onRequestClose={close}
+      className={classNames('w-80vw min-w-600px max-w-900px')}
+    >
       xxx
     </Modal>
   );

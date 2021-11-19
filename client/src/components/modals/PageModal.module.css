@@ -1,6 +1,5 @@
 .modal {
-  @apply absolute inset-16 lg:max-w-screen-lg;
-  @apply mx-auto;
+  @apply w-90vw h-80vh lg:max-w-screen-lg;
 }
 
 .overlay {
