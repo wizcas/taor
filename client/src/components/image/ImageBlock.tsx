@@ -21,8 +21,7 @@ interface Props {
   onViewImage(image: ImageMetadata): void;
 }
 
-export default function ImageBlock(props: Props) {
-  const { image, onViewImage } = props;
+export default function ImageBlock({ image, onViewImage }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [preferredHeight, setPreferredHeight] = useState<number | undefined>();
 

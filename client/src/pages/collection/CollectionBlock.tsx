@@ -47,8 +47,11 @@ export default function CollectionBlock({
       <div className="self-center m-2 text-sm">{collection.name}</div>
       {isSelected && (
         <div
-          className="absolute -top-1 right-2 pointer-events-none text-primary-400
-        filter drop-shadow-md"
+          className={classNames(
+            'absolute -top-1 right-2',
+            'pointer-events-none text-primary-400',
+            'filter drop-shadow-md'
+          )}
         >
           <FeatherIcon
             icon="bookmark"

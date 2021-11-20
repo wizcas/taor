@@ -9,14 +9,14 @@
     @apply block;
   }
   .toolbar {
-    @apply absolute bottom-0 right-0 transition-all duration-500;
-    @apply transform translate-x-full;
+    @apply absolute bottom-0 right-0 transition-all duration-300;
+    @apply opacity-0;
   }
   &:hover .toolbar {
-    @apply translate-x-0;
+    @apply opacity-100;
   }
   &:focus-within .toolbar {
-    @apply translate-x-0;
+    @apply opacity-100;
   }
 }
 .imageBlock {
