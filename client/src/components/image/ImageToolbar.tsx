@@ -12,8 +12,12 @@ interface Props {
   onSetWallpaper?(image: ImageMetadata): void;
 }
 
-export default function ImageToolbar(props: Props) {
-  const { image, className, onSetWallpaper, size = 'md' } = props;
+export default function ImageToolbar({
+  image,
+  className,
+  onSetWallpaper,
+  size = 'md',
+}: Props) {
   const preferences = useContext(PreferencesContext);
   const collections = useContext(CollectionsContext);
 
@@ -23,7 +27,7 @@ export default function ImageToolbar(props: Props) {
   }
 
   function addToCollection() {
-    collections.browserModal?.open({ canCreate: true });
+    collections.openBrowser({ canCreate: true, mode: 'addTo' }, image);
   }
 
   return (

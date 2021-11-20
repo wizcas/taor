@@ -22,6 +22,7 @@ export default function NewCollectionBlock() {
   const {
     register,
     handleSubmit,
+    reset,
     clearErrors,
     setFocus,
     formState: { errors },
@@ -32,12 +33,14 @@ export default function NewCollectionBlock() {
     console.error('New collection creation form error: ', errors);
   }
 
-  function onSubmit(data: CreationFormData) {
+  async function onSubmit(data: CreationFormData) {
     const newCollection: Collection = {
       name: data.name,
       images: [],
     };
-    collections.create(newCollection);
+    await collections.create(newCollection);
+    reset();
+    setIsEditing(false);
   }
 
   useEffect(() => {
@@ -57,7 +60,7 @@ export default function NewCollectionBlock() {
       {!isEditing ? (
         <button
           type="button"
-          className="flex flex-col justify-center items-center"
+          className="flex-1 flex flex-col justify-center items-center -!p-4"
           onClick={() => setIsEditing(true)}
         >
           <FeatherIcon icon="plus" />
@@ -67,7 +70,7 @@ export default function NewCollectionBlock() {
         <form
           onSubmit={handleSubmit(onSubmit)}
           className={classNames(
-            'flex flex-col justify-center items-stretch gap-4'
+            'flex-1 flex flex-col justify-center items-stretch gap-4 pb-0 p-4'
           )}
         >
           <input

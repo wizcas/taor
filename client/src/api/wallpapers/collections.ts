@@ -8,6 +8,18 @@ export interface Collection {
   images: ImageMetadata[];
 }
 
+export function isImageInCollection(
+  image: ImageMetadata,
+  collection: Collection
+) {
+  return collection.images.some(
+    (collected) =>
+      collected.id === image.id ||
+      collected.thumbnail === image.thumbnail ||
+      collected.raw === image.raw
+  );
+}
+
 export class CollectionsApi {
   private get table() {
     return WALLPAPER_DB.table<Collection, number>('collections');
@@ -24,10 +36,10 @@ export class CollectionsApi {
 
   async upsert(collection: Collection) {
     try {
-      const newId = await this.table.put(collection, collection.id);
-      const result = cloneDeep(collection);
-      result.id = newId;
-      return result;
+      const cloned = cloneDeep(collection);
+      const newId = await this.table.put(cloned, cloned.id);
+      cloned.id = newId;
+      return cloned;
     } catch (e) {
       console.error('Error upserting collection', e);
       return null;

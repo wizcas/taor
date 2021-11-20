@@ -1,17 +1,35 @@
 import classNames from 'classnames';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import CollectionBlock from './CollectionBlock';
 import NewCollectionBlock from './NewCollectionBlock';
-import { CollectionsContext } from '@/providers';
+import { CollectionsBrowserMode, CollectionsContext } from '@/providers';
 import InfiniteView from '@/components/container/InfiniteView';
+import { Collection } from '@/api/wallpapers/collections';
 
 interface Props {
   canCreate?: boolean;
+  mode?: CollectionsBrowserMode;
 }
 
-export default observer(function CollectionList({ canCreate }: Props) {
+export default observer(function CollectionList({ canCreate, mode }: Props) {
   const collections = useContext(CollectionsContext);
+
+  const onBlockClick = useCallback(
+    async (collection: Collection) => {
+      switch (mode) {
+        case 'browse':
+          break;
+        case 'addTo':
+          await collections.addImageToCollection(collection);
+          break;
+        default:
+          break;
+      }
+    },
+    [mode]
+  );
+
   return (
     <InfiniteView
       loadMore={collections.loadMore}
@@ -20,9 +38,19 @@ export default observer(function CollectionList({ canCreate }: Props) {
     >
       <div className={classNames('grid grid-cols-4 gap-4 m-4')}>
         {canCreate && <NewCollectionBlock />}
-        {collections.list.map((collection) => (
-          <CollectionBlock key={collection.id} collection={collection} />
-        ))}
+        {collections.list.map((collection) => {
+          const inCollection =
+            mode === 'addTo' && collections.hasImageIn(collection);
+          const canInteract = mode !== 'addTo' || !inCollection;
+          return (
+            <CollectionBlock
+              key={collection.id}
+              collection={collection}
+              onClick={canInteract ? onBlockClick : undefined}
+              isSelected={inCollection}
+            />
+          );
+        })}
       </div>
     </InfiniteView>
   );
