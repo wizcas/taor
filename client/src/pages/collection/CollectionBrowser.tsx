@@ -27,8 +27,7 @@ export default function CollectionBrowser() {
     setIsOpen(false);
   }
 
-  const title =
-    mode === 'browse' ? 'Browse Collections' : 'Add wallpaper to collections';
+  const title = mode === 'browse' ? 'Browse Collections' : 'Add to collections';
   const subtitle =
     mode === 'browse'
       ? undefined
