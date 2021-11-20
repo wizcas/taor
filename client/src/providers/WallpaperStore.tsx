@@ -20,7 +20,7 @@ class WallpaperStore {
     if (!this._active) {
       runInAction(() => {
         this._active = fromPromise<string>(
-          this.getActive(),
+          this.fetchActive(),
           fromPromise.resolve(defaultWallpaper)
         );
       });
@@ -59,7 +59,7 @@ class WallpaperStore {
     this._active = null;
   }
 
-  private async getActive() {
+  private async fetchActive() {
     let wallpaper = await this.fromCollection();
     if (!wallpaper) {
       wallpaper = await this.fromSingle();
