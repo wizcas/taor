@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Collection } from '@/api/wallpapers/collections';
 import CircleButton from '@/components/form/CircleButton';
 import FeatherIcon from '@/components/icon/FeatherIcon';
-import { PreferencesContext } from '@/providers';
+import { WallpaperContext } from '@/providers';
 
 interface Props {
   collection: Collection;
@@ -12,11 +12,11 @@ interface Props {
 
 export default observer(function CollectionBlockFooter({ collection }: Props) {
   const { id, name } = collection;
-  const preferences = useContext(PreferencesContext);
-  const isInUse = preferences.collectionId === id;
+  const wallpaper = useContext(WallpaperContext);
+  const isInUse = wallpaper.collectionId === id;
 
   function use() {
-    preferences.selectCollection(collection);
+    wallpaper.selectCollection(collection);
   }
 
   return (

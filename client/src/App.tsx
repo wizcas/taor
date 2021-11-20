@@ -7,7 +7,7 @@ import ContextProvider from './providers/ContextProvider';
 import {
   CollectionsContext,
   COLLECTIONS_PROVIDER,
-  PREFERENCES_PROVIDER,
+  WALLPAPER_PROVIDER,
 } from './providers';
 import CollectionBrowser from './pages/collection/CollectionBrowser';
 import usePageModal from '@/hooks/usePageModal';
@@ -19,7 +19,7 @@ import './App.css';
 
 Modal.setAppElement('#root');
 
-const CONTEXT_PROVIDERS = [PREFERENCES_PROVIDER, COLLECTIONS_PROVIDER];
+const CONTEXT_PROVIDERS = [WALLPAPER_PROVIDER, COLLECTIONS_PROVIDER];
 
 export default function App() {
   return (

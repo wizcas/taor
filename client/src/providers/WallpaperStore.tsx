@@ -7,8 +7,8 @@ import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 const defaultWallpaper =
   'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
 
-class PreferencesStore {
-  private _activeWallpaper: IPromiseBasedObservable<string> | null = null;
+class WallpaperStore {
+  private _active: IPromiseBasedObservable<string> | null = null;
 
   private _collectionId = 0;
 
@@ -16,16 +16,16 @@ class PreferencesStore {
     makeAutoObservable(this);
   }
 
-  get activeWallpaper() {
-    if (!this._activeWallpaper) {
+  get active() {
+    if (!this._active) {
       runInAction(() => {
-        this._activeWallpaper = fromPromise<string>(
-          this.getActiveWallpaper(),
+        this._active = fromPromise<string>(
+          this.getActive(),
           fromPromise.resolve(defaultWallpaper)
         );
       });
     }
-    return this._activeWallpaper;
+    return this._active;
   }
 
   get collectionId() {
@@ -36,9 +36,9 @@ class PreferencesStore {
     return id;
   }
 
-  selectFixedWallpaper(value: string) {
+  selectSingle(value: string) {
     localStorage.setItem('wallpaper', value);
-    this.refetchActiveWallpaper();
+    this.reloadActive();
   }
 
   selectCollection(collection: Collection | null) {
@@ -51,23 +51,23 @@ class PreferencesStore {
     localStorage.setItem('collectionId', id.toString(10));
     this._collectionId = id;
     if (images.length > 0) {
-      this.refetchActiveWallpaper();
+      this.reloadActive();
     }
   }
 
-  private refetchActiveWallpaper() {
-    this._activeWallpaper = null;
+  private reloadActive() {
+    this._active = null;
   }
 
-  private async getActiveWallpaper() {
-    let wallpaper = await this.getCollectionWallpaper();
+  private async getActive() {
+    let wallpaper = await this.fromCollection();
     if (!wallpaper) {
-      wallpaper = await this.getFixedWallpaper();
+      wallpaper = await this.fromSingle();
     }
     return wallpaper || defaultWallpaper;
   }
 
-  private async getCollectionWallpaper() {
+  private async fromCollection() {
     const id = this.collectionId;
     if (id === null) return null;
     const collection = await new CollectionsApi().get(id);
@@ -75,17 +75,17 @@ class PreferencesStore {
     return collection.images[0].raw || null;
   }
 
-  private async getFixedWallpaper() {
+  private async fromSingle() {
     return localStorage.getItem('wallpaper') || defaultWallpaper;
   }
 }
 
-export const PreferencesContext = createContext<PreferencesStore>(
-  new PreferencesStore()
+export const WallpaperContext = createContext<WallpaperStore>(
+  new WallpaperStore()
 );
-PreferencesContext.displayName = 'PreferencesContext';
+WallpaperContext.displayName = 'WallpaperContext';
 
-export const PREFERENCES_PROVIDER: ProvidableContext<PreferencesStore> = {
-  context: PreferencesContext,
-  initialValue: () => new PreferencesStore(),
+export const WALLPAPER_PROVIDER: ProvidableContext<WallpaperStore> = {
+  context: WallpaperContext,
+  initialValue: () => new WallpaperStore(),
 };

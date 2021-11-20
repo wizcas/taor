@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import styles from './Wallpaper.module.css';
-import { PreferencesContext } from '@/providers/PreferencesStore';
+import { WallpaperContext } from '@/providers';
 
 export default observer(function Wallpaper() {
-  const preferences = useContext(PreferencesContext);
+  const wallpaper = useContext(WallpaperContext);
   return (
     <img
       className={styles.wallpaper}
       alt=""
-      src={`${preferences.activeWallpaper?.value}`}
+      src={`${wallpaper.active?.value}`}
     />
   );
 });

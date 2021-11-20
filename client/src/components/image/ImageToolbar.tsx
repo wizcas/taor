@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import CircleButton from '../form/CircleButton';
 import FeatherIcon from '../icon/FeatherIcon';
 import { ImageMetadata, Size, SIZED_PADDINGS } from '@/types';
-import { CollectionsContext, PreferencesContext } from '@/providers';
+import { CollectionsContext, WallpaperContext } from '@/providers';
 
 interface Props {
   image: ImageMetadata;
@@ -18,11 +18,11 @@ export default function ImageToolbar({
   onSetWallpaper,
   size = 'md',
 }: Props) {
-  const preferences = useContext(PreferencesContext);
+  const wallpaper = useContext(WallpaperContext);
   const collections = useContext(CollectionsContext);
 
   function setWallpaper() {
-    preferences.selectFixedWallpaper(image.raw);
+    wallpaper.selectSingle(image.raw);
     onSetWallpaper?.(image);
   }
 
