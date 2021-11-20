@@ -1,7 +1,9 @@
 import take from 'lodash/fp/take';
 import classNames from 'classnames';
 import { CSSProperties, useMemo } from 'react';
+import { observer } from 'mobx-react-lite';
 import styles from './BlockCommon.module.css';
+import CollectionBlockFooter from './CollectionBlockFooter';
 import { Collection } from '@/api/wallpapers/collections';
 import FeatherIcon from '@/components/icon/FeatherIcon';
 
@@ -11,7 +13,7 @@ interface Props {
   onClick?(collection: Collection): void;
 }
 
-export default function CollectionBlock({
+export default observer(function CollectionBlock({
   collection,
   isSelected,
   onClick,
@@ -35,16 +37,17 @@ export default function CollectionBlock({
     </div>
   );
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
+      onKeyDown={() => undefined}
       className={classNames(styles.block, {
         [styles.interactive]: !!onClick,
       })}
       onClick={() => onClick?.(collection)}
-      disabled={!onClick}
     >
       {isEmpty ? placeholder : preview}
-      <div className="self-center m-2 text-sm">{collection.name}</div>
+      <CollectionBlockFooter collection={collection} />
       {isSelected && (
         <div
           className={classNames(
@@ -61,9 +64,9 @@ export default function CollectionBlock({
           />
         </div>
       )}
-    </button>
+    </div>
   );
-}
+});
 
 interface InnerPreviewProps {
   url: string;
@@ -79,7 +82,7 @@ function InnerPreview({ url }: InnerPreviewProps) {
   return (
     <div
       className={classNames(
-        'place-self-center rounded-md w-full h-70px',
+        'place-self-center rounded-md w-full h-64px',
         'bg-cover bg-center bg-no-repeat bg-clip-border'
       )}
       style={style}

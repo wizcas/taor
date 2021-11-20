@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { createContext } from 'react';
 import { fromPromise, IPromiseBasedObservable } from 'mobx-utils';
 import { ProvidableContext } from './ContextProvider';
@@ -10,18 +10,33 @@ const defaultWallpaper =
 class PreferencesStore {
   private _activeWallpaper: IPromiseBasedObservable<string> | null = null;
 
+  private _collectionId = 0;
+
   constructor() {
     makeAutoObservable(this);
   }
 
   get activeWallpaper() {
     if (!this._activeWallpaper) {
-      this._activeWallpaper = fromPromise<string>(this.getActiveWallpaper());
+      runInAction(() => {
+        this._activeWallpaper = fromPromise<string>(
+          this.getActiveWallpaper(),
+          fromPromise.resolve(defaultWallpaper)
+        );
+      });
     }
     return this._activeWallpaper;
   }
 
-  selectWallpaper(value: string) {
+  get collectionId() {
+    const id =
+      this._collectionId ||
+      parseInt(localStorage.getItem('collectionId') || '', 10);
+    if (Number.isNaN(id)) return null;
+    return id;
+  }
+
+  selectFixedWallpaper(value: string) {
     localStorage.setItem('wallpaper', value);
     this.refetchActiveWallpaper();
   }
@@ -34,6 +49,7 @@ class PreferencesStore {
       return;
     }
     localStorage.setItem('collectionId', id.toString(10));
+    this._collectionId = id;
     if (images.length > 0) {
       this.refetchActiveWallpaper();
     }
@@ -52,8 +68,8 @@ class PreferencesStore {
   }
 
   private async getCollectionWallpaper() {
-    const id = parseInt(localStorage.getItem('collectionId') || '', 10);
-    if (Number.isNaN(id)) return null;
+    const id = this.collectionId;
+    if (id === null) return null;
     const collection = await new CollectionsApi().get(id);
     if (!collection) return null;
     return collection.images[0].raw || null;

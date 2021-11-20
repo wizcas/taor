@@ -9,7 +9,7 @@ export default observer(function Wallpaper() {
     <img
       className={styles.wallpaper}
       alt=""
-      src={(preferences.activeWallpaper.value as string) || ''}
+      src={`${preferences.activeWallpaper?.value}`}
     />
   );
 });
