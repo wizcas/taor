@@ -1,5 +1,6 @@
 import take from 'lodash/fp/take';
 import classNames from 'classnames';
+import { CSSProperties, useMemo } from 'react';
 import styles from './BlockCommon.module.css';
 import { Collection } from '@/api/wallpapers/collections';
 import FeatherIcon from '@/components/icon/FeatherIcon';
@@ -25,10 +26,12 @@ export default function CollectionBlock({
     </div>
   );
   const preview = (
-    <div className="flex-1 relative p-2 flex flex-row flex-wrap gap-1">
-      {thumbnails.map((thumbnail) => (
-        <InnerPreview key={`${thumbnail}`} url={thumbnail} />
-      ))}
+    <div className="flex-1 overflow-hidden m-2 mb-0">
+      <div className="grid grid-cols-2 grid-rows-2 gap-2 @md:grid-cols-1">
+        {thumbnails.map((thumbnail) => (
+          <InnerPreview key={`${thumbnail}`} url={thumbnail} />
+        ))}
+      </div>
     </div>
   );
   return (
@@ -41,10 +44,10 @@ export default function CollectionBlock({
       disabled={!onClick}
     >
       {isEmpty ? placeholder : preview}
-      <div className="self-center p-2 text-sm">{collection.name}</div>
+      <div className="self-center m-2 text-sm">{collection.name}</div>
       {isSelected && (
         <div
-          className="absolute -top-0.5 right-2 pointer-events-none text-primary-400
+          className="absolute -top-1 right-2 pointer-events-none text-primary-400
         filter drop-shadow-md"
         >
           <FeatherIcon
@@ -63,5 +66,20 @@ interface InnerPreviewProps {
   url: string;
 }
 function InnerPreview({ url }: InnerPreviewProps) {
-  return <img src={url} alt="" className="place-self-center rounded-md h-10" />;
+  const style = useMemo(
+    () =>
+      ({
+        backgroundImage: `url(${url})`,
+      } as CSSProperties),
+    [url]
+  );
+  return (
+    <div
+      className={classNames(
+        'place-self-center rounded-md w-full h-70px',
+        'bg-cover bg-center bg-no-repeat bg-clip-border'
+      )}
+      style={style}
+    />
+  );
 }

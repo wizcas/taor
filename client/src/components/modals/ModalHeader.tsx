@@ -1,18 +1,21 @@
 import { MouseEvent, ReactNode } from 'react';
-import classNames from 'classnames';
 import CircleButton from '../form/CircleButton';
 import FeatherIcon from '../icon/FeatherIcon';
 import styles from './ModalHeader.module.css';
 
 interface Props {
   title?: ReactNode;
+  subtitle?: ReactNode;
   onClose?(e: MouseEvent): void;
 }
 
-export default function ModalHeader({ title, onClose }: Props) {
+export default function ModalHeader({ title, subtitle, onClose }: Props) {
   return (
     <div className={styles.header}>
-      <h3 className={classNames(styles.title)}>{title}</h3>
+      <div className={styles.titleBar}>
+        {title && <h3 className={styles.title}>{title}</h3>}
+        {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
+      </div>
       <CircleButton
         type="button"
         className={styles.closeButton}

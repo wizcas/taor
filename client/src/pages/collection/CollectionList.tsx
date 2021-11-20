@@ -36,7 +36,7 @@ export default observer(function CollectionList({ canCreate, mode }: Props) {
       loading={collections.isLoading}
       noMoreText="That's all you have"
     >
-      <div className={classNames('grid grid-cols-4 gap-4 m-4')}>
+      <div className={classNames('grid grid-cols-4 gap-4 m-4 <md:grid-cols-2')}>
         {canCreate && <NewCollectionBlock />}
         {collections.list.map((collection) => {
           const inCollection =

@@ -6,11 +6,13 @@ import ModalHeader from './ModalHeader';
 
 export interface ModalProps extends PropsWithChildren<ReactModal.Props> {
   title?: ReactNode;
+  subtitle?: ReactNode;
   contentClassName?: string;
 }
 
 export default function Modal({
   title,
+  subtitle,
   children,
   closeTimeoutMS = 300,
   onRequestClose,
@@ -27,7 +29,11 @@ export default function Modal({
       {...rest}
     >
       {(title || onRequestClose) && (
-        <ModalHeader title={title} onClose={(e) => onRequestClose?.(e)} />
+        <ModalHeader
+          title={title}
+          subtitle={subtitle}
+          onClose={(e) => onRequestClose?.(e)}
+        />
       )}
       <div className={styles.content}>{children}</div>
     </ReactModal>

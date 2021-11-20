@@ -26,9 +26,18 @@ export default function CollectionBrowser() {
   function close() {
     setIsOpen(false);
   }
+
+  const title =
+    mode === 'browse' ? 'Browse Collections' : 'Add wallpaper to collections';
+  const subtitle =
+    mode === 'browse'
+      ? undefined
+      : 'Click on the cards to collect the wallpaper';
+
   return (
     <Modal
-      title={mode === 'browse' ? 'Collections' : 'Add to collection'}
+      title={title}
+      subtitle={subtitle}
       isOpen={isOpen}
       onRequestClose={close}
       className={classNames('w-80vw min-w-600px max-w-900px')}

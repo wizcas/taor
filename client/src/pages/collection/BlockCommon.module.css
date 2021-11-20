@@ -1,7 +1,7 @@
 .block {
   @apply relative;
   @apply border border-solid border-gray-200 rounded-md;
-  @apply h-150px max-h-150px overflow-hidden;
+  @apply h-194px overflow-hidden;
   @apply shadow-lg;
   @apply flex flex-col justify-center items-stretch;
 
