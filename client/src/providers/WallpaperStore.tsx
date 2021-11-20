@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { createContext } from 'react';
 import { fromPromise, IPromiseBasedObservable } from 'mobx-utils';
+import random from 'lodash/random';
 import { ProvidableContext } from './ContextProvider';
 import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 
@@ -19,9 +20,10 @@ class WallpaperStore {
   get active() {
     if (!this._active) {
       runInAction(() => {
+        const lastActive = localStorage.getItem('activeWallpaper');
         this._active = fromPromise<string>(
           this.fetchActive(),
-          fromPromise.resolve(defaultWallpaper)
+          fromPromise.resolve(lastActive || defaultWallpaper)
         );
       });
     }
@@ -64,7 +66,9 @@ class WallpaperStore {
     if (!wallpaper) {
       wallpaper = await this.fromSingle();
     }
-    return wallpaper || defaultWallpaper;
+    const active = wallpaper || defaultWallpaper;
+    localStorage.setItem('activeWallpaper', active);
+    return active;
   }
 
   private async fromCollection() {
@@ -72,7 +76,9 @@ class WallpaperStore {
     if (id === null) return null;
     const collection = await new CollectionsApi().get(id);
     if (!collection) return null;
-    return collection.images[0].raw || null;
+    if (collection.images.length === 0) return null;
+    const rnd = random(collection.images.length - 1);
+    return collection.images[rnd].raw || null;
   }
 
   private async fromSingle() {
