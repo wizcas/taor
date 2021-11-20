@@ -138,7 +138,7 @@ class CollectionsStore {
     this.browserModal = modal;
   }
 
-  openBrowser(args: CollectionsBrowserArgs, addingImage?: ImageMetadata) {
+  openBrowser(args?: CollectionsBrowserArgs, addingImage?: ImageMetadata) {
     this.pendingImage = addingImage;
     this.browserModal?.open(args);
   }

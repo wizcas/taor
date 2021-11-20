@@ -3,12 +3,13 @@ import { observer } from 'mobx-react-lite';
 import styles from './Wallpaper.module.css';
 import { PreferencesContext } from '@/providers/PreferencesStore';
 
-function Wallpaper() {
+export default observer(function Wallpaper() {
   const preferences = useContext(PreferencesContext);
   return (
-    <img className={styles.wallpaper} alt="" src={preferences.wallpaperUrl} />
+    <img
+      className={styles.wallpaper}
+      alt=""
+      src={(preferences.activeWallpaper.value as string) || ''}
+    />
   );
-}
-
-const ObservedWallpaper = observer(Wallpaper);
-export default ObservedWallpaper;
+});

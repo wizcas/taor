@@ -25,6 +25,10 @@ export class CollectionsApi {
     return WALLPAPER_DB.table<Collection, number>('collections');
   }
 
+  async get(id: number) {
+    return this.table.get(id);
+  }
+
   async list(offset: number, limit: number): Promise<Collection[]> {
     try {
       return this.table.offset(offset).limit(limit).toArray();

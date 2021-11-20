@@ -22,7 +22,7 @@ export default function ImageToolbar({
   const collections = useContext(CollectionsContext);
 
   function setWallpaper() {
-    preferences.wallpaperUrl = image.raw;
+    preferences.selectWallpaper(image.raw);
     onSetWallpaper?.(image);
   }
 

@@ -17,6 +17,7 @@
     "lodash": "^4.17.21",
     "mobx": "^6.3.6",
     "mobx-react-lite": "^3.2.2",
+    "mobx-utils": "^6.0.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-hook-form": "^7.20.1",
