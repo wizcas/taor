@@ -10,6 +10,7 @@ import {
   WALLPAPER_PROVIDER,
 } from './providers';
 import CollectionBrowser from './pages/collection/CollectionBrowser';
+import WallpaperSettings from './pages/wallpaper/WallpaperSettings';
 import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';
@@ -34,8 +35,8 @@ export default function App() {
 function Home() {
   const { open } = usePageModal();
 
-  function openPageModal() {
-    open('/wallhaven');
+  function openPageModal(path: string) {
+    return () => open(path);
   }
 
   const c = useContext(CollectionsContext);
@@ -44,7 +45,13 @@ function Home() {
     <div className="App flex justify-center items-center w-screen h-screen">
       <Wallpaper />
       <div className="fixed right-0 bottom-0 flex gap-4 items-center p-4">
-        <CircleButton color="white" onClick={openPageModal}>
+        <CircleButton
+          color="white"
+          onClick={openPageModal('/wallpaper-settings')}
+        >
+          <FeatherIcon icon="feather" />
+        </CircleButton>
+        <CircleButton color="white" onClick={openPageModal('wallhaven')}>
           <FeatherIcon icon="settings" />
         </CircleButton>
         <CircleButton color="white" onClick={() => c.openBrowser()}>
@@ -54,6 +61,9 @@ function Home() {
 
       <PageModal title="wallhaven">
         <Switch>
+          <Route path="/wallpaper-settings">
+            <WallpaperSettings />
+          </Route>
           <Route path="/wallhaven">
             <WallhavenWrapper />
           </Route>

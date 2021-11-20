@@ -23,6 +23,7 @@ export default function ImageToolbar({
 
   function setWallpaper() {
     wallpaper.selectSingle(image.raw);
+    wallpaper.mode = 'single';
     onSetWallpaper?.(image);
   }
 

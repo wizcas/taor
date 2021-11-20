@@ -8,13 +8,27 @@ import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 const defaultWallpaper =
   'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
 
+export type WallpaperMode = 'single' | 'collection';
+
 class WallpaperStore {
   private _active: IPromiseBasedObservable<string> | null = null;
 
   private _collectionId = 0;
 
+  private _mode: WallpaperMode = 'single';
+
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get mode() {
+    return this._mode;
+  }
+
+  set mode(value: WallpaperMode) {
+    this._mode = value;
+    localStorage.setItem('wallpaperMode', value);
+    this.reloadActive();
   }
 
   get active() {
@@ -57,21 +71,7 @@ class WallpaperStore {
     }
   }
 
-  private reloadActive() {
-    this._active = null;
-  }
-
-  private async fetchActive() {
-    let wallpaper = await this.fromCollection();
-    if (!wallpaper) {
-      wallpaper = await this.fromSingle();
-    }
-    const active = wallpaper || defaultWallpaper;
-    localStorage.setItem('activeWallpaper', active);
-    return active;
-  }
-
-  private async fromCollection() {
+  async fromCollection() {
     const id = this.collectionId;
     if (id === null) return null;
     const collection = await new CollectionsApi().get(id);
@@ -81,8 +81,24 @@ class WallpaperStore {
     return collection.images[rnd].raw || null;
   }
 
-  private async fromSingle() {
+  fromSingle() {
     return localStorage.getItem('wallpaper') || defaultWallpaper;
+  }
+
+  private reloadActive() {
+    this._active = null;
+  }
+
+  private async fetchActive() {
+    let wallpaper: string | null;
+    if (this.mode === 'collection') {
+      wallpaper = await this.fromCollection();
+    } else {
+      wallpaper = this.fromSingle();
+    }
+    const active = wallpaper || defaultWallpaper;
+    localStorage.setItem('activeWallpaper', active);
+    return active;
   }
 }
 

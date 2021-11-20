@@ -13,10 +13,12 @@ interface Props {
 export default observer(function CollectionBlockFooter({ collection }: Props) {
   const { id, name } = collection;
   const wallpaper = useContext(WallpaperContext);
-  const isInUse = wallpaper.collectionId === id;
+  const isInUse =
+    wallpaper.mode === 'collection' && wallpaper.collectionId === id;
 
   function use() {
     wallpaper.selectCollection(collection);
+    wallpaper.mode = 'collection';
   }
 
   return (
