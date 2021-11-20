@@ -24,7 +24,7 @@ class CollectionsStore {
 
   isLoading = false;
 
-  addingImage?: ImageMetadata;
+  pendingImage?: ImageMetadata;
 
   private _list: Collection[] = [];
 
@@ -84,12 +84,33 @@ class CollectionsStore {
   }
 
   async addImageToCollection(collection: Collection) {
-    if (!this.addingImage) return;
-    if (isImageInCollection(this.addingImage, collection)) return;
-    collection.images = [...collection.images, this.addingImage];
+    if (!this.pendingImage) return;
+    if (this.hasImageIn(collection)) return;
+    collection.images = [...collection.images, this.pendingImage];
     const updated = await this.api.upsert(collection);
     if (updated) {
       this.upsertList([updated]);
+    }
+  }
+
+  async deleteImageFromCollection(collection: Collection) {
+    if (!this.pendingImage) return;
+    if (!this.hasImageIn(collection)) return;
+    collection.images = collection.images.filter(
+      (collected) => collected.id !== this.pendingImage?.id
+    );
+    const updated = await this.api.upsert(collection);
+    if (updated) {
+      this.upsertList([updated]);
+    }
+  }
+
+  async toggleImageInCollection(collection: Collection) {
+    if (!this.pendingImage) return;
+    if (this.hasImageIn(collection)) {
+      await this.deleteImageFromCollection(collection);
+    } else {
+      await this.addImageToCollection(collection);
     }
   }
 
@@ -109,7 +130,7 @@ class CollectionsStore {
 
   hasImageIn(collection: Collection) {
     return (
-      this.addingImage && isImageInCollection(this.addingImage, collection)
+      this.pendingImage && isImageInCollection(this.pendingImage, collection)
     );
   }
 
@@ -118,12 +139,12 @@ class CollectionsStore {
   }
 
   openBrowser(args: CollectionsBrowserArgs, addingImage?: ImageMetadata) {
-    this.addingImage = addingImage;
+    this.pendingImage = addingImage;
     this.browserModal?.open(args);
   }
 
   closeBrowser() {
-    this.addingImage = undefined;
+    this.pendingImage = undefined;
     this.browserModal?.close();
   }
 }

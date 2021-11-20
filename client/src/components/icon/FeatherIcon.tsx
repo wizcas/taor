@@ -11,6 +11,7 @@ interface Props {
   strokeWidth?: number;
   strokeLineCap?: string;
   strokeLineJoin?: string;
+  fill?: string;
 }
 
 const SIZES: SizedStringValues = {
@@ -29,6 +30,7 @@ export default function FeatherIcon({
   strokeWidth,
   strokeLineCap,
   strokeLineJoin,
+  fill,
 }: Props) {
   const attrs: Record<string, string | number> = {};
   if (className) {
@@ -56,6 +58,9 @@ export default function FeatherIcon({
   }
   if (strokeLineJoin) {
     attrs['stroke-linejoin'] = strokeLineJoin;
+  }
+  if (fill) {
+    attrs.fill = fill;
   }
 
   const iconData = feather.icons[icon];

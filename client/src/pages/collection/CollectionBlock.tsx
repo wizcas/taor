@@ -43,8 +43,16 @@ export default function CollectionBlock({
       {isEmpty ? placeholder : preview}
       <div className="self-center p-2 text-sm">{collection.name}</div>
       {isSelected && (
-        <div className="absolute top-2 right-2 pointer-events-none text-primary-400">
-          <FeatherIcon icon="check-circle" size="sm" />
+        <div
+          className="absolute -top-0.5 right-2 pointer-events-none text-primary-400
+        filter drop-shadow-md"
+        >
+          <FeatherIcon
+            icon="bookmark"
+            className="text-red-500 "
+            fill="currentColor"
+            size="md"
+          />
         </div>
       )}
     </button>

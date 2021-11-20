@@ -21,7 +21,7 @@ export default observer(function CollectionList({ canCreate, mode }: Props) {
         case 'browse':
           break;
         case 'addTo':
-          await collections.addImageToCollection(collection);
+          await collections.toggleImageInCollection(collection);
           break;
         default:
           break;
@@ -41,12 +41,11 @@ export default observer(function CollectionList({ canCreate, mode }: Props) {
         {collections.list.map((collection) => {
           const inCollection =
             mode === 'addTo' && collections.hasImageIn(collection);
-          const canInteract = mode !== 'addTo' || !inCollection;
           return (
             <CollectionBlock
               key={collection.id}
               collection={collection}
-              onClick={canInteract ? onBlockClick : undefined}
+              onClick={onBlockClick}
               isSelected={inCollection}
             />
           );
