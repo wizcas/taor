@@ -23,8 +23,14 @@ export default observer(function CollectionBlock({
   );
   const isEmpty = thumbnails.length === 0;
   const placeholder = (
-    <div className="flex-1 flex flex-col justify-center text-gray-400">
-      Empty
+    <div
+      className={classNames(
+        'flex-1 flex flex-col justify-center items-center gap-2',
+        'text-gray-400 text-sm'
+      )}
+    >
+      <FeatherIcon icon="circle" />
+      <span>Nothing yet.</span>
     </div>
   );
   const preview = (
