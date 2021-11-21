@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { createContext } from 'react';
 import unionWith from 'lodash/fp/unionWith';
 import { ProvidableContext } from './ContextProvider';
@@ -73,7 +73,9 @@ class CollectionsStore {
     const result = await this.api.list(this.offset, PAGE_SIZE);
     this.offset += PAGE_SIZE;
     this.upsertList(result);
-    this.isLoading = false;
+    runInAction(() => {
+      this.isLoading = false;
+    });
   }
 
   async create(collection: Collection) {
