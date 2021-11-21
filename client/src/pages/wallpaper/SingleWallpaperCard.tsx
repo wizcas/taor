@@ -5,7 +5,7 @@ import { WallpaperContext } from '@/providers';
 import Card from '@/components/container/Card';
 import Badge from '@/components/badge/Badge';
 
-export default observer(function SingleWallpaperBlock() {
+export default observer(function SingleWallpaperCard() {
   const wallpaper = useContext(WallpaperContext);
   const style = useMemo(
     () =>
