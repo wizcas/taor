@@ -31,7 +31,7 @@ export class CollectionsApi {
 
   async list(offset: number, limit: number): Promise<Collection[]> {
     try {
-      return this.table.offset(offset).limit(limit).toArray();
+      return this.table.reverse().offset(offset).limit(limit).toArray();
     } catch (e) {
       console.error('Error listing collections', e);
       return [];

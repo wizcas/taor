@@ -1,6 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'windicss/helpers';
 import colors from 'windicss/colors';
 import plugin from 'windicss/plugin';
+// import forms from 'windicss/plugin/forms';
+import aspectRatio from 'windicss/plugin/aspect-ratio';
 
 function range(size, startAt = 1) {
   return Array.from(Array(size).keys()).map((i) => i + startAt);
@@ -95,12 +98,7 @@ export default defineConfig({
         variants('skew')
       );
     }),
-    require('windicss/plugin/filters'),
-    // require('windicss/plugin/forms'),
-    require('windicss/plugin/aspect-ratio'),
-    require('windicss/plugin/line-clamp'),
-    require('windicss/plugin/typography')({
-      modifiers: ['DEFAULT', 'sm', 'lg', 'red'],
-    }),
+    aspectRatio,
+    // forms,
   ],
 });
