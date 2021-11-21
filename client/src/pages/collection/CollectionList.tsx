@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useCallback, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import CollectionBlock from './CollectionBlock';
+import CollectionCard from './CollectionCard';
 import NewCollectionBlock from './NewCollectionBlock';
 import { CollectionsBrowserMode, CollectionsContext } from '@/providers';
 import InfiniteView from '@/components/container/InfiniteView';
@@ -42,7 +42,7 @@ export default observer(function CollectionList({ canCreate, mode }: Props) {
           const inCollection =
             mode === 'addTo' && collections.hasImageIn(collection);
           return (
-            <CollectionBlock
+            <CollectionCard
               key={collection.id}
               collection={collection}
               onClick={onBlockClick}

@@ -2,7 +2,7 @@ import take from 'lodash/fp/take';
 import classNames from 'classnames';
 import { CSSProperties, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
-import CollectionBlockFooter from './CollectionBlockFooter';
+import CollectionCardFooter from './CollectionCardFooter';
 import { Collection } from '@/api/wallpapers/collections';
 import FeatherIcon from '@/components/icon/FeatherIcon';
 import Card from '@/components/container/Card';
@@ -13,7 +13,7 @@ interface Props {
   onClick?(collection: Collection): void;
 }
 
-export default observer(function CollectionBlock({
+export default observer(function CollectionCard({
   collection,
   isSelected,
   onClick,
@@ -45,7 +45,7 @@ export default observer(function CollectionBlock({
   return (
     <Card onClick={() => onClick?.(collection)}>
       {isEmpty ? placeholder : preview}
-      <CollectionBlockFooter collection={collection} />
+      <CollectionCardFooter collection={collection} />
       {isSelected && (
         <div
           className={classNames(

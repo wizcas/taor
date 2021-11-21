@@ -10,7 +10,7 @@ interface Props {
   collection: Collection;
 }
 
-export default observer(function CollectionBlockFooter({ collection }: Props) {
+export default observer(function CollectionCardFooter({ collection }: Props) {
   const { id, name } = collection;
   const wallpaper = useContext(WallpaperContext);
   const isInUse =
