@@ -26,9 +26,13 @@ class CollectionsStore {
 
   pendingImage?: ImageMetadata;
 
+  editingCollection?: Collection;
+
   private _list: Collection[] = [];
 
   private browserModal?: ModalRef<CollectionsBrowserArgs> = undefined;
+
+  private editorModal?: ModalRef = undefined;
 
   private readonly api = new CollectionsApi();
 
@@ -138,7 +142,16 @@ class CollectionsStore {
     this.browserModal = modal;
   }
 
+  disposeBrowser(modal: ModalRef<CollectionsBrowserArgs>) {
+    if (this.browserModal === modal) {
+      this.browserModal = undefined;
+    }
+  }
+
   openBrowser(args?: CollectionsBrowserArgs, addingImage?: ImageMetadata) {
+    if (!this.browserModal) {
+      console.warn('collection browser modal has not been initialized');
+    }
     this.pendingImage = addingImage;
     this.browserModal?.open(args);
   }
@@ -146,6 +159,29 @@ class CollectionsStore {
   closeBrowser() {
     this.pendingImage = undefined;
     this.browserModal?.close();
+  }
+
+  initEditor(modal: ModalRef) {
+    this.editorModal = modal;
+  }
+
+  disposeEditor(modal: ModalRef) {
+    if (this.editorModal === modal) {
+      this.editorModal = undefined;
+    }
+  }
+
+  openEditor(collection: Collection) {
+    if (!this.editorModal) {
+      console.warn('collection editor modal has not been initialized');
+    }
+    this.editingCollection = collection;
+    this.editorModal?.open();
+  }
+
+  closeEditor() {
+    this.editingCollection = undefined;
+    this.editorModal?.close();
   }
 }
 

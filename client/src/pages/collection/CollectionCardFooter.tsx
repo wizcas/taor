@@ -3,7 +3,7 @@ import { MouseEvent, useContext } from 'react';
 import { Collection } from '@/api/wallpapers/collections';
 import CircleButton from '@/components/form/CircleButton';
 import FeatherIcon from '@/components/icon/FeatherIcon';
-import { WallpaperContext } from '@/providers';
+import { CollectionsContext, WallpaperContext } from '@/providers';
 import Badge from '@/components/badge/Badge';
 
 interface Props {
@@ -19,10 +19,11 @@ export default observer(function CollectionCardFooter({
   const wallpaper = useContext(WallpaperContext);
   const isInUse =
     wallpaper.mode === 'collection' && wallpaper.collectionId === id;
+  const collections = useContext(CollectionsContext);
 
   function onEdit(e: MouseEvent) {
     e.stopPropagation();
-    // todo: goto edit
+    collections.openEditor(collection);
   }
 
   return (

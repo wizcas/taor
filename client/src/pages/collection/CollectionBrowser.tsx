@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import CollectionList from './CollectionList';
 import {
@@ -14,18 +14,23 @@ export default function CollectionBrowser() {
   const [mode, setMode] = useState<CollectionsBrowserMode>('browse');
 
   const collections = useContext(CollectionsContext);
-  collections.initBrowser({
-    open(args: CollectionsBrowserArgs) {
-      setIsOpen(true);
-      setCanCreate(!!args?.canCreate);
-      setMode(args?.mode ?? 'browse');
-    },
-    close,
-  });
 
-  function close() {
+  const close = useCallback(() => {
     setIsOpen(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    const modal = {
+      open(args: CollectionsBrowserArgs) {
+        setIsOpen(true);
+        setCanCreate(!!args?.canCreate);
+        setMode(args?.mode ?? 'browse');
+      },
+      close,
+    };
+    collections.initBrowser(modal);
+    return () => collections.disposeBrowser(modal);
+  }, [collections, close]);
 
   const title = mode === 'browse' ? 'Browse Collections' : 'Add to collections';
   const subtitle =

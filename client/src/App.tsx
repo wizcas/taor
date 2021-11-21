@@ -11,6 +11,7 @@ import {
 } from './providers';
 import CollectionBrowser from './pages/collection/CollectionBrowser';
 import WallpaperSettings from './pages/wallpaper/WallpaperSettings';
+import CollectionEditor from './pages/collection/CollectionEditor';
 import usePageModal from '@/hooks/usePageModal';
 import Wallpaper from '@/components/image/Wallpaper';
 import PageModal from '@/components/modals/PageModal';
@@ -71,6 +72,7 @@ function Home() {
       </PageModal>
 
       <CollectionBrowser />
+      <CollectionEditor />
     </div>
   );
 }
