@@ -79,3 +79,8 @@ select,
     @apply ring ring-primary-400 ring-opacity-80;
   }
 }
+
+hr {
+  @apply border border-0 border-b-1 border-gray-500 border-opacity-30;
+  @apply h-1px;
+}

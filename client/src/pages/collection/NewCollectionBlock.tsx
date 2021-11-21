@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
-import styles from './BlockCommon.module.css';
 import { Collection } from '@/api/wallpapers/collections';
 import FieldHint from '@/components/form/FieldHint';
 import { CollectionsContext } from '@/providers';
 import FeatherIcon from '@/components/icon/FeatherIcon';
 import CircleButton from '@/components/form/CircleButton';
+import Card from '@/components/container/Card';
 
 interface CreationFormData {
   name: string;
@@ -52,20 +52,12 @@ export default function NewCollectionBlock() {
   }, [isEditing]);
 
   return (
-    <div
-      className={classNames(styles.block, {
-        [styles.interactive]: !isEditing,
-      })}
-    >
+    <Card onClick={isEditing ? undefined : () => setIsEditing(true)}>
       {!isEditing ? (
-        <button
-          type="button"
-          className="flex-1 flex flex-col justify-center items-center -!p-4"
-          onClick={() => setIsEditing(true)}
-        >
+        <>
           <FeatherIcon icon="plus" />
-          <div>New collection</div>
-        </button>
+          <div className="text-center mt-2">New collection</div>
+        </>
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -98,6 +90,6 @@ export default function NewCollectionBlock() {
           </div>
         </form>
       )}
-    </div>
+    </Card>
   );
 }
