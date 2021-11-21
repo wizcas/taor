@@ -35,7 +35,7 @@ export default observer(function CollectionCardFooter({
       </div>
       {canEdit && (
         <CircleButton className="text-gray-800" onClick={onEdit}>
-          <FeatherIcon icon="edit-3" size="sm" />
+          <FeatherIcon icon="edit" size="sm" />
         </CircleButton>
       )}
     </div>
