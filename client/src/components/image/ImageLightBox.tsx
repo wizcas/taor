@@ -13,11 +13,12 @@ import FeatherIcon from '../icon/FeatherIcon';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
-import ImageToolbar from './ImageToolbar';
+import ImageToolbar, { ImageToolbarActions } from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
 
 interface Props {
   images?: ImageMetadata[];
+  actions?: ImageToolbarActions;
 }
 
 export interface ImageLightBoxRef {
@@ -30,7 +31,10 @@ interface NavigationContext {
   prevImage?: ImageMetadata;
 }
 
-function ImageLightBox({ images }: Props, ref: ForwardedRef<ImageLightBoxRef>) {
+function ImageLightBox(
+  { images, actions }: Props,
+  ref: ForwardedRef<ImageLightBoxRef>
+) {
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<ImageMetadata | undefined>(undefined);
 
@@ -131,6 +135,7 @@ function ImageLightBox({ images }: Props, ref: ForwardedRef<ImageLightBoxRef>) {
           onSetWallpaper={close}
           size="md"
           iconSize="lg"
+          actions={actions}
         />
       </div>
     </>

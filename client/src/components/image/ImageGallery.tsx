@@ -32,7 +32,7 @@ export default function ImageGallery({ images = [], actions }: Props) {
           );
         })}
       </div>
-      <ImageLightBox ref={lightBoxRef} images={images} />
+      <ImageLightBox ref={lightBoxRef} images={images} actions={actions} />
     </>
   );
 }

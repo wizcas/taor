@@ -1,16 +1,18 @@
 import classNames from 'classnames';
 import { CSSProperties, useContext, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
+import { computed } from 'mobx';
 import { WallpaperContext } from '@/providers';
 import Card from '@/components/container/Card';
 import Badge from '@/components/badge/Badge';
 
 export default observer(function SingleWallpaperCard() {
   const wallpaper = useContext(WallpaperContext);
+  const single = computed(() => wallpaper.fromSingle());
   const style = useMemo(
     () =>
       ({
-        backgroundImage: `url(${wallpaper.fromSingle()})`,
+        backgroundImage: `url(${single})`,
       } as CSSProperties),
     [wallpaper]
   );

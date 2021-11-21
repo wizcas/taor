@@ -1,5 +1,5 @@
 .header {
-  @apply flex flex-row justify-between items-center gap-2 w-full;
+  @apply flex flex-row justify-between items-start gap-2 w-full;
   @apply mb-4;
 
   .titleBar {

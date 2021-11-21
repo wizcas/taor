@@ -6,6 +6,7 @@ import { CollectionsContext } from '@/providers';
 import { ModalRef } from '@/types';
 import EditableTextBox from '@/components/form/EditableTextBox';
 import ImageGallery from '@/components/image/ImageGallery';
+import FeatherIcon from '@/components/icon/FeatherIcon';
 
 export default observer(function CollectionEditor() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,17 +39,30 @@ export default observer(function CollectionEditor() {
     </div>
   );
 
+  const images = collection?.images ?? [];
+
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={close}
       title={title}
-      className={classNames('w-600px')}
+      subtitle="Manage your collected images"
+      className={classNames('w-60vw')}
     >
-      <ImageGallery
-        images={collection?.images ?? []}
-        actions={['apply', 'remove']}
-      />
+      {images.length > 0 ? (
+        <ImageGallery images={images} actions={['apply', 'remove']} />
+      ) : (
+        <div
+          className={classNames(
+            'flex flex-col items-center justify-center gap-2',
+            'text-gray-400',
+            'p-8'
+          )}
+        >
+          <FeatherIcon icon="circle" />
+          <span>No image&rsquo;s been collected yet.</span>
+        </div>
+      )}
     </Modal>
   );
 });
