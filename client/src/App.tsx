@@ -49,13 +49,13 @@ function Home() {
           color="white"
           onClick={openPageModal('/wallpaper-settings')}
         >
-          <FeatherIcon icon="feather" />
+          <FeatherIcon icon="feather" size="lg" />
         </CircleButton>
         <CircleButton color="white" onClick={openPageModal('wallhaven')}>
-          <FeatherIcon icon="settings" />
+          <FeatherIcon icon="settings" size="lg" />
         </CircleButton>
         <CircleButton color="white" onClick={() => c.openBrowser()}>
-          <FeatherIcon icon="image" />
+          <FeatherIcon icon="image" size="lg" />
         </CircleButton>
       </div>
 

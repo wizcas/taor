@@ -15,9 +15,9 @@ interface Props {
 }
 
 const SIZES: SizedStringValues = {
-  sm: '24px',
-  md: '32px',
-  lg: '64px',
+  sm: '1rem',
+  md: '1.25rem',
+  lg: '1.5rem',
 };
 
 export default function FeatherIcon({

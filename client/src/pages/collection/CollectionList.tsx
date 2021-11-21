@@ -13,10 +13,15 @@ import { Collection } from '@/api/wallpapers/collections';
 
 interface Props {
   canCreate?: boolean;
+  canEdit?: boolean;
   mode?: CollectionsBrowserMode;
 }
 
-export default observer(function CollectionList({ canCreate, mode }: Props) {
+export default observer(function CollectionList({
+  canCreate,
+  canEdit,
+  mode,
+}: Props) {
   const collections = useContext(CollectionsContext);
   const wallpaper = useContext(WallpaperContext);
 
@@ -54,6 +59,7 @@ export default observer(function CollectionList({ canCreate, mode }: Props) {
               collection={collection}
               onClick={onClickCard}
               isSelected={inCollection}
+              canEdit={canEdit}
             />
           );
         })}

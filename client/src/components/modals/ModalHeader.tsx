@@ -22,7 +22,7 @@ export default function ModalHeader({ title, subtitle, onClose }: Props) {
         onClick={onClose}
         color="black"
       >
-        <FeatherIcon icon="x" size="sm" />
+        <FeatherIcon icon="x" />
       </CircleButton>
     </div>
   );

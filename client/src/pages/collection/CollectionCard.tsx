@@ -10,12 +10,14 @@ import Card from '@/components/container/Card';
 interface Props {
   collection: Collection;
   isSelected?: boolean;
+  canEdit?: boolean;
   onClick?(collection: Collection): void;
 }
 
 export default observer(function CollectionCard({
   collection,
   isSelected,
+  canEdit,
   onClick,
 }: Props) {
   const thumbnails = take(4)(
@@ -45,7 +47,7 @@ export default observer(function CollectionCard({
   return (
     <Card onClick={() => onClick?.(collection)}>
       {isEmpty ? placeholder : preview}
-      <CollectionCardFooter collection={collection} />
+      <CollectionCardFooter collection={collection} canEdit={canEdit} />
       {isSelected && (
         <div
           className={classNames(
