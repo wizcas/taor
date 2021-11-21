@@ -1,8 +1,10 @@
 .modal {
+  --maxWidth: calc(100vw - theme(spacing.8) * 2);
   @apply flex flex-col items-stretch overflow-hidden;
   @apply p-4;
   @apply bg-light-400 bg-opacity-80;
   @apply rounded-md;
+  @apply min-w-400px max-w-$maxWidth;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 

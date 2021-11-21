@@ -1,9 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import classNames from 'classnames';
 import Modal from '@/components/modals/Modal';
 import { CollectionsContext } from '@/providers';
 import { ModalRef } from '@/types';
 import EditableTextBox from '@/components/form/EditableTextBox';
+import ImageGallery from '@/components/image/ImageGallery';
 
 export default observer(function CollectionEditor() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +39,13 @@ export default observer(function CollectionEditor() {
   );
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={close} title={title}>
-      Editing {collections.editingCollection?.name}
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={close}
+      title={title}
+      className={classNames('w-600px')}
+    >
+      <ImageGallery images={collection?.images ?? []} />
     </Modal>
   );
 });

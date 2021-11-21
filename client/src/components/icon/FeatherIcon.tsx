@@ -1,23 +1,27 @@
 import * as feather from 'feather-icons';
 import { Size, SizedStringValues } from '@/types';
 
+export type IconSizes = Size | 'xl' | '2xl';
+
 interface Props {
   icon: string;
   className?: string;
   color?: string;
   width?: number | string;
   height?: number | string;
-  size?: Size;
+  size?: IconSizes;
   strokeWidth?: number;
   strokeLineCap?: string;
   strokeLineJoin?: string;
   fill?: string;
 }
 
-const SIZES: SizedStringValues = {
+const SIZES: SizedStringValues<IconSizes> = {
   sm: '1rem',
   md: '1.25rem',
   lg: '1.5rem',
+  xl: '2rem',
+  '2xl': '2.5rem',
 };
 
 export default function FeatherIcon({

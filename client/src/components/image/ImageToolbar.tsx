@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
 import CircleButton from '../form/CircleButton';
-import FeatherIcon from '../icon/FeatherIcon';
+import FeatherIcon, { IconSizes } from '../icon/FeatherIcon';
 import { ImageMetadata, Size, SIZED_PADDINGS } from '@/types';
 import { CollectionsContext, WallpaperContext } from '@/providers';
 
@@ -9,6 +9,7 @@ interface Props {
   image: ImageMetadata;
   className?: string;
   size?: Size;
+  iconSize?: IconSizes;
   onSetWallpaper?(image: ImageMetadata): void;
 }
 
@@ -17,6 +18,7 @@ export default function ImageToolbar({
   className,
   onSetWallpaper,
   size = 'md',
+  iconSize,
 }: Props) {
   const wallpaper = useContext(WallpaperContext);
   const collections = useContext(CollectionsContext);
@@ -30,6 +32,8 @@ export default function ImageToolbar({
   function addToCollection() {
     collections.openBrowser({ canCreate: true, mode: 'addTo' }, image);
   }
+
+  iconSize = iconSize || size;
 
   return (
     <div
@@ -46,10 +50,10 @@ export default function ImageToolbar({
       )}
     >
       <CircleButton onClick={setWallpaper} size={size}>
-        <FeatherIcon icon="check-circle" size={size} />
+        <FeatherIcon icon="check-circle" size={iconSize} />
       </CircleButton>
       <CircleButton onClick={addToCollection} size={size}>
-        <FeatherIcon icon="bookmark" size={size} />
+        <FeatherIcon icon="bookmark" size={iconSize} />
       </CircleButton>
     </div>
   );

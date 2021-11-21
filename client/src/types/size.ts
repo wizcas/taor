@@ -1,8 +1,11 @@
 export type Size = 'sm' | 'md' | 'lg';
-export type SizedStringValues = Record<Size, string>;
+export type SizedStringValues<T extends string = never> = Record<
+  Size | T,
+  string
+>;
 
 export const SIZED_PADDINGS: SizedStringValues = {
   sm: 'p-1',
   md: 'p-2',
-  lg: 'p-4',
+  lg: 'p-2',
 };
