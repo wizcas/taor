@@ -1,13 +1,14 @@
 import { useRef } from 'react';
 import ImageBlock from './ImageBlock';
 import ImageLightBox, { ImageLightBoxRef } from './ImageLightBox';
+import { ImageToolbarActions } from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
 
 interface Props {
   images: ImageMetadata[];
+  actions?: ImageToolbarActions;
 }
-export default function ImageGallery(props: Props) {
-  const { images = [] } = props;
+export default function ImageGallery({ images = [], actions }: Props) {
   const lightBoxRef = useRef<ImageLightBoxRef>(null);
 
   function showLightBox(wallpaper: ImageMetadata) {
@@ -22,7 +23,12 @@ export default function ImageGallery(props: Props) {
         {images.filter(Boolean).map((wallpaper) => {
           const { id } = wallpaper;
           return (
-            <ImageBlock key={id} image={wallpaper} onViewImage={showLightBox} />
+            <ImageBlock
+              key={id}
+              image={wallpaper}
+              onViewImage={showLightBox}
+              actions={actions}
+            />
           );
         })}
       </div>

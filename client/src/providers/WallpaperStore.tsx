@@ -15,14 +15,18 @@ class WallpaperStore {
 
   private _collectionId = 0;
 
-  private _mode: WallpaperMode = 'single';
+  private _mode: WallpaperMode | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
   get mode() {
-    return this._mode;
+    return (
+      this._mode ||
+      (localStorage.getItem('wallpaperMode') as WallpaperMode) ||
+      'single'
+    );
   }
 
   set mode(value: WallpaperMode) {
@@ -82,7 +86,7 @@ class WallpaperStore {
   }
 
   fromSingle() {
-    return localStorage.getItem('wallpaper') || defaultWallpaper;
+    return localStorage.getItem('wallpaper') || null;
   }
 
   private reloadActive() {

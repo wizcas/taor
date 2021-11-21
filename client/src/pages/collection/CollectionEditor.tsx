@@ -45,7 +45,10 @@ export default observer(function CollectionEditor() {
       title={title}
       className={classNames('w-600px')}
     >
-      <ImageGallery images={collection?.images ?? []} />
+      <ImageGallery
+        images={collection?.images ?? []}
+        actions={['apply', 'remove']}
+      />
     </Modal>
   );
 });

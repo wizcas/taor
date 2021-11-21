@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import FeatherIcon from '../icon/FeatherIcon';
 import LazyImage from './LazyImage';
 import styles from './ImageBlock.module.css';
-import ImageToolbar from './ImageToolbar';
+import ImageToolbar, { ImageToolbarActions } from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
 
 const ratio16to9 = 16 / 9;
@@ -19,9 +19,10 @@ const ratio16to9 = 16 / 9;
 interface Props {
   image: ImageMetadata;
   onViewImage(image: ImageMetadata): void;
+  actions?: ImageToolbarActions;
 }
 
-export default function ImageBlock({ image, onViewImage }: Props) {
+export default function ImageBlock({ image, onViewImage, actions }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [preferredHeight, setPreferredHeight] = useState<number | undefined>();
 
@@ -108,7 +109,13 @@ export default function ImageBlock({ image, onViewImage }: Props) {
     >
       {intersection?.isIntersecting ? block : null}
       {!isLoading && (
-        <ImageToolbar image={image} className={styles.toolbar} size="sm" />
+        <ImageToolbar
+          image={image}
+          className={styles.toolbar}
+          size="sm"
+          iconSize="md"
+          actions={actions}
+        />
       )}
     </div>
   );

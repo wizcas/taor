@@ -99,11 +99,14 @@ class CollectionsStore {
     }
   }
 
-  async deleteImageFromCollection(collection: Collection) {
-    if (!this.pendingImage) return;
-    if (!this.hasImageIn(collection)) return;
+  async deleteImageFromCollection(
+    image: ImageMetadata,
+    collection: Collection
+  ) {
+    if (!image) return;
+    if (!isImageInCollection(image, collection)) return;
     collection.images = collection.images.filter(
-      (collected) => collected.id !== this.pendingImage?.id
+      (collected) => collected.id !== image?.id
     );
     const updated = await this.api.upsert(collection);
     if (updated) {
@@ -114,7 +117,7 @@ class CollectionsStore {
   async toggleImageInCollection(collection: Collection) {
     if (!this.pendingImage) return;
     if (this.hasImageIn(collection)) {
-      await this.deleteImageFromCollection(collection);
+      await this.deleteImageFromCollection(this.pendingImage, collection);
     } else {
       await this.addImageToCollection(collection);
     }

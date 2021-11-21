@@ -10,8 +10,12 @@ interface Props {
   className?: string;
   size?: Size;
   iconSize?: IconSizes;
+  actions?: ImageToolbarActions;
   onSetWallpaper?(image: ImageMetadata): void;
 }
+
+type ImageToolbarAction = 'apply' | 'collect' | 'remove';
+export type ImageToolbarActions = ImageToolbarAction[];
 
 export default function ImageToolbar({
   image,
@@ -19,21 +23,49 @@ export default function ImageToolbar({
   onSetWallpaper,
   size = 'md',
   iconSize,
+  actions = ['apply', 'collect'],
 }: Props) {
   const wallpaper = useContext(WallpaperContext);
   const collections = useContext(CollectionsContext);
 
-  function setWallpaper() {
+  iconSize = iconSize || size;
+  function hasAction(action: ImageToolbarAction) {
+    return actions.includes(action);
+  }
+  function apply() {
     wallpaper.selectSingle(image.raw);
     wallpaper.mode = 'single';
     onSetWallpaper?.(image);
   }
 
-  function addToCollection() {
+  function collect() {
     collections.openBrowser({ canCreate: true, mode: 'addTo' }, image);
   }
 
-  iconSize = iconSize || size;
+  function remove() {
+    if (!collections.editingCollection) return;
+    collections.deleteImageFromCollection(image, collections.editingCollection);
+  }
+
+  const buttons = (
+    <>
+      {hasAction('apply') && (
+        <CircleButton onClick={apply} size={size}>
+          <FeatherIcon icon="check-circle" size={iconSize} />
+        </CircleButton>
+      )}
+      {hasAction('collect') && (
+        <CircleButton onClick={collect} size={size}>
+          <FeatherIcon icon="bookmark" size={iconSize} />
+        </CircleButton>
+      )}
+      {hasAction('remove') && (
+        <CircleButton onClick={remove} size={size} className="text-red-600">
+          <FeatherIcon icon="trash" size={iconSize} />
+        </CircleButton>
+      )}
+    </>
+  );
 
   return (
     <div
@@ -49,12 +81,7 @@ export default function ImageToolbar({
         className
       )}
     >
-      <CircleButton onClick={setWallpaper} size={size}>
-        <FeatherIcon icon="check-circle" size={iconSize} />
-      </CircleButton>
-      <CircleButton onClick={addToCollection} size={size}>
-        <FeatherIcon icon="bookmark" size={iconSize} />
-      </CircleButton>
+      {buttons}
     </div>
   );
 }
