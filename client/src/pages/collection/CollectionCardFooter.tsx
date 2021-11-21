@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { MouseEvent, useContext } from 'react';
 import { Collection } from '@/api/wallpapers/collections';
-import CircleButton from '@/components/form/CircleButton';
+import CircleButton from '@/components/button/CircleButton';
 import FeatherIcon from '@/components/icon/FeatherIcon';
 import { CollectionsContext, WallpaperContext } from '@/providers';
 import Badge from '@/components/badge/Badge';

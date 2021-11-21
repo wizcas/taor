@@ -77,7 +77,11 @@ export default function EditableTextBox({
         />
       ) : (
         <div
-          className="flex flex-row gap-2 items-center"
+          className={classNames(
+            'flex flex-row gap-2 items-center',
+            'cursor-pointer',
+            'hover:(bg-orange-400 bg-opacity-30)'
+          )}
           role="textbox"
           tabIndex={0}
           onClick={edit}

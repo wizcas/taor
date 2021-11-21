@@ -1,5 +1,5 @@
 import { MouseEvent, ReactNode } from 'react';
-import CircleButton from '../form/CircleButton';
+import CircleButton from '../button/CircleButton';
 import FeatherIcon from '../icon/FeatherIcon';
 import styles from './ModalHeader.module.css';
 

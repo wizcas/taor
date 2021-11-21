@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { useContext } from 'react';
-import CircleButton from './components/form/CircleButton';
+import CircleButton from './components/button/CircleButton';
 import FeatherIcon from './components/icon/FeatherIcon';
 import ContextProvider from './providers/ContextProvider';
 import {

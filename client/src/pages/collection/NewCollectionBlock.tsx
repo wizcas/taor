@@ -5,7 +5,7 @@ import { Collection } from '@/api/wallpapers/collections';
 import FieldHint from '@/components/form/FieldHint';
 import { CollectionsContext } from '@/providers';
 import FeatherIcon from '@/components/icon/FeatherIcon';
-import CircleButton from '@/components/form/CircleButton';
+import CircleButton from '@/components/button/CircleButton';
 import Card from '@/components/container/Card';
 
 interface CreationFormData {

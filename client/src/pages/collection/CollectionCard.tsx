@@ -36,11 +36,21 @@ export default observer(function CollectionCard({
     </div>
   );
   const preview = (
-    <div className="flex-1 overflow-hidden m-2 mb-0">
+    <div className="flex-1 overflow-hidden m-2 mb-0 relative">
       <div className="grid grid-cols-2 grid-rows-2 gap-2 @md:grid-cols-1">
         {thumbnails.map((thumbnail) => (
           <InnerPreview key={`${thumbnail}`} url={thumbnail} />
         ))}
+      </div>
+      <div
+        className={classNames(
+          'absolute right-0 bottom-0',
+          'bg-dark-50 bg-opacity-50',
+          'text-white',
+          'text-xs px-2 py-0.5'
+        )}
+      >
+        {thumbnails.length} {thumbnails.length > 1 ? 'images' : 'image'}
       </div>
     </div>
   );

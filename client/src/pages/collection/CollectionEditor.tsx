@@ -41,6 +41,22 @@ export default observer(function CollectionEditor() {
 
   const images = collection?.images ?? [];
 
+  const empty = (
+    <div
+      className={classNames(
+        'flex flex-col items-center justify-center gap-2',
+        'text-gray-400',
+        'p-8'
+      )}
+    >
+      <FeatherIcon icon="circle" />
+      <span>No image&rsquo;s been collected yet.</span>
+    </div>
+  );
+  const gallery = (
+    <ImageGallery images={images} actions={['apply', 'remove']} />
+  );
+
   return (
     <Modal
       isOpen={isOpen}
@@ -49,20 +65,8 @@ export default observer(function CollectionEditor() {
       subtitle="Manage your collected images"
       className={classNames('w-60vw')}
     >
-      {images.length > 0 ? (
-        <ImageGallery images={images} actions={['apply', 'remove']} />
-      ) : (
-        <div
-          className={classNames(
-            'flex flex-col items-center justify-center gap-2',
-            'text-gray-400',
-            'p-8'
-          )}
-        >
-          <FeatherIcon icon="circle" />
-          <span>No image&rsquo;s been collected yet.</span>
-        </div>
-      )}
+      {images.length > 0 ? gallery : empty}
+      <div className="text-right">Delete</div>
     </Modal>
   );
 });

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
-import CircleButton from '../form/CircleButton';
+import CircleButton from '../button/CircleButton';
 import FeatherIcon, { IconSizes } from '../icon/FeatherIcon';
 import { ImageMetadata, Size, SIZED_PADDINGS } from '@/types';
 import { CollectionsContext, WallpaperContext } from '@/providers';
