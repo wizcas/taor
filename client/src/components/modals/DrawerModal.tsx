@@ -36,18 +36,13 @@ function DrawerModal(
         side,
         'absolute inset-y-0 h-screen',
         'rounded-none',
-        'bg-white bg-opacity-80',
         'p-4',
         {
           'left-0': side === 'left',
           'right-0': side === 'right',
         }
       )}
-      overlayClassName={classNames(
-        'drawer',
-        'fixed inset-0',
-        'bg-white bg-opacity-75'
-      )}
+      overlayClassName={classNames('drawer', 'fixed inset-0')}
     >
       {children}
     </Modal>
