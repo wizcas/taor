@@ -18,7 +18,7 @@ export default function WallpaperSettings() {
         </Card>
       </div>
       <HeaderWithDivider text="Collections" />
-      <CollectionList />
+      <CollectionList mode="browse" />
     </div>
   );
 }

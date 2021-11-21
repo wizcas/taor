@@ -3,7 +3,11 @@ import { useCallback, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import CollectionCard from './CollectionCard';
 import NewCollectionBlock from './NewCollectionBlock';
-import { CollectionsBrowserMode, CollectionsContext } from '@/providers';
+import {
+  CollectionsBrowserMode,
+  CollectionsContext,
+  WallpaperContext,
+} from '@/providers';
 import InfiniteView from '@/components/container/InfiniteView';
 import { Collection } from '@/api/wallpapers/collections';
 
@@ -14,11 +18,14 @@ interface Props {
 
 export default observer(function CollectionList({ canCreate, mode }: Props) {
   const collections = useContext(CollectionsContext);
+  const wallpaper = useContext(WallpaperContext);
 
-  const onBlockClick = useCallback(
+  const onClickCard = useCallback(
     async (collection: Collection) => {
       switch (mode) {
         case 'browse':
+          wallpaper.selectCollection(collection);
+          wallpaper.mode = 'collection';
           break;
         case 'addTo':
           await collections.toggleImageInCollection(collection);
@@ -45,7 +52,7 @@ export default observer(function CollectionList({ canCreate, mode }: Props) {
             <CollectionCard
               key={collection.id}
               collection={collection}
-              onClick={onBlockClick}
+              onClick={onClickCard}
               isSelected={inCollection}
             />
           );

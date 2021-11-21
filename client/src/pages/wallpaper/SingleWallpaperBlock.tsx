@@ -17,28 +17,24 @@ export default observer(function SingleWallpaperBlock() {
   );
   const isInUse = wallpaper.mode === 'single';
 
-  function use() {
+  function activate() {
     wallpaper.mode = 'single';
   }
 
   const footer = (
-    <div className="flex flex-row gap-2 items-center mx-2 my-1 text-sm">
-      <div className="flex-1 text-left">Selected wallpaper</div>
-      {isInUse ? (
-        <div
-          className={classNames('text-green-600 text-sm italic leading-40px')}
-        >
+    <div className="flex flex-row gap-2 items-center mx-2 my-1 text-sm leading-40px">
+      <div className="flex-1 text-left text-sm text-gray-600">
+        Click to apply
+      </div>
+      {isInUse && (
+        <div className={classNames('text-green-600 text-sm italic')}>
           Active
         </div>
-      ) : (
-        <CircleButton className="text-gray-800" onClick={use}>
-          <FeatherIcon icon="play-circle" size="sm" />
-        </CircleButton>
       )}
     </div>
   );
   return (
-    <Card className={classNames('p-2')} footer={footer}>
+    <Card className={classNames('p-2')} footer={footer} onClick={activate}>
       <div
         className={classNames(
           'bg-center bg-clip-border bg-no-repeat bg-cover',

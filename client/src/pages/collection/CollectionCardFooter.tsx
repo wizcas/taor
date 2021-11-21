@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
+import { MouseEvent, useContext } from 'react';
 import classNames from 'classnames';
 import { Collection } from '@/api/wallpapers/collections';
 import CircleButton from '@/components/form/CircleButton';
@@ -16,9 +16,9 @@ export default observer(function CollectionCardFooter({ collection }: Props) {
   const isInUse =
     wallpaper.mode === 'collection' && wallpaper.collectionId === id;
 
-  function use() {
-    wallpaper.selectCollection(collection);
-    wallpaper.mode = 'collection';
+  function use(e: MouseEvent) {
+    e.stopPropagation();
+    // todo: goto edit
   }
 
   return (
