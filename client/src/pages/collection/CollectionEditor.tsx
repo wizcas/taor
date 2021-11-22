@@ -7,6 +7,7 @@ import { ModalRef } from '@/types';
 import EditableTextBox from '@/components/form/EditableTextBox';
 import ImageGallery from '@/components/image/ImageGallery';
 import FeatherIcon from '@/components/icon/FeatherIcon';
+import Button from '@/components/button/Button';
 
 export default observer(function CollectionEditor() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +67,11 @@ export default observer(function CollectionEditor() {
       className={classNames('w-60vw')}
     >
       {images.length > 0 ? gallery : empty}
-      <div className="text-right">Delete</div>
+      <div className="flex flex-row-reverse p-1">
+        <Button icon="trash" variant="danger">
+          Delete
+        </Button>
+      </div>
     </Modal>
   );
 });
