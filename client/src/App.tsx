@@ -59,7 +59,7 @@ function Home() {
         </CircleButton>
       </div>
 
-      <PageModal title="wallhaven" routes={routes} />
+      <PageModal routes={routes} />
 
       <CollectionBrowser />
       <CollectionEditor />
