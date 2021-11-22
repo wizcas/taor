@@ -46,6 +46,7 @@ export default observer(function CollectionCard({
         className={classNames(
           'absolute right-0 bottom-0',
           'bg-dark-50 bg-opacity-50',
+          'rounded-sm',
           'text-white',
           'text-xs px-2 py-0.5'
         )}
