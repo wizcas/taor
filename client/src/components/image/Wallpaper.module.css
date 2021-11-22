@@ -1,7 +1,18 @@
 .wallpaper {
   @apply fixed inset-0 flex flex-row-reverse items-stretch w-screen h-screen;
-  z-index: -1;
-  /* background: var(--wallpaper) no-repeat center center fixed;
-  background-size: cover; */
-  object-fit: cover;
+  @apply -z-2 object-cover;
+
+  &.top {
+    @apply -z-1;
+    animation: fadeIn 1s ease-in;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

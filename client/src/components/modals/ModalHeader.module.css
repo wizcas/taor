@@ -1,13 +1,18 @@
 .header {
-  @apply flex flex-row items-center w-full;
+  @apply flex flex-row justify-between items-start gap-2 w-full;
   @apply mb-4;
 
+  .titleBar {
+    @apply flex flex-col items-stretch;
+  }
   .title {
-    @apply flex-1;
+    @apply text-lg font-semibold;
+  }
+  .subtitle {
+    @apply text-sm text-gray-500;
   }
 
-  button {
-    @apply transform hover:scale-110;
-    @apply transition-transform duration-200 ease-in-out;
+  .closeButton {
+    @apply -mr-2;
   }
 }

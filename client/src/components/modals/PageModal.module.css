@@ -1,15 +1,8 @@
 .modal {
-  @apply absolute inset-4;
-  @apply flex flex-col items-stretch overflow-hidden;
-  @apply p-4;
-  @apply bg-white bg-opacity-80;
-  @apply rounded-md;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  @apply w-90vw h-80vh lg:max-w-screen-lg;
 }
 
 .overlay {
-  @apply fixed inset-0 bg-transparent;
-}
-.content {
-  @apply relative flex-1 overflow-hidden;
+  @apply !bg-transparent;
+  @apply !backdrop-filter-none;
 }

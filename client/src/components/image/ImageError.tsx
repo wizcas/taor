@@ -1,6 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSlash } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
+import FeatherIcon from '../icon/FeatherIcon';
 import styles from './ImageError.module.css';
 
 interface Props {
@@ -18,7 +17,7 @@ export default function ImageError(props: Props) {
             [styles.dark]: dark,
           })}
         >
-          <FontAwesomeIcon icon={faSlash} />
+          <FeatherIcon icon="slash" />
           {message && <span>{message}</span>}
         </div>
       )}

@@ -1,0 +1,18 @@
+.modal {
+  --maxWidth: calc(100vw - theme(spacing.8) * 2);
+  @apply flex flex-col items-stretch overflow-hidden;
+  @apply p-4;
+  @apply bg-light-400 bg-opacity-80;
+  @apply rounded-md;
+  @apply min-w-400px max-w-$maxWidth;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+  @apply fixed inset-0 bg-light-400 bg-opacity-40;
+  @apply flex justify-center items-center gap-8;
+  @apply backdrop-filter backdrop-blur-md;
+}
+.content {
+  @apply relative flex-1 overflow-x-hidden overflow-y-auto;
+}

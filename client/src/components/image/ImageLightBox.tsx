@@ -8,20 +8,17 @@ import {
   useEffect,
 } from 'react';
 import Modal from 'react-modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
+import FeatherIcon from '../icon/FeatherIcon';
 import LazyImage from './LazyImage';
 
 import styles from './ImageLightBox.module.css';
-import ImageToolbar from './ImageToolbar';
+import ImageToolbar, { ImageToolbarActions } from './ImageToolbar';
 import type { ImageMetadata } from '@/types';
 
 interface Props {
   images?: ImageMetadata[];
+  actions?: ImageToolbarActions;
 }
 
 export interface ImageLightBoxRef {
@@ -34,11 +31,13 @@ interface NavigationContext {
   prevImage?: ImageMetadata;
 }
 
-function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
+function ImageLightBox(
+  { images, actions }: Props,
+  ref: ForwardedRef<ImageLightBoxRef>
+) {
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<ImageMetadata | undefined>(undefined);
 
-  const { images } = props;
   const { prevImage, nextImage } = useMemo<NavigationContext>(() => {
     if (!images) return {};
     const index = image ? images.indexOf(image) : -1;
@@ -117,7 +116,7 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
             className={classNames(styles.navigation, 'left-0')}
             onClick={onNavigate(prev)}
           >
-            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+            <FeatherIcon icon="chevron-left" size="2xl" />
           </button>
         )}
         {nextImage && (
@@ -126,12 +125,18 @@ function ImageLightBox(props: Props, ref: ForwardedRef<ImageLightBoxRef>) {
             className={classNames(styles.navigation, 'right-0')}
             onClick={onNavigate(next)}
           >
-            <FontAwesomeIcon icon={faChevronRight} size="2x" />
+            <FeatherIcon icon="chevron-right" size="2xl" />
           </button>
         )}
       </div>
       <div className={styles.buttonContainer}>
-        <ImageToolbar image={image} onSetWallpaper={close} />
+        <ImageToolbar
+          image={image}
+          onSetWallpaper={close}
+          size="md"
+          iconSize="lg"
+          actions={actions}
+        />
       </div>
     </>
   );

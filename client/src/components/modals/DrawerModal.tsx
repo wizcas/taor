@@ -1,25 +1,16 @@
 import classNames from 'classnames';
-import {
-  ForwardedRef,
-  forwardRef,
-  ReactNode,
-  useImperativeHandle,
-  useState,
-} from 'react';
-import Modal from 'react-modal';
+import { ForwardedRef, forwardRef, useImperativeHandle, useState } from 'react';
+import Modal, { ModalProps } from './Modal';
+import type { ModalRef } from '@/types';
 
-interface Props {
+interface Props extends Pick<ModalProps, 'title' | 'children'> {
   side?: 'left' | 'right';
-  children?: ReactNode;
 }
 
-export interface DrawerModalRef {
-  open: () => void;
-  close: () => void;
-}
-
-function DrawerModal(props: Props, ref: ForwardedRef<DrawerModalRef>) {
-  const { side = 'right', children } = props;
+function DrawerModal(
+  { title, side = 'right', children }: Props,
+  ref: ForwardedRef<ModalRef>
+) {
   const [isOpen, setIsOpen] = useState(false);
 
   useImperativeHandle(ref, () => ({
@@ -36,6 +27,7 @@ function DrawerModal(props: Props, ref: ForwardedRef<DrawerModalRef>) {
   }
   return (
     <Modal
+      title={title}
       isOpen={isOpen}
       onRequestClose={close}
       closeTimeoutMS={300}
@@ -43,19 +35,14 @@ function DrawerModal(props: Props, ref: ForwardedRef<DrawerModalRef>) {
         'drawer',
         side,
         'absolute inset-y-0 h-screen',
-        'shadow-2xl',
-        'bg-white bg-opacity-80',
+        'rounded-none',
         'p-4',
         {
           'left-0': side === 'left',
           'right-0': side === 'right',
         }
       )}
-      overlayClassName={classNames(
-        'drawer',
-        'fixed inset-0',
-        'bg-white bg-opacity-75'
-      )}
+      overlayClassName={classNames('drawer', 'fixed inset-0')}
     >
       {children}
     </Modal>

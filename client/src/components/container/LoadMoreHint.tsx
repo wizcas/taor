@@ -1,10 +1,9 @@
-import { faArrowDown, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { ForwardedRef, forwardRef } from 'react';
+import FeatherIcon from '../icon/FeatherIcon';
 import Spinner from '../wait/Spinner';
 
-interface Props {
+export interface LoadMoreHintProps {
   loadMoreText?: string;
   noMoreText?: string;
   loadingText?: string;
@@ -12,26 +11,27 @@ interface Props {
   loading?: boolean;
   className?: string;
 }
-function LoadMoreHint(props: Props, ref: ForwardedRef<HTMLDivElement>) {
-  const {
+export default forwardRef(function LoadMoreHint(
+  {
     loadMoreText = 'Load more',
     noMoreText = 'No more content',
     loadingText = 'Loading more',
     hasMore,
     loading,
     className,
-  } = props;
-
+  }: LoadMoreHintProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   let prefix: JSX.Element;
   let text: JSX.Element;
   if (loading) {
     prefix = <Spinner loading={loading} size={16} />;
     text = <span>{loadingText}&hellip;</span>;
   } else if (hasMore) {
-    prefix = <FontAwesomeIcon icon={faArrowDown} />;
+    prefix = <FeatherIcon icon="arrow-down" size="sm" />;
     text = <span>{loadMoreText}</span>;
   } else {
-    prefix = <FontAwesomeIcon icon={faCheck} />;
+    prefix = <FeatherIcon icon="check" size="sm" />;
     text = <span>{noMoreText}</span>;
   }
 
@@ -50,7 +50,4 @@ function LoadMoreHint(props: Props, ref: ForwardedRef<HTMLDivElement>) {
       {text}
     </div>
   );
-}
-
-const LoadMoreHintWithRef = forwardRef(LoadMoreHint);
-export default LoadMoreHintWithRef;
+});

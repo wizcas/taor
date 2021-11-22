@@ -28,6 +28,7 @@ code {
 .ReactModal__Content {
   @apply backdrop-filter backdrop-blur-md;
   @apply transition-all duration-300 ease-in-out;
+
   &:not(.drawer) {
     @apply transform scale-0;
   }
@@ -66,4 +67,44 @@ code {
 
 h3 {
   @apply text-2xl font-bold;
+}
+
+button,
+input,
+select,
+*[role='button'] {
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    @apply ring ring-primary-400 ring-opacity-80;
+  }
+}
+
+hr {
+  @apply border border-0 border-b-1 border-gray-500 border-opacity-30;
+  @apply h-1px;
+}
+
+/** ---------- SCROLLBAR STYLING ---------- **/
+* {
+  --scrollbar-track-color: transparent;
+  --scrollbar-thumb-color: rgba(0, 0, 0, 0.3);
+  --scrollbar-thumb-hover-color: rgba(0, 0, 0, 0.5);
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+    border-radius: 0.25rem;
+    &:hover {
+      background-color: var(--scrollbar-thumb-hover-color);
+    }
+  }
 }

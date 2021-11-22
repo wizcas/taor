@@ -1,22 +1,29 @@
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
+import CircleButton from '../button/CircleButton';
+import FeatherIcon from '../icon/FeatherIcon';
 import styles from './ModalHeader.module.css';
 
 interface Props {
-  title: ReactNode;
-  onClose(): void;
+  title?: ReactNode;
+  subtitle?: ReactNode;
+  onClose?(e: MouseEvent): void;
 }
 
-export default function ModalHeader(props: Props) {
-  const { title, onClose } = props;
-
+export default function ModalHeader({ title, subtitle, onClose }: Props) {
   return (
     <div className={styles.header}>
-      <h3 className={styles.title}>{title}</h3>
-      <button type="button" onClick={onClose}>
-        <FontAwesomeIcon icon={faTimes} size="2x" />
-      </button>
+      <div className={styles.titleBar}>
+        {title && <h3 className={styles.title}>{title}</h3>}
+        {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
+      </div>
+      <CircleButton
+        type="button"
+        className={styles.closeButton}
+        onClick={onClose}
+        color="black"
+      >
+        <FeatherIcon icon="x" />
+      </CircleButton>
     </div>
   );
 }
