@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { useContext } from 'react';
 import CircleButton from './components/button/CircleButton';
 import FeatherIcon from './components/icon/FeatherIcon';
@@ -25,11 +25,11 @@ const CONTEXT_PROVIDERS = [WALLPAPER_PROVIDER, COLLECTIONS_PROVIDER];
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <ContextProvider providers={CONTEXT_PROVIDERS}>
         <Home />
       </ContextProvider>
-    </Router>
+    </BrowserRouter>
   );
 }
 
@@ -61,14 +61,10 @@ function Home() {
       </div>
 
       <PageModal title="wallhaven">
-        <Switch>
-          <Route path="/wallpaper-settings">
-            <WallpaperSettings />
-          </Route>
-          <Route path="/wallhaven">
-            <WallhavenWrapper />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/wallpaper-settings" element={<WallpaperSettings />} />
+          <Route path="/wallhaven" element={<WallhavenWrapper />} />
+        </Routes>
       </PageModal>
 
       <CollectionBrowser />
