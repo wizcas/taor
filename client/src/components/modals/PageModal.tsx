@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useLocation } from 'react-router-dom';
+import { Outlet, RouteObject, useLocation, useRoutes } from 'react-router-dom';
 import { ReactNode } from 'react';
 import classNames from 'classnames';
 import styles from './PageModal.module.css';
@@ -8,12 +8,12 @@ import usePageModal from '@/hooks/usePageModal';
 
 interface Props {
   title: ReactNode;
-  children: ReactNode;
+  routes: RouteObject[];
 }
 
-function Component(props: Props) {
-  const { title, children } = props;
+function Component({ title, routes }: Props) {
   const { close } = usePageModal();
+  const routeElement = useRoutes(routes);
   const location = useLocation();
   const isOpen = !!location.pathname && location.pathname !== '/';
 
@@ -26,7 +26,8 @@ function Component(props: Props) {
       closeTimeoutMS={300}
       title={title}
     >
-      {children}
+      {routeElement}
+      <Outlet />
     </Modal>
   );
 }
