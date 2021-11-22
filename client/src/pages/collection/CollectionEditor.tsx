@@ -2,17 +2,19 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 import Modal from '@/components/modals/Modal';
-import { CollectionsContext } from '@/providers';
+import { CollectionsContext, WallpaperContext } from '@/providers';
 import { ModalRef } from '@/types';
 import EditableTextBox from '@/components/form/EditableTextBox';
 import ImageGallery from '@/components/image/ImageGallery';
 import FeatherIcon from '@/components/icon/FeatherIcon';
 import Button from '@/components/button/Button';
+import usePromptModal from '@/components/modals/usePromptModal';
 
 export default observer(function CollectionEditor() {
   const [isOpen, setIsOpen] = useState(false);
   const collections = useContext(CollectionsContext);
   const collection = collections.editingCollection;
+  const wallpaper = useContext(WallpaperContext);
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -58,6 +60,26 @@ export default observer(function CollectionEditor() {
     <ImageGallery images={images} actions={['apply', 'remove']} />
   );
 
+  const { prompt } = usePromptModal({
+    title: 'Delete Collection',
+    content: (
+      <div>
+        Are you sure to delete collection <strong>{collection?.name}</strong>?
+      </div>
+    ),
+  });
+
+  async function onDelete() {
+    const go = await prompt();
+    if (go && collection) {
+      await collections.delete(collection);
+      if (wallpaper.collectionId === collection.id) {
+        wallpaper.mode = 'single';
+      }
+      close();
+    }
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -68,7 +90,7 @@ export default observer(function CollectionEditor() {
     >
       {images.length > 0 ? gallery : empty}
       <div className="flex flex-row-reverse p-1">
-        <Button icon="trash" variant="danger">
+        <Button icon="trash" variant="danger" onClick={onDelete}>
           Delete
         </Button>
       </div>
