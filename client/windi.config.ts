@@ -35,10 +35,29 @@ export default defineConfig({
           800: '664400',
           900: '#332200',
         },
+        abc: 'salmon',
+        white: {
+          main: colors.light[500],
+          secondary: colors.coolGray[300],
+          true: '#fffff',
+        },
+        black: {
+          main: colors.dark[800],
+          secondary: colors.dark[400],
+          true: '#000000',
+        },
       },
       fontFamily: {
-        sans: ['Graphik', 'sans-serif'],
+        sans: ['Fira Sans', 'Roboto', 'Arial', 'sans-serif'],
         serif: ['Merriweather', 'serif'],
+        mono: [
+          'Fira Code',
+          'Consolas',
+          'source-code-pro',
+          'Monaco',
+          'Courier New',
+          'monospace',
+        ],
       },
       spacing: {
         128: '32rem',

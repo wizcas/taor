@@ -1,0 +1,6 @@
+.layout {
+  @apply flex flex-row gap-4;
+}
+.content {
+  @apply flex-1 px-2;
+}
