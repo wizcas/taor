@@ -16,7 +16,7 @@ export default function LoadingBanner(props: Props) {
     <div
       className={classNames(
         'flex flex-row justify-center items-center gap-2',
-        'text-gray-600 text-md'
+        'secondary-text'
       )}
     >
       <Spinner loading size={16} />

@@ -6,6 +6,10 @@ body {
   @apply text-black-main dark:text-white-main;
 }
 
+* {
+  @apply box-border;
+}
+
 code {
   @apply font-mono;
 }
@@ -79,7 +83,7 @@ select,
 }
 
 hr {
-  @apply border border-0 border-b-1 border-gray-500 border-opacity-30;
+  @apply border-0 border-b border-gray-disabled;
   @apply h-1px;
 }
 

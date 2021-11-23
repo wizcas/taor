@@ -12,11 +12,12 @@ export default function ActiveWallpaper() {
       <HeaderWithDivider text="Single wallpaper" />
       <div className="grid grid-cols-[2fr,1fr] <md:grid-cols-1 gap-4 p-4">
         <SingleWallpaperCard />
-        <Card onClick={() => navigate('wallhaven')}>
+        <Card
+          onClick={() => navigate('wallhaven')}
+          className="text-black-secondary"
+        >
           <FeatherIcon icon="search" />
-          <div className="text-center mt-2">
-            Search for more images &hellip;
-          </div>
+          <div className="text-center mt-4">Search online wallpapers</div>
         </Card>
       </div>
       <HeaderWithDivider text="Collections" />

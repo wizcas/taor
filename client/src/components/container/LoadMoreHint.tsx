@@ -42,7 +42,7 @@ export default forwardRef(function LoadMoreHint(
         'p-4',
         'flex flex-row items-center justify-center gap-2',
         'text-sm',
-        'text-gray-600',
+        'text-gray-main',
         className
       )}
     >

@@ -11,8 +11,8 @@ export default function HeaderWithDivider({ text, icon }: Props) {
     <div
       className={classNames(
         'flex flex-row items-center gap-2',
-        'mt-6 mb-4',
-        'text-md font-semibold text-gray-600'
+        'not-first:mt-6 mb-4',
+        'text-md text-gray-main'
       )}
     >
       {icon && <FeatherIcon icon={icon} />}

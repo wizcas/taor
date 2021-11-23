@@ -70,14 +70,11 @@ export default function ImageToolbar({
   return (
     <div
       className={classNames(
-        'bg-black',
-        'bg-opacity-50',
-        SIZED_PADDINGS[size],
+        'bg-black-true bg-opacity-30',
+        'text-white-main',
         'rounded-md',
-        'text-white',
-        'flex',
-        'flex-row',
-        'items-center',
+        'flex flex-row items-center',
+        SIZED_PADDINGS[size],
         className
       )}
     >

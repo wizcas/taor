@@ -17,8 +17,8 @@
   }
   .navigation {
     @apply absolute;
-    @apply bg-white bg-opacity-30;
-    @apply text-dark-500;
+    @apply bg-white-main bg-opacity-30;
+    @apply text-black-main;
     @apply px-4 py-8;
     @apply top-1/2 transform -translate-y-1/2;
     @apply pointer-events-auto cursor-pointer;
@@ -43,7 +43,7 @@
 }
 .overlay {
   @apply fixed inset-0;
-  @apply bg-black bg-opacity-90;
+  @apply bg-black-main bg-opacity-90;
 }
 
 .buttonContainer {

@@ -9,13 +9,13 @@ export type Variants =
   | 'warning'
   | 'danger';
 const VARIANT_CLASSES: Record<Variants, string> = {
-  normal: 'bg-white bg-opacity-30 text-dark-500',
-  primary: 'bg-primary-400 text-dark-500',
-  secondary: 'bg-gray-300 text-dark-500',
-  info: 'bg-blue-500 text-light-500',
-  success: 'bg-green-400 text-dark-500',
-  warning: 'bg-yellow-400 text-dark-500',
-  danger: 'bg-red-500 text-light-500',
+  normal: 'bg-white-main bg-opacity-30 text-black-secondary',
+  primary: 'bg-primary-400 text-black-secondary',
+  secondary: 'bg-gray-300 text-black-secondary',
+  info: 'bg-blue-500 text-white-main',
+  success: 'bg-green-400 text-black-secondary',
+  warning: 'bg-yellow-400 text-black-secondary',
+  danger: 'bg-red-500 text-white-main',
 };
 const VARIANT_HOVER_CLASSES: Record<Variants, string> = {
   normal: 'hover:(bg-opacity-50)',
@@ -27,7 +27,7 @@ const VARIANT_HOVER_CLASSES: Record<Variants, string> = {
   danger: 'hover:(bg-red-600) ',
 };
 const VARIANT_ACTIVE_CLASSES: Record<Variants, string> = {
-  normal: 'active:(bg-cool-gray-50)',
+  normal: 'active:(bg-white-secondary)',
   primary: 'active:(bg-primary-600)',
   secondary: 'active:(bg-gray-500)',
   info: 'active:(bg-blue-700)',

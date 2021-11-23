@@ -36,7 +36,7 @@
 
   .expand {
     @apply absolute top-2 left-2;
-    @apply text-white opacity-0;
+    @apply text-white-main opacity-0;
     @apply transition-all duration-300 z-1;
   }
 

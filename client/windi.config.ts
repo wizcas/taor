@@ -5,12 +5,6 @@ import plugin from 'windicss/plugin';
 // import forms from 'windicss/plugin/forms';
 import aspectRatio from 'windicss/plugin/aspect-ratio';
 
-function range(size, startAt = 1) {
-  return Array.from(Array(size).keys()).map((i) => i + startAt);
-}
-
-const sizeList = range(40, 60);
-
 export default defineConfig({
   darkMode: 'class', // or 'media'
   theme: {
@@ -23,7 +17,7 @@ export default defineConfig({
         '2xl': '1536px',
       },
       colors: {
-        gray: colors.coolGray,
+        // gray: colors.coolGray,
         blue: colors.lightBlue,
         red: colors.rose,
         pink: colors.fuchsia,
@@ -41,9 +35,13 @@ export default defineConfig({
           secondary: colors.coolGray[300],
           true: '#fffff',
         },
+        gray: {
+          main: colors.coolGray[500],
+          disabled: colors.coolGray[400],
+        },
         black: {
           main: colors.dark[800],
-          secondary: colors.dark[400],
+          secondary: colors.dark[100],
           true: '#000000',
         },
       },
@@ -68,11 +66,9 @@ export default defineConfig({
       },
     },
   },
-  safelist: [
-    sizeList.map((i) => `w-${i}px`),
-    sizeList.map((i) => `h-${i}px`),
-    'w-xs w-sm w-md w-lg w-xl w-2xl w-3xl',
-  ],
+  shortcuts: {
+    'secondary-text': 'text-sm text-gray-500',
+  },
   plugins: [
     plugin(({ addUtilities }) => {
       const newUtilities = {

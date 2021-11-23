@@ -2,14 +2,16 @@
   @apply relative;
   @apply border border-solid border-gray-200 rounded-md;
   @apply h-194px overflow-hidden;
-  @apply shadow-lg;
+  @apply shadow-md;
   @apply flex flex-col justify-center items-stretch;
-  @apply bg-light-400 bg-opacity-60;
+  @apply bg-white-main bg-opacity-60;
+  @apply transition-all duration-200;
 
   &.interactive {
     @apply cursor-pointer;
     &:hover {
-      @apply bg-light-600 bg-opacity-80;
+      @apply bg-opacity-80;
+      @apply shadow-lg;
     }
   }
   &:not(.interactive) {

@@ -2,24 +2,26 @@
   @apply relative flex flex-row items-stretch;
   &.vertical {
     @apply flex-col;
+    @apply w-max;
   }
 }
 .item {
   @apply flex flex-row items-center;
   @apply px-4 py-3 mb-2;
-  @apply text-cool-gray-500 no-underline;
+  @apply text-black-secondary no-underline;
   @apply transition-all duration-200;
+  @apply border-l-0.5rem border-transparent border-solid;
 
   &:hover {
-    @apply bg-white bg-opacity-20;
-    @apply text-cool-gray-600;
+    @apply bg-white-main bg-opacity-20;
   }
   &:active,
   &:visited {
   }
   &.active {
     @apply text-current;
-    @apply bg-white bg-opacity-30;
-    @apply rounded-md;
+    @apply bg-white-main bg-opacity-30;
+    @apply rounded-l-md;
+    @apply border-l-0.5rem border-primary-400 border-solid;
   }
 }

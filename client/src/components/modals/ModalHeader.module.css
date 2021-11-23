@@ -13,7 +13,7 @@
     @apply text-lg font-semibold;
   }
   .subtitle {
-    @apply text-sm text-gray-500;
+    @apply secondary-text;
   }
 
   .closeButton {
