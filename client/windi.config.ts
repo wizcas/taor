@@ -30,6 +30,10 @@ export default defineConfig({
         primary: {
           400: '#ffbd38',
           500: '#ffaa00',
+          600: '#cc8800',
+          700: '#996600',
+          800: '664400',
+          900: '#332200',
         },
       },
       fontFamily: {

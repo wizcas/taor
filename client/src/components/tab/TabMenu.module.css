@@ -1,0 +1,25 @@
+.menu {
+  @apply relative flex flex-row items-stretch;
+  &.vertical {
+    @apply flex-col;
+  }
+}
+.item {
+  @apply flex flex-row items-center;
+  @apply px-4 py-3 mb-2;
+  @apply text-cool-gray-500 no-underline;
+  @apply transition-all duration-200;
+
+  &:hover {
+    @apply bg-white bg-opacity-20;
+    @apply text-cool-gray-600;
+  }
+  &:active,
+  &:visited {
+  }
+  &.active {
+    @apply text-current;
+    @apply bg-white bg-opacity-30;
+    @apply rounded-md;
+  }
+}

@@ -1,9 +1,13 @@
 .header {
-  @apply flex flex-row justify-between items-start gap-2 w-full;
+  @apply flex flex-row items-start gap-2 w-full;
   @apply mb-4;
 
+  .leading {
+    @apply flex flex-col items-stretch justify-center;
+  }
+
   .titleBar {
-    @apply flex flex-col items-stretch;
+    @apply flex flex-1 flex-col items-stretch;
   }
   .title {
     @apply text-lg font-semibold;

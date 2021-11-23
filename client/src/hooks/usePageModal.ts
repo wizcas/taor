@@ -1,15 +1,14 @@
-import { LocationState } from 'history';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function usePageModal() {
-  const history = useHistory<LocationState>();
+  const navigate = useNavigate();
 
   function open(path: string) {
-    history.push(path);
+    navigate(path);
   }
 
   function close() {
-    history.go(-1);
+    navigate(-1);
   }
 
   return { open, close };
