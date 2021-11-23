@@ -14,8 +14,8 @@ const SUB_PAGES: TabMenuItem[] = [
 
 export default function WallpaperSettings() {
   return (
-    <div>
-      <TabMenu items={SUB_PAGES} />
+    <div className="flex flex-row gap-4">
+      <TabMenu items={SUB_PAGES} vertical />
       <Outlet />
     </div>
   );

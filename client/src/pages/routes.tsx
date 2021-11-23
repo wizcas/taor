@@ -1,7 +1,7 @@
 import { RouteObject } from 'react-router-dom';
 import WallhavenWrapper from './wallhaven/Wrapper';
 import ActiveWallpaper from './wallpaper/ActiveWallpaper';
-import WallpaperSettings from './wallpaper/WallpaperSettings';
+import WallpaperSettings from './wallpaper/Wallpaper';
 
 export interface TitledRouteObject extends RouteObject {
   title: string;

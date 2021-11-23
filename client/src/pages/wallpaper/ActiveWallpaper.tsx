@@ -8,7 +8,7 @@ import FeatherIcon from '@/components/icon/FeatherIcon';
 export default function ActiveWallpaper() {
   const navigate = useNavigate();
   return (
-    <>
+    <div className="flex-1">
       <HeaderWithDivider text="Single wallpaper" />
       <div className="grid grid-cols-[2fr,1fr] <md:grid-cols-1 gap-4 p-4">
         <SingleWallpaperCard />
@@ -21,6 +21,6 @@ export default function ActiveWallpaper() {
       </div>
       <HeaderWithDivider text="Collections" />
       <CollectionList mode="browse" canEdit />
-    </>
+    </div>
   );
 }

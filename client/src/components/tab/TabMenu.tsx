@@ -9,11 +9,16 @@ export interface TabMenuItem {
 
 interface Props {
   items: TabMenuItem[];
+  vertical?: boolean;
 }
 
-export default function TabMenu({ items }: Props) {
+export default function TabMenu({ items, vertical }: Props) {
   return (
-    <nav className={styles.menu}>
+    <nav
+      className={classNames(styles.menu, {
+        [styles.vertical]: vertical,
+      })}
+    >
       {items.map((item) => (
         <TabMenuItem key={item.path} item={item} />
       ))}
