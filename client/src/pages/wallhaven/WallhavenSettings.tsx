@@ -7,6 +7,7 @@ import WallhavenFilters from './WallhavenFilters';
 import type { ModalRef } from '@/types';
 import { WallhavenQueryContext } from '@/api/wallhaven';
 import DrawerModal from '@/components/modals/DrawerModal';
+import Button from '@/components/button/Button';
 
 function WallhavenSettings() {
   const [query, updateQuery] = useContext(WallhavenQueryContext);
@@ -30,13 +31,11 @@ function WallhavenSettings() {
       <section className={styles.toolbar}>
         <input
           type="text"
-          placeholder="Search by keywords"
+          placeholder="Enter keywords"
           value={q}
           onChange={onSearchTextSubmit}
         />
-        <button type="button" onClick={openFilters}>
-          settings
-        </button>
+        <Button onClick={openFilters}>settings</Button>
       </section>
       <WallhavenSearchResult className="overflow-y-auto flex-1" />
       <DrawerModal title="Wallhaven Search Settings" ref={filtersRef}>

@@ -31,8 +31,8 @@ export default defineConfig({
         },
         abc: 'salmon',
         white: {
-          main: colors.light[500],
-          secondary: colors.coolGray[300],
+          main: colors.light[100],
+          secondary: colors.light[900],
           true: '#fffff',
         },
         gray: {

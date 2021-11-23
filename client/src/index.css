@@ -78,7 +78,21 @@ select,
   &:focus,
   &:focus-visible {
     outline: none;
-    @apply ring ring-primary-400 ring-opacity-80;
+    @apply ring-2 ring-primary-400;
+  }
+}
+
+button {
+  @apply m-2px;
+}
+
+input,
+select {
+  @apply p-2 rounded-sm border;
+  @apply bg-white-main;
+  @apply m-2px;
+  &::placeholder {
+    @apply text-gray-disabled;
   }
 }
 
