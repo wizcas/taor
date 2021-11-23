@@ -1,0 +1,25 @@
+.menu {
+  @apply relative flex flex-row;
+  /* @apply border-b border-cool-gray-400 border-solid; */
+}
+.item {
+  @apply flex flex-row items-center;
+  @apply h-50px px-4 py-4;
+  @apply text-cool-gray-500 no-underline;
+  @apply transition-all duration-200;
+
+  &:hover {
+    @apply bg-white bg-opacity-20;
+    @apply text-primary-600;
+  }
+  &:active,
+  &:visited {
+  }
+  &.active {
+    @apply text-current;
+    /* @apply bg-primary-400; */
+    /* @apply font-bold; */
+    /* @apply bg-white bg-opacity-0; */
+    /* box-shadow: theme(colors.primary.500) 0 0px 3px 3px inset; */
+  }
+}

@@ -1,5 +1,6 @@
 import { RouteObject } from 'react-router-dom';
 import WallhavenWrapper from './wallhaven/Wrapper';
+import ActiveWallpaper from './wallpaper/ActiveWallpaper';
 import WallpaperSettings from './wallpaper/WallpaperSettings';
 
 export interface TitledRouteObject extends RouteObject {
@@ -13,13 +14,15 @@ export default [
     element: <></>,
   },
   {
-    path: 'wallpaper-settings',
+    path: 'wallpaper',
     element: <WallpaperSettings />,
-    title: 'Choose your wallpaper',
-  },
-  {
-    path: 'wallhaven',
-    element: <WallhavenWrapper />,
-    title: 'Pick one from Wallhaven',
+    title: 'Pick wallpapers',
+    children: [
+      { index: true, element: <ActiveWallpaper /> },
+      {
+        path: 'wallhaven',
+        element: <WallhavenWrapper />,
+      },
+    ],
   },
 ] as TitledRouteObject[];

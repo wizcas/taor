@@ -1,14 +1,9 @@
 import Modal from 'react-modal';
 import { BrowserRouter } from 'react-router-dom';
-import { useContext } from 'react';
 import CircleButton from './components/button/CircleButton';
 import FeatherIcon from './components/icon/FeatherIcon';
 import ContextProvider from './providers/ContextProvider';
-import {
-  CollectionsContext,
-  COLLECTIONS_PROVIDER,
-  WALLPAPER_PROVIDER,
-} from './providers';
+import { COLLECTIONS_PROVIDER, WALLPAPER_PROVIDER } from './providers';
 import CollectionBrowser from './pages/collection/CollectionBrowser';
 import CollectionEditor from './pages/collection/CollectionEditor';
 import routes from './pages/routes';
@@ -39,23 +34,15 @@ function Home() {
     return () => open(path);
   }
 
-  const c = useContext(CollectionsContext);
-
   return (
     <div className="App flex justify-center items-center w-screen h-screen">
       <Wallpaper />
       <div className="fixed right-0 bottom-0 flex gap-4 items-center p-4">
-        <CircleButton
-          color="white"
-          onClick={openPageModal('/wallpaper-settings')}
-        >
-          <FeatherIcon icon="feather" size="lg" />
+        <CircleButton color="white" onClick={openPageModal('/wallpaper')}>
+          <FeatherIcon icon="image" size="lg" />
         </CircleButton>
         <CircleButton color="white" onClick={openPageModal('wallhaven')}>
           <FeatherIcon icon="settings" size="lg" />
-        </CircleButton>
-        <CircleButton color="white" onClick={() => c.openBrowser()}>
-          <FeatherIcon icon="image" size="lg" />
         </CircleButton>
       </div>
 
