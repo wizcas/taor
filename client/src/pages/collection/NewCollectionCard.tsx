@@ -17,7 +17,7 @@ const NAME_ERRORS: Record<string, string> = {
   maxLength: 'The collection name must be short than 50 characters',
 };
 
-export default function NewCollectionBlock() {
+export default function NewCollectionCard() {
   const [isEditing, setIsEditing] = useState(false);
   const {
     register,
