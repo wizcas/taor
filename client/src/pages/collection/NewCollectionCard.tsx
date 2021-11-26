@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import { Collection } from '@/api/wallpapers/collections';
@@ -18,6 +18,7 @@ const NAME_ERRORS: Record<string, string> = {
 };
 
 export default function NewCollectionCard() {
+  const collections = useContext(CollectionsContext);
   const [isEditing, setIsEditing] = useState(false);
   const {
     register,
@@ -27,7 +28,11 @@ export default function NewCollectionCard() {
     setFocus,
     formState: { errors },
   } = useForm();
-  const collections = useContext(CollectionsContext);
+  const inputRef = useRef<Element | null>(null);
+  const { ref: formRef, ...inputAttrs } = register('name', {
+    required: true,
+    maxLength: 50,
+  });
 
   if (errors && Object.keys(errors).length > 0) {
     console.error('New collection creation form error: ', errors);
@@ -67,15 +72,19 @@ export default function NewCollectionCard() {
         >
           <input
             placeholder="Collection Name"
-            {...register('name', { required: true, maxLength: 50 })}
+            {...inputAttrs}
+            ref={(e) => {
+              formRef(e);
+              inputRef.current = e;
+            }}
           />
-          {
-            // FIXME: show in somewhere that do not affect the layout.
-            // ex. tooltip, alert box, etc.
-            errors.name && (
-              <FieldHint type="error" message={NAME_ERRORS[errors.name.type]} />
-            )
-          }
+          {errors.name && (
+            <FieldHint
+              type="error"
+              message={NAME_ERRORS[errors.name.type]}
+              reference={inputRef}
+            />
+          )}
           <div className="flex flex-row-reverse justify-between">
             <CircleButton type="submit" className="text-green-800">
               <FeatherIcon icon="check" />

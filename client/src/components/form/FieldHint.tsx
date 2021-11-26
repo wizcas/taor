@@ -1,21 +1,43 @@
+import Tippy, { TippyProps } from '@tippyjs/react';
 import classNames from 'classnames';
+import FeatherIcon from '../icon/FeatherIcon';
+import styles from './FieldHint.module.css';
 
 export type HintType = 'info' | 'warn' | 'error' | 'success';
 
-interface Props {
+interface Props extends TippyProps {
   type: HintType;
   message: string;
 }
 
-const TYPE_CLASSES: Record<HintType, string> = {
-  info: 'text-blue-800',
-  warn: 'text-yellow-600',
-  success: 'text-green-700',
-  error: 'text-red-800',
+const ICONS: Record<HintType, string> = {
+  info: 'info',
+  warn: 'alert-circle',
+  success: 'check-circle',
+  error: 'x-circle',
 };
 
-export default function FieldHint({ type, message }: Props) {
+export default function FieldHint({
+  type,
+  message,
+  placement,
+  reference,
+}: Props) {
+  const content = (
+    <div className="flex flex-row gap-2 items-center">
+      <FeatherIcon icon={ICONS[type]} size="sm" />
+      {message}
+    </div>
+  );
   return (
-    <div className={classNames('text-sm', TYPE_CLASSES[type])}>{message}</div>
+    <Tippy
+      reference={reference}
+      placement={placement}
+      showOnCreate
+      hideOnClick
+      trigger="focusin"
+      className={classNames('text-sm', styles.hint, styles[type])}
+      content={content}
+    />
   );
 }

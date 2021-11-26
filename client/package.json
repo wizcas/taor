@@ -10,6 +10,7 @@
     "lint.fix": "eslint src/**/*.{ts,tsx} --fix"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
     "classnames": "^2.3.1",
     "dexie": "^3.0.3",
     "feather-icons": "^4.28.0",
@@ -24,7 +25,8 @@
     "react-query": "^3.31.0",
     "react-router-dom": "6",
     "react-spinners": "^0.11.0",
-    "react-use": "^17.3.1"
+    "react-use": "^17.3.1",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@types/feather-icons": "^4.7.0",

@@ -1,0 +1,36 @@
+.hint {
+  @apply text-sm;
+  &.info {
+    --text-color: theme(colors.white.main);
+    --bg-color: theme(colors.blue.600);
+  }
+  &.warn {
+    --text-color: theme(colors.white.main);
+    --bg-color: theme(colors.yello.600);
+  }
+  &.success {
+    --text-color: theme(colors.white.main);
+    --bg-color: theme(colors.green.600);
+  }
+  &.error {
+    --text-color: theme(colors.white.main);
+    --bg-color: theme(colors.red.600);
+  }
+
+  &:global(.tippy-box) {
+    background: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    &[data-placement^='top'] > :global(.tippy-arrow)::before {
+      border-top-color: var(--bg-color) !important;
+    }
+    &[data-placement^='bottom'] > :global(.tippy-arrow)::before {
+      border-bottom-color: var(--bg-color) !important;
+    }
+    &[data-placement^='left'] > :global(.tippy-arrow)::before {
+      border-left-color: var(--bg-color) !important;
+    }
+    &[data-placement^='right'] > :global(.tippy-arrow)::before {
+      border-right-color: var(--bg-color) !important;
+    }
+  }
+}
