@@ -7,6 +7,14 @@
   },
   "private": true,
   "license": "GPL-3.0-or-later",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "yarn lint.compile && eslint packages/**",
+    "lint.compile": "tsc -p packages/client && tsc -p packages/server",
+    "lint.fix": "eslint --fix packages/**",
+    "lint.pre-commit": "eslint --cache packages/**",
+    "dev.client": "cd packages/client && yarn dev"
+  },
   "workspaces": [
     "packages/*"
   ],
@@ -22,12 +30,5 @@
     "prettier": "^2.5.0",
     "typescript": "^4.5.2",
     "husky": "^7.0.0"
-  },
-  "scripts": {
-    "prepare": "husky install",
-    "lint": "yarn lint.compile && eslint packages/**",
-    "lint.compile": "tsc -p packages/client && tsc -p packages/server",
-    "lint.fix": "eslint --fix packages/**",
-    "lint.pre-commit": "eslint --cache packages/**"
   }
 }

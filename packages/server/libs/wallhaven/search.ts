@@ -1,10 +1,9 @@
-import { Context } from 'koa';
+import { RequestHandler } from 'express';
 import { get } from '../../http';
 import wallhavenAPI from './const';
 
-export default async function search(ctx: Context) {
-  const { query } = ctx;
+export const search: RequestHandler = async (req, res) => {
+  const { query } = req;
   const data = await get(wallhavenAPI.search, { params: query });
-  ctx.body = data;
-  ctx.status = 200;
-}
+  res.status(200).json(data);
+};

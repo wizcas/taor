@@ -1,7 +1,7 @@
-import Router from '@koa/router';
-import search from './search';
+import express from 'express';
+import { search } from './search';
 
-const router = new Router();
+const router = express.Router();
 
 router.get('/search', search);
 

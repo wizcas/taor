@@ -1,22 +1,16 @@
-import Koa from 'koa';
-import Router from '@koa/router';
-import { cors } from '../libs/middleware';
+import express from 'express';
+import { cacheControl, cors } from '../libs/middleware';
 import wallhaven from '../libs/wallhaven';
 
-const app = new Koa();
-const router = new Router({
-  prefix: '/api',
-});
+const app = express();
 
-router.get('', (ctx) => {
-  ctx.body = 'taor API';
-});
-router.get('/hello', (ctx) => {
-  ctx.body = 'hello world!';
-});
+app.use(cors).use(cacheControl);
 
-router.use('/wallhaven', wallhaven.routes(), wallhaven.allowedMethods());
-
-app.use(cors).use(router.routes()).use(router.allowedMethods());
+app.get('/api/hello', (req, res) => {
+  const { query } = req;
+  const name = query.name || 'world';
+  res.end(`Hello ${name}!`);
+});
+app.use('/api/wallhaven', wallhaven);
 
 export default app;
