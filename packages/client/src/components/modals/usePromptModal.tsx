@@ -18,7 +18,7 @@ export default function usePromptModal(
   const containerRef = useRef<DocumentFragment | null>(null);
   const modalRef = useRef<PromptModalRef>(null);
   const closeRef = useRef<CloseCallback | null>(null);
-  const timerRef = useRef<number>(0);
+  const timerRef = useRef<NodeJS.Timeout>();
 
   function render() {
     containerRef.current = document.createDocumentFragment();

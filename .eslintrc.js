@@ -17,6 +17,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
+  ignorePatterns: ['node_modules', '**/*.js'],
   rules: {
     'no-shadow': 'off',
     'no-use-before-define': 'off',

@@ -2,10 +2,11 @@
 const path = require('path');
 
 module.exports = {
+  extends: ['plugin:react/recommended', '../../.eslintrc.js'],
+  root: true,
   env: {
     browser: true,
   },
-  extends: ['plugin:react/recommended', '../../configs/default-eslintrc.js'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview",
-    "lint": "eslint src/**/*.{ts,tsx}",
-    "lint.fix": "eslint src/**/*.{ts,tsx} --fix"
+    "serve": "vite preview"
   },
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
