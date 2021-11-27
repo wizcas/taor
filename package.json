@@ -6,5 +6,8 @@
     "email": "chen@0x1c.dev"
   },
   "private": true,
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }
