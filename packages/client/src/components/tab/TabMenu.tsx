@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import { useMatch, useResolvedPath, useNavigate } from 'react-router-dom';
+import Button from '../button/Button';
 import styles from './TabMenu.module.css';
 
 export interface TabMenuItem {
@@ -29,16 +30,16 @@ export default function TabMenu({ items, vertical }: Props) {
 function TabMenuItem({ item }: { item: TabMenuItem }) {
   const to = useResolvedPath(item.path);
   const match = useMatch({ path: to.pathname, end: true });
+  const navigate = useNavigate();
   return (
-    <Link
+    <Button
       key={item.path}
-      to={item.path}
-      replace
+      onClick={() => navigate(item.path, { replace: true })}
       className={classNames(styles.item, {
         [styles.active]: match,
       })}
     >
       {item.label}
-    </Link>
+    </Button>
   );
 }

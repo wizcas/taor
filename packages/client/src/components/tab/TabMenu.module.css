@@ -15,8 +15,10 @@
   &:hover {
     @apply bg-white-main bg-opacity-20;
   }
-  &:active,
-  &:visited {
+  &:focus,
+  &:focus-visible {
+    @apply ring-0;
+    @apply border-l-0.5rem border-primary-400 border-solid border-opacity-50;
   }
   &.active {
     @apply text-current;

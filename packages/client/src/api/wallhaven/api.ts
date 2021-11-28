@@ -37,9 +37,8 @@ interface WallhavenSearchResult {
 }
 
 const wallhavenAPI = {
-  remote: 'https://taor-api.vercel.com/api/wallhaven/search',
+  remote: 'https://taor-api.vercel.app/api/wallhaven/search',
   local: 'http://localhost:3000/api/wallhaven/search',
-  official: 'https://wallhaven.cc/api/v1/search',
 };
 
 async function search(
@@ -50,9 +49,8 @@ async function search(
     ...query,
     page: `${page}`,
   };
-  const url = new URL(wallhavenAPI.local);
-  // const url = new URL(wallhavenAPI.remote);
-  // const url = new URL(wallhavenAPI.official);
+  // const url = new URL(wallhavenAPI.local);
+  const url = new URL(wallhavenAPI.remote);
   url.search = new URLSearchParams(fullQuery).toString();
 
   const resp = await fetch(url.toString(), {
