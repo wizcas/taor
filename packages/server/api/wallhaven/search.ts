@@ -1,5 +1,5 @@
 import { WALLHAVEN_ENDPOINTS } from '../../libs/wallhaven';
-import { get } from '../../http';
+import { get } from '../../libs/http';
 import middleware from '../../libs/middleware';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
