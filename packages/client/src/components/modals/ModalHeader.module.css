@@ -8,6 +8,7 @@
 
   .titleBar {
     @apply flex flex-1 flex-col items-stretch;
+    @apply self-center;
   }
   .title {
     @apply text-lg font-semibold;
@@ -17,6 +18,6 @@
   }
 
   .closeButton {
-    @apply -mr-2;
+    @apply -mr-2 -mt-2;
   }
 }

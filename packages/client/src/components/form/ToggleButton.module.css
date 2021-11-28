@@ -1,8 +1,28 @@
 .toggleButton {
-  @apply p-1;
-  @apply bg-gray-200;
-  @apply border-solid border-1 border-gray-500;
+  @apply py-1 px-3;
+  @apply bg-white-main;
+  @apply border-1 border-solid border-gray-main border-opacity-20;
+  @apply shadow-sm;
+  @apply transition-all duration-200 ease-in-out;
+
+  & > input[type='checkbox'] {
+    @apply hidden;
+  }
+
   &.checked {
-    @bg-gray-300;
+    @apply bg-gray-main;
+    @apply text-white-main;
+  }
+
+  &:hover {
+    @apply shadow-md;
+  }
+
+  &:first-of-type {
+    @apply rounded-l;
+  }
+
+  &:last-of-type {
+    @apply rounded-r;
   }
 }

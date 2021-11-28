@@ -9,7 +9,8 @@ export type Variants =
   | 'warning'
   | 'danger';
 const VARIANT_CLASSES: Record<Variants, string> = {
-  normal: 'bg-white-main bg-opacity-60 text-gray-main',
+  normal:
+    'bg-white-main bg-opacity-60 text-gray-main border border-solid border-gray-main border-opacity-20',
   primary: 'bg-primary-400 text-black-secondary',
   secondary: 'bg-gray-300 text-black-secondary',
   info: 'bg-blue-500 text-white-main',
