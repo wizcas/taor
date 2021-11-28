@@ -2,6 +2,8 @@ import express from 'express';
 import { cacheControl, cors } from '../libs/middleware';
 // import wallhaven from '../libs/wallhaven';
 
+console.log(express.toString());
+
 const app = express();
 
 app.use(cors).use(cacheControl);
