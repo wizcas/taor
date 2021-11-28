@@ -38,11 +38,12 @@ function Home() {
     <div className="App flex justify-center items-center w-screen h-screen">
       <Wallpaper />
       <div className="fixed right-0 bottom-0 flex gap-2 items-center p-4">
-        <CircleButton color="white" onClick={openPageModal('/wallpaper')}>
+        <CircleButton
+          color="white"
+          onClick={openPageModal('/wallpaper')}
+          className="bg-black-secondary bg-opacity-50"
+        >
           <FeatherIcon icon="image" size="lg" />
-        </CircleButton>
-        <CircleButton color="white" onClick={openPageModal('wallhaven')}>
-          <FeatherIcon icon="settings" size="lg" />
         </CircleButton>
       </div>
 

@@ -5,8 +5,7 @@ import random from 'lodash/random';
 import { ProvidableContext } from './ContextProvider';
 import { Collection, CollectionsApi } from '@/api/wallpapers/collections';
 
-const defaultWallpaper =
-  'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
+const defaultWallpaper = '/packed/jam.jpg';
 
 export type WallpaperMode = 'single' | 'collection';
 
@@ -86,7 +85,7 @@ class WallpaperStore {
   }
 
   fromSingle() {
-    return localStorage.getItem('wallpaper') || null;
+    return localStorage.getItem('wallpaper') || defaultWallpaper;
   }
 
   private reloadActive() {
