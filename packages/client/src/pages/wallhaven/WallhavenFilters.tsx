@@ -13,7 +13,6 @@ const CATEGORY_OPTIONS = [
 const PURITY_OPTIONS = [
   { label: 'SFW', key: 'sfw' },
   { label: 'Sketchy', key: 'sketchy' },
-  { label: 'NSFW', key: 'nsfw' },
 ];
 
 const RESOLUTIONS = [
