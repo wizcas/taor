@@ -3,7 +3,7 @@
   @apply bg-white-main;
   @apply border-1 border-solid border-gray-main border-opacity-20;
   @apply shadow-sm;
-  @apply transition-all duration-200 ease-in-out;
+  @apply transition-short;
 
   & > input[type='checkbox'] {
     @apply hidden;

@@ -5,7 +5,7 @@
   @apply shadow-md;
   @apply flex flex-col justify-center items-stretch;
   @apply bg-white-main bg-opacity-60;
-  @apply transition-all duration-200;
+  @apply transition-short;
 
   &.interactive {
     @apply cursor-pointer;

@@ -9,7 +9,7 @@
   @apply flex flex-row items-center;
   @apply px-4 py-3 mb-2;
   @apply text-black-secondary no-underline;
-  @apply transition-all duration-200;
+  @apply transition-short;
   @apply border-l-0.5rem border-transparent border-solid;
 
   &:hover {

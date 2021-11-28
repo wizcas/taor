@@ -22,11 +22,11 @@
     @apply px-4 py-8;
     @apply top-1/2 transform -translate-y-1/2;
     @apply pointer-events-auto cursor-pointer;
-    @apply transition-all ease-in-out duration-300;
+    @apply transition-normal;
     @apply opacity-0;
 
     svg {
-      @apply transition-all ease-in-out duration-300;
+      @apply transition-normal;
     }
     &:hover {
       @apply bg-opacity-50;

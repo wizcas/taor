@@ -19,7 +19,7 @@ code {
 }
 
 .ReactModal__Overlay {
-  @apply transition-all duration-300 ease-in-out;
+  @apply transition-normal;
   @apply opacity-0;
 }
 
@@ -33,7 +33,7 @@ code {
 
 .ReactModal__Content {
   @apply backdrop-filter backdrop-blur-md;
-  @apply transition-all duration-300 ease-in-out;
+  @apply transition-normal;
 
   &:not(.drawer) {
     @apply transform scale-0;
@@ -92,9 +92,13 @@ button {
 
 input,
 select {
-  @apply p-2 rounded-sm border;
+  @apply p-2 rounded-md border border-gray-main border-opacity-20;
   @apply bg-white-main;
   @apply m-2px;
+  @apply transition-short;
+  &:hover {
+    @apply border-opacity-50;
+  }
   &::placeholder {
     @apply text-gray-disabled;
   }

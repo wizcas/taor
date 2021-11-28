@@ -66,6 +66,9 @@ export default defineConfig({
   },
   shortcuts: {
     'secondary-text': 'text-sm text-gray-500',
+    'transition-short': 'transition-all duration-200 east-in-out',
+    'transition-normal': 'transition-all duration-300 east-in-out',
+    'transition-long': 'transition-all duration-500 east-in-out',
   },
   plugins: [aspectRatio],
 });

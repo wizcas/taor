@@ -9,7 +9,7 @@
     @apply block;
   }
   .toolbar {
-    @apply absolute bottom-0 right-0 transition-all duration-300;
+    @apply absolute bottom-0 right-0 transition-normal;
     @apply opacity-0;
   }
   &:hover .toolbar {
@@ -25,7 +25,7 @@
   .thumbnail {
     @apply w-full h-full;
     @apply bg-cover bg-center bg-no-repeat bg-clip-border;
-    @apply transition-all duration-500;
+    @apply transition-long;
     @apply relative;
     @apply transform;
   }
@@ -37,7 +37,7 @@
   .expand {
     @apply absolute top-2 left-2;
     @apply text-white-main opacity-0;
-    @apply transition-all duration-300 z-1;
+    @apply transition-normal z-1;
   }
 
   &::after {
