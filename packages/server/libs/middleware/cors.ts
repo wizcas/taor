@@ -1,17 +1,26 @@
-import { RequestHandler } from 'express';
+import type {
+  VercelApiHandler,
+  VercelRequest,
+  VercelResponse,
+} from '@vercel/node';
 
-export const cors: RequestHandler = (req, res, next) => {
-  const { method } = req;
-  res.set({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers':
-      'Content-Type, Authorization, Content-Length, Accept',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
-    'Access-Control-Allow-Credentials': 'true',
-  });
-  if (method === 'OPTIONS') {
-    res.status(200);
-  } else {
-    next();
-  }
-};
+export const cors =
+  (fn: VercelApiHandler) => async (req: VercelRequest, res: VercelResponse) => {
+    const { method } = req;
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+    );
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, ' +
+        'Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+    if (method === 'OPTIONS') {
+      res.status(200).end();
+      return undefined;
+    }
+    return fn(req, res);
+  };
