@@ -1,9 +1,13 @@
+html {
+  font-size: 16px;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, theme('fontFamily.sans');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @apply text-black-main dark:text-white-main;
+  font-size: 100%;
 }
 
 * {

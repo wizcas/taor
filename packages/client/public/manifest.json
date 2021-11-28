@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Taor",
+  "author": "Wizcas Chen",
+  "description": "A tasteful new tab",
+  "version": "1.0",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage", "https://taor-api.vercel.app"]
+}

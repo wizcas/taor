@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import CircleButton from './components/button/CircleButton';
 import FeatherIcon from './components/icon/FeatherIcon';
 import ContextProvider from './providers/ContextProvider';
@@ -19,11 +19,11 @@ const CONTEXT_PROVIDERS = [WALLPAPER_PROVIDER, COLLECTIONS_PROVIDER];
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <MemoryRouter>
       <ContextProvider providers={CONTEXT_PROVIDERS}>
         <Home />
       </ContextProvider>
-    </BrowserRouter>
+    </MemoryRouter>
   );
 }
 
