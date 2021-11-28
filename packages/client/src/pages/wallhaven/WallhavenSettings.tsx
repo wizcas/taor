@@ -35,7 +35,7 @@ function WallhavenSettings() {
           value={q}
           onChange={onSearchTextSubmit}
         />
-        <Button onClick={openFilters}>settings</Button>
+        <Button onClick={openFilters}>More filters</Button>
       </section>
       <WallhavenSearchResult className="overflow-y-auto flex-1" />
       <DrawerModal title="Wallhaven Search Settings" ref={filtersRef}>

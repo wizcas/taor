@@ -8,7 +8,7 @@ export default function usePageModal() {
   }
 
   function close() {
-    navigate(-1);
+    navigate(-Number.MAX_SAFE_INTEGER);
   }
 
   return { open, close };

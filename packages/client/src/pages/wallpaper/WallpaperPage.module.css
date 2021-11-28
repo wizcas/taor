@@ -1,5 +1,7 @@
 .layout {
-  @apply flex flex-row gap-4;
+  @apply flex flex-row gap-4 items-stretch;
+  @apply overflow-hidden;
+  @apply max-h-full;
 }
 .content {
   @apply flex-1 px-2;
